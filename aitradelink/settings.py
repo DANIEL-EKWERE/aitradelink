@@ -87,17 +87,17 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': #'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
 }
-
-
-# DATABASES = {
-#     'default': dj_database_url.parse("postgresql://alpha_trade_user:91XO3T8NOd60sPeyPtDQitHMwDpVZNPL@dpg-ct0um5btq21c73ejdtt0-a.oregon-postgres.render.com/alpha_trade")
-# }
 
 
 
