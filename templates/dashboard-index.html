@@ -1,0 +1,1216 @@
+<html lang="en">
+{% load static %}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/png" href="./asset/theme4/images/icon/icon.png">
+    <title>
+        aitradelink
+        Investment log
+    </title>
+
+    <link href="./asset/theme4/frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link href="{% static "styles/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "styles/bootstrap-icons.css" %}" rel="stylesheet">
+    <link href="{% static "styles/boxicons.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href=".{% static "tyles/slick.css" %}">
+    <link href="{% static "styles/glightbox.min.css" %}" rel="stylesheet">
+    <link href="{% static "styles/remixicon.css" %}" rel="stylesheet">
+    <link href="{% static "styles/swiper-bundle.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "styles/selectric.css" %}">
+    <link rel="stylesheet" href="{% static "styles/animate.min.css" %}">
+    <link rel="stylesheet" href="{% static "styles/font-awsome.min.css" %}">
+    <link rel="stylesheet" href="{% static "styles/iziToast.min.css" %}">
+    <link href="{% static "styles/style.css" %}" rel="stylesheet">
+
+
+    
+    <style>
+        .menu li{
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        li a{
+            color: white;
+            text-decoration: none;
+        }
+         li a:hover{
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body cz-shortcut-listen="true">
+
+    <!-- ======= Header ======= -->
+
+
+    <header id="header" class="fixed-top header-inner-pages header-scrolled">
+        <h1 class="header-mark">
+            <i class="bi bi-currency-exchange"></i>
+        </h1>
+        <h2 class="header-mark">
+            <i class="bi bi-currency-exchange"></i>
+        </h2>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <div class="d-flex flex-wrap align-items-center">
+                <div class="logo me-auto me-lg-0 my-3">
+
+                    <div class="d-block d-sm-none">
+                        <p class="text-small mb-0 text-dark">Total portfolio</p>
+                        <h5>$0
+
+                        </h5>
+                    </div>
+
+                    <div class="d-none d-lg-block">
+                        <a href="{% url "broker:dashboard-index" %}">
+                            <img class="img-fluid rounded sm-device-img text-align" src="{% static "images/definew.png" %}" alt="pp">
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="d-flex flex-wrap align-items-center d-none d-lg-block">
+                <ul class="d-flex text-white menu">
+                    <li class="active">
+                        <a href="{% url "broker:dashboard-index" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{% url "broker:p2p" %}"
+                            class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            Buy crypto (p2p)</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'broker:deposit' %}"
+                            class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-gift">
+                                <polyline points="20 12 20 22 4 22 4 12" />
+                                <rect x="2" y="7" width="20" height="5">
+                                </rect>
+                                <line x1="12" y1="22" x2="12" y2="7" />
+                                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z">
+                                </path>
+                                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                            </svg>
+                            Buy crypto (gift card)</a>
+                    </li>
+
+                    <li>
+                        <span class="ms-2 dropdown-toggle" id="trade" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="cursor: pointer;">
+                            Trade
+                        </span>
+                        <ul class="bg-gray dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a href="{% url "broker:logs" %}" style="color:black"><svg xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-chevrons-right">
+                                        <polyline points="13 17 18 12 13 7" />
+                                        <polyline points="6 17 11 12 6 7" />
+                                    </svg> Trade</a>
+                            </li>
+
+                            <li>
+                                <a href="{% url "broker:logs" %}" style="color:black"><svg xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-chevrons-right">
+                                        <polyline points="13 17 18 12 13 7" />
+                                        <polyline points="6 17 11 12 6 7" />
+                                    </svg> Invest log</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="{% url "broker:deposit" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg> Receive</a>
+                    </li>
+
+
+                    <li>
+                        <a href="{% url "broker:withdraw" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg> Withdraw</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url "broker:market" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg> Market</a>
+                    </li>
+
+                    <!--<li class="">-->
+                    <!--  <a href="./2fa"><i data-feather="shield"></i> 2fa</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="./html/mailto:support@aitradelink.com.html"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-life-buoy">
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="4" />
+                                <line x1="4.93" y1="4.93" x2="9.17" y2="9.17" />
+                                <line x1="14.83" y1="14.83" x2="19.07" y2="19.07" />
+                                <line x1="14.83" y1="9.17" x2="19.07" y2="4.93" />
+                                <line x1="14.83" y1="9.17" x2="18.36" y2="5.64" />
+                                <line x1="4.93" y1="19.07" x2="9.17" y2="14.83" />
+                            </svg> Support</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="header-right d-flex">
+                <div class="dropdown" style="position: relative;">
+                    <a href="#" class="text-white dropdown-toggle user-toggle-menu" id="notificationDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-bell">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                    </a>
+                    <span class="bg-danger"
+                        style="width:10px;height:10px;border-radius:50%;position: absolute;top: 0;left: 25px;"></span>
+
+                    <ul class="p-2 d-sidebar-menu dropdown-menu dropdown-menu-end"
+                        aria-labelledby="notificationDropdown"
+                        style="transform: translate3d(50px, 38px, 0px);width: 300px;overflow-y: scroll; height: 400px;">
+
+                    </ul>
+                </div>
+
+
+                <div class="dropdown ms-3">
+                    <span class="ms-2 dropdown-toggle user-toggle-menu" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{% static "images/user.png" %}" alt="pp">
+                    </span>
+
+                    <ul class="d-sidebar-menu dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        <li style="padding-left:0px;">
+                            <div class="user-profile">
+                                <div class="user-avatar">
+                                    <img src="{% static "images/user.png" %}" alt="pp" class="rounded-circle">
+                                </div>
+                                <div class="user-details">
+                                    <div class="user-name">
+                                        Cent Jr</div>
+                                    <div class="user-email"> {{ request.user.email }} </div>
+
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <a href="{% url "broker:settings" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg> Profile</a>
+                        </li>
+                        {% comment %} <li>
+                            <a href="./broker.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg> Verify broker</a>
+                        </li> {% endcomment %}
+                        <li>
+                            <a href="{% url "broker:settings" %}"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                                </svg>Settings</a>
+                        </li>
+                        <li>
+                            <a href="{% url "broker:logout" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                    <polyline points="16 17 21 12 16 7" />
+                                    <line x1="21" y1="12" x2="9" y2="12" />
+                                </svg> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- End Header -->
+
+
+    <main id="main" class="dashboard-main">
+        <section class="dashboard-section">
+
+
+
+
+
+
+            <div class="d-sidebar">
+                <ul class="d-sidebar-menu">
+                    <li>
+                        <a href="{% url "broker:dashboard-index" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg> Dashboard</a>
+                    </li>
+
+
+                    <!--New Menu-->
+                    <li>
+                        <a href="{% url "broker:p2p" %}"
+                            class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            P2p trading</a>
+                    </li>
+
+                    <li class="has_submenu open">
+                        <a href="#0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-zap">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg> Trade</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{% url "broker:logs" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-chevrons-right">
+                                        <polyline points="13 17 18 12 13 7" />
+                                        <polyline points="6 17 11 12 6 7" />
+                                    </svg> Trade</a>
+                            </li>
+                            <li class="active">
+                                <a href="{% url "broker:logs" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-chevrons-right">
+                                        <polyline points="13 17 18 12 13 7" />
+                                        <polyline points="6 17 11 12 6 7" />
+                                    </svg> Invest log</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="{% url "broker:deposit" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg> Receive</a>
+                    </li>
+
+                    <!-- <li class="">-->
+                    <!--  <a href="./transfer-money"><i data-feather="send"></i> Send</a>-->
+                    <!--</li>-->
+
+                    <li>
+                        <a href="{% url "broker:withdraw" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg> Withdraw</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url "broker:market" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg> Market</a>
+                    </li>
+
+                    <!--<li class="">-->
+                    <!--  <a href="./2fa"><i data-feather="shield"></i> 2fa</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="./ticket.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-life-buoy">
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="4" />
+                                <line x1="4.93" y1="4.93" x2="9.17" y2="9.17" />
+                                <line x1="14.83" y1="14.83" x2="19.07" y2="19.07" />
+                                <line x1="14.83" y1="9.17" x2="19.07" y2="4.93" />
+                                <line x1="14.83" y1="9.17" x2="18.36" y2="5.64" />
+                                <line x1="4.93" y1="19.07" x2="9.17" y2="14.83" />
+                            </svg> Support</a>
+                    </li>
+                    <li>
+                        <a href="{% url "broker:settings" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg> Profile</a>
+                    </li>
+                    <li>
+                        <a href="{% url "broker:logout" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg> Logout</a>
+                    </li>
+                </ul>
+                <!--<div class="d-plan-notice mt-4 mx-3">-->
+                <!--    <p class="mb-0">Your current plan-->
+                <!--        -N/A</p>-->
+                <!--    <a href="./logmentplan">Update plan <i class="fas fa-arrow-up"></i></a>-->
+                <!--</div>-->
+            </div>
+
+
+
+
+            <!-- mobile bottom menu start -->
+            <div class="mobile-bottom-menu-wrapper" style="background:#f8f9f9">
+                <ul class="mobile-bottom-menu">
+                    <li>
+                        <a href="{% url "broker:dashboard-index" %}" style='color: #0093e4;'>
+                            <i class="bi bi-house-door"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <!--<li>-->
+                    <!--  <a href="{% static "deposit" %}" class="">-->
+                    <!--    <i class="bi bi-wallet2"></i>-->
+                    <!--    <span>Deposit</span>-->
+                    <!--  </a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="{% url "broker:logs" %}">
+                            <i class="bi bi-piggy-bank"></i>
+                            <span>My trade</span>
+                        </a>
+                    </li>
+
+                    <!--<li>-->
+                    <!--  <a href="{% static "withdraw" %}" class="">-->
+                    <!--    <i class="bi bi-cash-coin"></i>-->
+                    <!--    <span>Withdraw</span>-->
+                    <!--  </a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="{% url "broker:transfer" %}">
+                            <i class="bi bi-shuffle"></i>
+                            <span>Transfer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url "broker:market" %}">
+                            <i class="bi bi-cash-coin"></i>
+                            <span>Market</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- mobile bottom menu end -->
+            <script src="/widgets/js/script"></script>
+            <script src="/npm/sweetalert2@11"></script>
+            
+            <style>
+                /*.custom-popup .swal2-popup {*/
+                /*    height: 80% !important;*/
+                /*}*/
+                .custom-popup {
+                    width: 90% !important;
+                    max-width: none !important;
+                    overflow-y: auto !important;
+                    /*height:90% !important;*/
+                }
+
+                .swal2-container {
+                    z-index: 9999999999;
+                }
+
+                div:where(.swal2-container) h2:where(.swal2-title) {
+                    padding: 0 !important;
+                }
+
+                div:where(.swal2-icon) {
+                    margin: 0.5em auto 0.6em;
+                    ;
+                }
+
+                div:where(.swal2-container) .swal2-html-container {
+                    text-align: left !important;
+                    margin: 0.5em;
+                }
+
+                div:where(.swal2-container) div:where(.swal2-actions) {
+                    margin: 0 !important;
+                }
+
+                .wrap_cc7a {
+                    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                    bottom: 40% !important;
+                    display: block;
+                    opacity: 1;
+                    position: fixed;
+                    transition: opacity .1s;
+                    visibility: visible;
+                    z-index: 2147483647;
+                }
+            </style>
+            <style>
+                /* Custom styling for each column */
+                .cover {
+                    position: absolute;
+                    top: 570px;
+                    left: 0;
+                    width: 100%;
+                    height: 180px;
+                    background-color: transparent;
+                    opacity: 0.5;
+                    z-index: 1;
+                }
+
+                .active-dot {
+                    width: 10px;
+                    height: 10px;
+                    display: inline-block;
+                    margin-left: 5px;
+                    background-color: green;
+                    border-radius: 50%;
+                }
+
+                .tradingview-widget-container {
+                    position: relative;
+                    /* Set the container as the reference for positioning */
+                    z-index: 0;
+                    /* Keep the widget below the cover */
+                }
+
+                .custom-column {
+                    padding: 5px;
+                    text-align: center;
+                    color: white;
+                    font-size: 18px;
+                    border-radius: 10px;
+                    margin: 2px;
+                }
+
+                .balance-bg,
+                .withdraw-bg,
+                .deposit-bg {
+                    background-color: #fff;
+                    box-shadow: 1px 1px 2px 1px #e1d7e1;
+                    border: 1px solid rgba(0, 0, 0, .125);
+                    color: black;
+                    padding: 10px !important;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                /* Centered icon */
+                .centered-icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .icon {
+                    font-size: 25px;
+                    color: #0093e4;
+                }
+
+                .cryptoboxes {
+                    height: 143vh;
+                }
+
+                .col-10 {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: start;
+                    padding-left: 25px;
+                }
+
+                .alert {
+                    margin-bottom: 0px !important;
+                }
+
+                ._orientationRight_ee1e.wrap_bfe9 {
+                    right: 0 !important;
+                    position: fixed !important;
+                    top: 55% !important;
+                }
+            </style>
+
+            <div class="dashboard-body-part" style="background:#f8f9f9; ">
+
+                <!--<h5>Hi, d3v</h5>-->
+                <div class="row gy-4" style="padding:5px">
+
+
+
+
+                    <div class="row g-sm-4 g-3 justify-content-between" style="margin-top:0px;padding-left: 0px">
+
+                        <div class="col-lg-9 col-md-12 d-none d-lg-block">
+                            <div class="row m-2">
+                                <div class="col-lg-9 w-100">
+                                    <!-- TradingView Widget BEGIN -->
+                                    <div class="tradingview-widget-container" style="width:100%">
+                                        <div id="tradingview_48ea6" style="height:143vh">
+                                            <div id="tradingview_39b94-wrapper"
+                                                style="position: relative; box-sizing: content-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Trebuchet MS&quot; Roboto, Ubuntu, sans-serif; margin: 0px auto !important; padding: 0px !important; width: 100%; height: 100%;">
+                                                <iframe title="advanced chart TradingView widget" lang="en"
+                                                    id="tradingview_39b94" frameborder="0" allowtransparency="true"
+                                                    scrolling="no" allowfullscreen="true"
+                                                    src="https://s.tradingview.com/widgetembed/?hideideas=1&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en#%7B%22symbol%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22frameElementId%22%3A%22tradingview_39b94%22%2C%22interval%22%3A%22D%22%2C%22allow_symbol_change%22%3A%221%22%2C%22save_image%22%3A%220%22%2C%22details%22%3A%221%22%2C%22studies%22%3A%22%5B%5D%22%2C%22theme%22%3A%22light%22%2C%22style%22%3A%221%22%2C%22timezone%22%3A%22Africa%2FLagos%22%2C%22studies_overrides%22%3A%22%7B%7D%22%2C%22utm_source%22%3A%22app.def-trademarket.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22chart%22%2C%22utm_term%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22page-uri%22%3A%22app.def-trademarket.com%2Fdashboard%2Findex.php%22%7D"
+                                                    style="width: 100%; height: 100%; margin: 0px !important; padding: 0px !important;"></iframe>
+                                            </div>
+                                        </div>
+                                        <script type="text/javascript" src="{% static "scripts/tv.js" %}"></script>
+                                        <script type="text/javascript">
+                                            new TradingView.widget({
+                                                "autosize": true,
+                                                "symbol": "BITSTAMP:BTCUSD",
+                                                "interval": "D",
+                                                "timezone": "Africa/Lagos",
+                                                "theme": "light",
+                                                "style": "1",
+                                                "locale": "en",
+                                                "enable_publishing": false,
+                                                "allow_symbol_change": true,
+                                                "save_image": false,
+                                                "details": true,
+                                                "container_id": "tradingview_48ea6"
+                                            });
+                                        </script>
+                                    </div>
+                                    <!-- TradingView Widget END -->
+                                </div>
+                                <div class="col-lg-3 w-100 mt-2" style="height:350px">
+                                    <!-- TradingView Widget BEGIN -->
+                                    <div class="tradingview-widget-container" style="width: 100%; height: 100%;">
+                                        <iframe allowtransparency="true" frameborder="0"
+                                            src="https://www.tradingview-widget.com/embed-widget/crypto-mkt-screener/?locale=en#%7B%22width%22%3A%22100%25%22%2C%22height%22%3A%22100%25%22%2C%22defaultColumn%22%3A%22overview%22%2C%22screener_type%22%3A%22crypto_mkt%22%2C%22displayCurrency%22%3A%22USD%22%2C%22colorTheme%22%3A%22light%22%2C%22market%22%3A%22crypto%22%2C%22enableScrolling%22%3Atrue%2C%22utm_source%22%3A%22app.def-trademarket.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22cryptomktscreener%22%2C%22page-uri%22%3A%22app.def-trademarket.com%2Fdashboard%2Findex.php%22%7D"
+                                            title="crypto mkt-screener TradingView widget" lang="en"
+                                            style="user-select: none; box-sizing: border-box; display: block; height: 100%; width: 100%;"></iframe>
+
+                                        <style>
+                                            .tradingview-widget-copyright {
+                                                font-size: 13px !important;
+                                                line-height: 32px !important;
+                                                text-align: center !important;
+                                                vertical-align: middle !important;
+                                                /* @mixin sf-pro-display-font; */
+                                                font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+                                                color: #B2B5BE !important;
+                                            }
+
+                                            .tradingview-widget-copyright .blue-text {
+                                                color: #2962FF !important;
+                                            }
+
+                                            .tradingview-widget-copyright a {
+                                                text-decoration: none !important;
+                                                color: #B2B5BE !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:visited {
+                                                color: #B2B5BE !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:hover .blue-text {
+                                                color: #1E53E5 !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:active .blue-text {
+                                                color: #1848CC !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:visited .blue-text {
+                                                color: #2962FF !important;
+                                            }
+                                        </style>
+                                    </div>
+                                    <!-- TradingView Widget END -->
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-12 col-sm-12 d-none d-lg-block" style="height:150vh">
+                            <div class="row">
+                                <div class="col-md-12 my-2">
+
+                                    <!--Status-->
+
+
+                                    <!--request-->
+
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="custom-column balance-bg row d-flex">
+                                        <div class="col-2">
+                                            <h6><i class="icon fas fa-balance-scale"></i></h6>
+                                        </div>
+                                        <div class="col-10 text-left">
+                                            <div class="text-left">Total Portfolio</div>
+                                            <div>$0</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <div class="custom-column balance-bg row d-flex">
+                                        <div class="col-2">
+                                            <img width="100%" src="{% static "images/64cd7b9fe98ce1691188127.png" %}">
+                                        </div>
+                                        <div class="col-10 text-left wallet-container">
+                                            <div class="text-left">Active BTC Trade Wallet</div>
+
+                                            <div class="wallet-container">
+                                                <span class="bg-success active-dot"></span>
+                                                <small>$0</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="custom-column balance-bg row d-flex">
+                                        <div class="col-2">
+                                            <img width="100%" src="{% static "images/64cd3c3d3896a1691171901.png" %}">
+                                        </div>
+                                        <div class="col-10 text-left wallet-container">
+                                            <div class="text-left">Active ETH Trade Wallet</div>
+
+                                            <div class="wallet-container">
+                                                <span class="bg-success active-dot"></span>
+                                                <small>$0</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="border-color: gray; border-radius: 8px; border-width: 1px;">
+                                    <div class="col-md-12">
+                                        <div class="custom-column withdraw-bg row d-flex">
+                                            <div class="col-2">
+                                                <h6><i class="icon fas fa-money-bill"></i></h6>
+                                            </div>
+                                            <div class="col-10">
+                                                <div>Total Withdraw</div>
+                                                <div>${{ details.total_withdraw }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="custom-column deposit-bg row d-flex">
+                                        <div class="col-2">
+                                            <h6><i class="icon fas fa-coins"></i></h6>
+                                        </div>
+                                        <div class="col-10">
+                                            <div>Total Deposit</div>
+                                            <div>${{ details.total_deposit }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <h6 class="my-3">My Assets</h6>
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/64cd7b9fe98ce1691188127.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}%" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Bitcoin <br>
+                                        <span class="text-muted text-uppercase">btc</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.bitcoin }}<br>
+                                        <!--$0.00 <br>-->
+                                        <span>Total btc Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/64cd3c3d3896a1691171901.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Ethereum <br>
+                                        <span class="text-muted text-uppercase">eth</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.ethereum }}<br>
+                                        <span>Total eth Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="user-account-number" style="height:200px;z-index:99">
+                                <!-- <div>
+                                    <h1>
+                                        <i class="bi bi-currency-exchange"></i>
+                                    </h1>
+
+                                </div> -->
+                                <div
+                                    style="background-color:#0093e4;; padding: 30px; border-radius: 8px; text-align: center;">
+
+                                    <p class="caption mb-2 text-center" style="color: white;">
+                                        Hello, <b>{{ request.user.first_name }} {{ profile.last_name }}</b><br>
+                                        Welcome to aitradelink Investment <br> Trade Crypto with ease
+                                    </p>
+                                    <br>
+                                    <a href="{% url "broker:logs" %}"
+                                        style="display: inline-block; width: 100%; padding: 15px; background: white; text-decoration: none; border-radius: 12px; color: #0093e4; font-weight: bold; text-align: center;">
+                                        <i class="ri-hand-coin-fill custom-icon"></i> Start Trading
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 col-sm-12 d-none d-lg-block">
+                                <div class="cover" style="top:1050px"></div>
+                                <div class="col-sm-12 mt-2">
+                                    <div class="tradingview-widget-container" style="width: 100%; height: 420px;">
+                                        <iframe scrolling="no" allowtransparency="true" frameborder="0"
+                                            src="https://www.tradingview-widget.com/embed-widget/market-overview/?locale=en#%7B%22colorTheme%22%3A%22light%22%2C%22dateRange%22%3A%2212M%22%2C%22showChart%22%3Atrue%2C%22largeChartUrl%22%3A%22%22%2C%22isTransparent%22%3Atrue%2C%22showSymbolLogo%22%3Atrue%2C%22showFloatingTooltip%22%3Afalse%2C%22width%22%3A%22100%25%22%2C%22height%22%3A420%2C%22plotLineColorGrowing%22%3A%22rgba(41%2C%2098%2C%20255%2C%201)%22%2C%22plotLineColorFalling%22%3A%22rgba(41%2C%2098%2C%20255%2C%201)%22%2C%22gridLineColor%22%3A%22rgba(240%2C%20243%2C%20250%2C%200)%22%2C%22scaleFontColor%22%3A%22rgba(106%2C%20109%2C%20120%2C%201)%22%2C%22belowLineFillColorGrowing%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22belowLineFillColorFalling%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22belowLineFillColorGrowingBottom%22%3A%22rgba(41%2C%2098%2C%20255%2C%200)%22%2C%22belowLineFillColorFallingBottom%22%3A%22rgba(41%2C%2098%2C%20255%2C%200)%22%2C%22symbolActiveColor%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22tabs%22%3A%5B%7B%22title%22%3A%22Indices%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22d%22%3A%22Bitcoin%2F%20US%20Dollar%22%7D%2C%7B%22s%22%3A%22BITSTAMP%3AETHUSD%22%2C%22d%22%3A%22Ethereum%2F%20US%20Dollar%22%7D%2C%7B%22s%22%3A%22BITSTAMP%3AXRPUSD%22%2C%22d%22%3A%22XRP%2F%20US%20Dollar%22%7D%5D%2C%22originalTitle%22%3A%22Indices%22%7D%2C%7B%22title%22%3A%22Futures%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22CME_MINI%3AES1!%22%2C%22d%22%3A%22S%26P%20500%22%7D%2C%7B%22s%22%3A%22CME%3A6E1!%22%2C%22d%22%3A%22Euro%22%7D%2C%7B%22s%22%3A%22COMEX%3AGC1!%22%2C%22d%22%3A%22Gold%22%7D%5D%2C%22originalTitle%22%3A%22Futures%22%7D%2C%7B%22title%22%3A%22Bonds%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22CME%3AGE1!%22%2C%22d%22%3A%22Eurodollar%22%7D%2C%7B%22s%22%3A%22CBOT%3AZB1!%22%2C%22d%22%3A%22T-Bond%22%7D%2C%7B%22s%22%3A%22CBOT%3AUB1!%22%2C%22d%22%3A%22Ultra%20T-Bond%22%7D%5D%2C%22originalTitle%22%3A%22Bonds%22%7D%2C%7B%22title%22%3A%22Forex%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22FX%3AEURUSD%22%2C%22d%22%3A%22EUR%20to%20USD%22%7D%2C%7B%22s%22%3A%22FX%3AGBPUSD%22%2C%22d%22%3A%22GBP%20to%20USD%22%7D%2C%7B%22s%22%3A%22FX%3AUSDJPY%22%2C%22d%22%3A%22USD%20to%20JPY%22%7D%5D%2C%22originalTitle%22%3A%22Forex%22%7D%5D%2C%22utm_source%22%3A%22app.def-trademarket.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22market-overview%22%2C%22page-uri%22%3A%22app.def-trademarket.com%2Fdashboard%2Findex.php%22%7D"
+                                            title="market overview TradingView widget" lang="en"
+                                            style="user-select: none; box-sizing: border-box; display: block; height: 100%; width: 100%;"></iframe>
+
+                                        <style>
+                                            .tradingview-widget-copyright {
+                                                font-size: 13px !important;
+                                                line-height: 32px !important;
+                                                text-align: center !important;
+                                                vertical-align: middle !important;
+                                                /* @mixin sf-pro-display-font; */
+                                                font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+                                                color: #B2B5BE !important;
+                                            }
+
+                                            .tradingview-widget-copyright .blue-text {
+                                                color: #2962FF !important;
+                                            }
+
+                                            .tradingview-widget-copyright a {
+                                                text-decoration: none !important;
+                                                color: #B2B5BE !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:visited {
+                                                color: #B2B5BE !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:hover .blue-text {
+                                                color: #1E53E5 !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:active .blue-text {
+                                                color: #1848CC !important;
+                                            }
+
+                                            .tradingview-widget-copyright a:visited .blue-text {
+                                                color: #2962FF !important;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-xl-4 col-lg-6 col-sm-12 d-block d-sm-none">
+
+                            {% comment %} <div class="col-md-12 my-2">
+
+                                <!--Status-->
+
+                                <!--request-->
+
+
+
+                            </div> {% endcomment %}
+
+                            <div class="user-account-number" style="height:300px;z-index:99">
+                                <!-- <div>
+                                    <h1>
+                                        <i class="bi bi-currency-exchange"></i>
+                                    </h1>
+
+                                </div> -->
+                                <div
+                                    style="background-color: #0093e4; padding: 30px; border-radius: 8px; text-align: center;z-index:99">
+                                    <p class="caption mb-2 text-center" style="color: white;">
+                                        Hello, <b>{{ profile.first_name }} {{ profile.last_name }}</b><br>
+                                        Welcome to Aitradelink Investment <br> Trade Crypto with ease
+                                    </p>
+                                    <br>
+                                    <a href="{% url "broker:logs" %}" class="caption mb-2"
+                                        style="display: inline-block; width: 100%; padding: 15px; background: white; text-decoration: none; border-radius: 12px; color: #0093e4; font-weight: bold; text-align: center;">
+                                        <i class="ri-hand-coin-fill custom-icon"></i> Start Trading
+                                    </a>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-12 d-sm-none d-block" style="padding-left:0px;">
+                            <div class="cover" style="top:680px"></div>
+                            <!-- TradingView Widget BEGIN -->
+                            <div class="tradingview-widget-container" style="width: 100%; height: 460px;">
+                                <iframe scrolling="no" allowtransparency="true" frameborder="0"
+                                    src="https://www.tradingview-widget.com/embed-widget/market-overview/?locale=en#%7B%22colorTheme%22%3A%22light%22%2C%22dateRange%22%3A%2212M%22%2C%22showChart%22%3Atrue%2C%22largeChartUrl%22%3A%22%22%2C%22isTransparent%22%3Atrue%2C%22showSymbolLogo%22%3Atrue%2C%22showFloatingTooltip%22%3Afalse%2C%22width%22%3A%22100%25%22%2C%22height%22%3A460%2C%22plotLineColorGrowing%22%3A%22rgba(41%2C%2098%2C%20255%2C%201)%22%2C%22plotLineColorFalling%22%3A%22rgba(41%2C%2098%2C%20255%2C%201)%22%2C%22gridLineColor%22%3A%22rgba(240%2C%20243%2C%20250%2C%200)%22%2C%22scaleFontColor%22%3A%22rgba(106%2C%20109%2C%20120%2C%201)%22%2C%22belowLineFillColorGrowing%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22belowLineFillColorFalling%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22belowLineFillColorGrowingBottom%22%3A%22rgba(41%2C%2098%2C%20255%2C%200)%22%2C%22belowLineFillColorFallingBottom%22%3A%22rgba(41%2C%2098%2C%20255%2C%200)%22%2C%22symbolActiveColor%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22tabs%22%3A%5B%7B%22title%22%3A%22Indices%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22d%22%3A%22Bitcoin%2F%20US%20Dollar%22%7D%2C%7B%22s%22%3A%22BITSTAMP%3AETHUSD%22%2C%22d%22%3A%22Ethereum%2F%20US%20Dollar%22%7D%2C%7B%22s%22%3A%22BITSTAMP%3AXRPUSD%22%2C%22d%22%3A%22XRP%2F%20US%20Dollar%22%7D%5D%2C%22originalTitle%22%3A%22Indices%22%7D%2C%7B%22title%22%3A%22Futures%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22CME_MINI%3AES1!%22%2C%22d%22%3A%22S%26P%20500%22%7D%2C%7B%22s%22%3A%22CME%3A6E1!%22%2C%22d%22%3A%22Euro%22%7D%2C%7B%22s%22%3A%22COMEX%3AGC1!%22%2C%22d%22%3A%22Gold%22%7D%5D%2C%22originalTitle%22%3A%22Futures%22%7D%2C%7B%22title%22%3A%22Bonds%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22CME%3AGE1!%22%2C%22d%22%3A%22Eurodollar%22%7D%2C%7B%22s%22%3A%22CBOT%3AZB1!%22%2C%22d%22%3A%22T-Bond%22%7D%2C%7B%22s%22%3A%22CBOT%3AUB1!%22%2C%22d%22%3A%22Ultra%20T-Bond%22%7D%5D%2C%22originalTitle%22%3A%22Bonds%22%7D%2C%7B%22title%22%3A%22Forex%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22FX%3AEURUSD%22%2C%22d%22%3A%22EUR%20to%20USD%22%7D%2C%7B%22s%22%3A%22FX%3AGBPUSD%22%2C%22d%22%3A%22GBP%20to%20USD%22%7D%2C%7B%22s%22%3A%22FX%3AUSDJPY%22%2C%22d%22%3A%22USD%20to%20JPY%22%7D%5D%2C%22originalTitle%22%3A%22Forex%22%7D%5D%2C%22utm_source%22%3A%22app.def-trademarket.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22market-overview%22%2C%22page-uri%22%3A%22app.def-trademarket.com%2Fdashboard%2Findex.php%22%7D"
+                                    title="market overview TradingView widget" lang="en"
+                                    style="user-select: none; box-sizing: border-box; display: block; height: 100%; width: 100%;"></iframe>
+
+                                <style>
+                                    .tradingview-widget-copyright {
+                                        font-size: 13px !important;
+                                        line-height: 32px !important;
+                                        text-align: center !important;
+                                        vertical-align: middle !important;
+                                        /* @mixin sf-pro-display-font; */
+                                        font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+                                        color: #B2B5BE !important;
+                                    }
+
+                                    .tradingview-widget-copyright .blue-text {
+                                        color: #2962FF !important;
+                                    }
+
+                                    .tradingview-widget-copyright a {
+                                        text-decoration: none !important;
+                                        color: #B2B5BE !important;
+                                    }
+
+                                    .tradingview-widget-copyright a:visited {
+                                        color: #B2B5BE !important;
+                                    }
+
+                                    .tradingview-widget-copyright a:hover .blue-text {
+                                        color: #1E53E5 !important;
+                                    }
+
+                                    .tradingview-widget-copyright a:active .blue-text {
+                                        color: #1848CC !important;
+                                    }
+
+                                    .tradingview-widget-copyright a:visited .blue-text {
+                                        color: #2962FF !important;
+                                    }
+                                </style>
+                            </div>
+                            <!-- Trading View Widget ENDS-->
+                        </div>
+
+                        <div class="col-sm-12 d-sm-none d-block">
+                            <!-- Withdraw and Deposit Cards -->
+                            <div class="row" style="margin-right: 2px;">
+                                <div class="single-slide col-6">
+                                    <div class="d-box-three text-center">
+                                        <div class="icon">
+                                            <i class="fas fa-money-bill" style="color:#0093e4; font-size: 24px;"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p class="text-small mb-0 text-dark">Total Withdraw</p>
+                                            <h5 class="title text-dark">${{ details.total_withdraw }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-slide col-6">
+                                    <div class="d-box-three text-center">
+                                        <div class="icon">
+                                            <i class="fas fa-coins" style="color:#0093e4; font-size: 24px;"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p class="text-small mb-0 text-dark">Total Deposit</p>
+                                            <h5 class="title text-dark">${{ details.total_deposit }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons (Withdraw, Receive, Trade) -->
+                            <div class="row gy-2 mobile-box-wrapper" style="margin: 2px;">
+                                <div class="col-4">
+                                    <div class="mobile-action-send mobile-box text-center" style="display: block">
+                                        <a href="{% url "broker:withdraw" %}" class="item-link" style="text-decoration: none;">
+                                            <i class="ri-send-plane-line" style="font-size: 22px; color: #0093e4;"></i>
+                                            <h6 class="title">Withdraw</h6>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mobile-action-receive mobile-box text-center">
+                                        <a href="{% url "broker:deposit" %}" class="item-link" style="text-decoration: none;">
+                                            <i class="ri-download-2-line" style="font-size: 22px; color: #0093e4;"></i>
+                                            <h6 class="title">Receive</h6>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mobile-action-trade mobile-box text-center">
+                                        <a href="{% url "broker:logs" %}" class="item-link" style="text-decoration: none;">
+                                            <i class="ri-coins-fill" style="font-size: 22px; color: #0093e4;"></i>
+                                            <h6 class="title">Trade</h6>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Buy Crypto Buttons -->
+                            <div class="col-12 text-center" style="margin-top: 10px;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="{% url "broker:p2p" %}" class="w-100 btn btn-sm trading-btn"
+                                            style="background-color: #0093e4; color: white; border-radius: 8px;">
+                                            BUY CRYPTO<br>(P2P)
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="{% url "broker:deposit" %}" class="w-100 btn btn-sm trading-btn"
+                                            style="background-color: #0093e4; color: white; border-radius: 8px;">
+                                            BUY CRYPTO<br>(Gift Card)
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--mobile card slider end -->
+
+
+                    </div>
+
+
+                    <div class="row d-sm-none d-block" style=" padding-left:5px; ">
+                        <h6 class="my-3">My Assets</h6>
+                        <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                            style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                            <div class="card-body row"
+                                style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                <div class="col-2 text-capitalize text-dark">
+                                    <img width="60%" height="auto" src="{% static "images/64cd7b9fe98ce1691188127.png" %}"
+                                        class="t-icon">
+                                    <img width="40%" height="auto" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                </div>
+                                <div class="col-4 text-capitalize text-dark">
+                                    Bitcoin <br>
+                                    <span class="text-muted text-uppercase">btc</span>
+                                </div>
+                                <div class="col-6 text-dark">
+                                    ${{ myAsset.bitcoin }}<br>
+                                    <!--$0.00 <br>-->
+                                    <span>Total btc Balance</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                            style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                            <div class="card-body row"
+                                style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                <div class="col-2 text-capitalize text-dark">
+                                    <img width="60%" src="{% static "images/64cd3c3d3896a1691171901.png" %}" class="t-icon">
+                                    <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                </div>
+                                <div class="col-4 text-capitalize text-dark">
+                                    Ethereum <br>
+                                    <span class="text-muted text-uppercase">eth</span>
+                                </div>
+                                <div class="col-6 text-dark">
+                                    ${{ myAsset.ethereum }}<br>
+                                    <span>Total eth Balance</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--<div class="col-xl-4 col-lg-6 card ml-2 bg-dark text-white my-3" style="margin-left: 6px; box;box-shadow: 1px 1px 2px 1px #f4f0f4;">-->
+                        <!--    <div class="card-body row">-->
+                        <!--  <div class="col-5">Etherium</div>-->
+                        <!--  <div class="col-7">$0.00</div>-->
+                        <!--  <div class="col-5 text-muted">0 eth</div>-->
+                        <!--  <div class="col-7 text-muted">0.00% (US$ 0.00)</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div class="modal fade" id="planDelete" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <form action="" method="post">
+                            <input type="hidden" name="_token" value="9uDk52mEjkGS5MbvLjwyEmAjhYxiJui7A8kreu2S">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Plan</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    <style>
+        .tradingview-widget-copyright {
+            font-size: 13px !important;
+            line-height: 32px !important;
+            text-align: center !important;
+            vertical-align: middle !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+            color: #B2B5BE !important;
+        }
+
+        .tradingview-widget-copyright .blue-text {
+            color: #2962FF !important;
+        }
+
+        .tradingview-widget-copyright a {
+            text-decoration: none !important;
+            color: #B2B5BE !important;
+        }
+
+        .tradingview-widget-copyright a:visited {
+            color: #B2B5BE !important;
+        }
+
+        .tradingview-widget-copyright a:hover .blue-text {
+            color: #1E53E5 !important;
+        }
+
+        .tradingview-widget-copyright a:active .blue-text {
+            color: #1848CC !important;
+        }
+
+        .tradingview-widget-copyright a:visited .blue-text {
+            color: #2962FF !important;
+        }
+    </style>
+
+
+    <script src="{% static "scripts/jquery.min.js" %}"></script>
+    <script src="{% static "scripts/purecounter.js" %}"></script>
+    <script src="{% static "scripts/bootstrap.bundle.min.js" %}"></script>
+
+    <script src="{% static "scripts/feather.min.js" %}"></script>
+
+    <script src="{% static "scripts/slick.min.js" %}"></script>
+
+    <script src="{% static "scripts/glightbox.min.js" %}"></script>
+    <script src="{% static "scripts/validate.js" %}"></script>
+    <script src="{% static "scripts/selectric.min.js" %}"></script>
+
+    <script src="{% static "scripts/iziToast.min.js" %}"></script>
+    <script src="{% static "scripts/jquery.uploadPreview.min.js" %}"></script>
+    <script src="{% static "scripts/user_dashboard.js" %}"></script>
+
+
+</body>
+
+</html>
