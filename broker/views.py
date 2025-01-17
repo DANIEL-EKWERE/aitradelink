@@ -17,10 +17,11 @@ def index(request):
     return render(request, 'dashboard-index.html')
 
 def log(request):
+    details = Dashboard.objects.get(user=request.user)
     # user = request.userjjjjjjjjjjjjjjjjjjjjjjjjj
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
-    return render(request, 'dashboard-log-my-trade.html')
+    return render(request, 'dashboard-log-my-trade.html', {'details':details})
 
 
 
