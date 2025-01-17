@@ -10,7 +10,7 @@
     <link rel="shortcut icon" type="image/png" href="./asset/theme4/images/icon/icon.png">
     <title>
         aitradelink
-        Dashboard
+        profile/settings
     </title>
 
     <link href="{% static "asset/theme4/frontend/img/apple-touch-icon.png" %}" rel="apple-touch-icon">
@@ -233,7 +233,7 @@
                                 </div>
                                 <div class="user-details">
                                     <div class="user-name">
-                                        Cent Jr</div>
+                                        {{ request.user.username }}</div>
                                     <div class="user-email"> {{ request.user.email }} </div>
 
                                 </div>
@@ -472,8 +472,9 @@
         </div>
         <div class="site-card">
             <div class="card-body">
-                <form action="./profile/setting" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="9uDk52mEjkGS5MbvLjwyEmAjhYxiJui7A8kreu2S">                    <div class="row gy-4 justify-content-center">
+                <form action="{% url "broker:profile-setting" %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <div class="row gy-4 justify-content-center">
                         <div class="col-md-4 pe-lg-5 pe-md-4 justify-content-center">
                             <div class="img-choose-div">
                                 <p>Profile picture</p>
@@ -489,21 +490,21 @@
                             <div class="update">
                                 <div class="mb-3">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" name="fname" value="David Cent" placeholder="Enter first name">
+                                    <input type="text" class="form-control" name="fname" value="{{ details.first_name }}" placeholder="Enter first name">
                                 </div>
                                 <div class="mb-3">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="username" value="Cent Jr" placeholder="Enter user name" readonly>
+                                    <input type="text" class="form-control" name="username" value="{{ request.user.username }}" placeholder="Enter user name">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label>Email address</label>
-                                <input type="email" class="form-control" name="email" value="xoxoretaining@gmail.com" placeholder="Enter email" readonly>
+                                <input type="email" class="form-control" name="email" value="{{ request.user.email }}" placeholder="Enter email">
                             </div>
 
                             <div class="mb-3">
                                 <label>Phone</label>
-                                <input type="text" class="form-control" name="phone" value="" placeholder="Enter phone">
+                                <input type="text" class="form-control" name="phone" value="{{ details.phone }}" placeholder="Enter phone">
                             </div>
 
 
@@ -511,27 +512,27 @@
 
                             <div class="form-group col-md-12 mb-3">
                                 <label>Country</label>
-                                <input type="text" name="country" class="form-control" value="">
+                                <input type="text" name="country" class="form-control" value="{{ details.country }}">
                             </div>
 
                             <div class="col-md-12 mb-3">
 
                                 <label>City</label>
-                                <input type="text" name="city" class="form-control form_control" value="">
+                                <input type="text" name="city" class="form-control form_control" value="{{ details.city }}">
 
                             </div>
 
                             <div class="col-md-12 mb-3">
 
                                 <label>Zip</label>
-                                <input type="text" name="zip" class="form-control form_control" value="">
+                                <input type="text" name="zip" class="form-control form_control" value="{{ details.zip_code }}">
 
                             </div>
 
                             <div class="col-md-12 mb-3">
 
                                 <label>State</label>
-                                <input type="text" name="state" class="form-control form_control" value="">
+                                <input type="text" name="state" class="form-control form_control" value="{{ details.state }}">
 
                             </div>
 
@@ -539,27 +540,27 @@
 
                             <div class="form-group col-md-12 mb-3">
                                 <label>Bank name</label>
-                                <input type="text" name="bank" class="form-control" value="">
+                                <input type="text" name="bank" class="form-control" value="{{ details.bank }}">
                             </div>
 
                             <div class="col-md-12 mb-3">
 
                                 <label>Account number</label>
-                                <input type="text" name="account" class="form-control form_control" value="">
+                                <input type="text" name="account" class="form-control form_control" value="{{ details.account }}">
 
                             </div>
 
                             <div class="col-md-12 mb-3">
 
                                 <label>Account name</label>
-                                <input type="text" name="accname" class="form-control form_control" value="">
+                                <input type="text" name="accname" class="form-control form_control" value="{{ details.accname }}">
 
                             </div>
 
                           <div class="col-md-12 mb-3">
 
                                 <label>Routing number</label>
-                                <input type="text" name="wallet_address" class="form-control form_control" value="">
+                                <input type="text" name="wallet_address" class="form-control form_control" value="N/A">
 
                           </div>
 

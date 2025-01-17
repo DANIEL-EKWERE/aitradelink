@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="user-details">
                                     <div class="user-name">
-                                        Cent Jr</div>
+                                        {{ request.user.username }}</div>
                                     <div class="user-email"> {{ request.user.email }} </div>
 
                                 </div>
@@ -791,7 +791,7 @@
                                     style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
                                     <div class="col-2 text-capitalize text-dark">
                                         <img width="60%" src="{% static "images/64cd7b9fe98ce1691188127.png" %}" class="t-icon">
-                                        <img width="40%" src="{% static "images/lock.jpeg" %}%" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
                                     </div>
                                     <div class="col-4 text-capitalize text-dark">
                                         Bitcoin <br>

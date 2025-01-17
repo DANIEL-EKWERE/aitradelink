@@ -39,10 +39,26 @@ def transfer(request):
 
 
 def withdraw(request):
-    # user = request.user
+    user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
+    
+    if request.method == "POST":
+        amount = request.POST.get("amount")
+        method = request.POST.get("method")
+        address = request.POST.get("address")
+        if float(amount) > 0 and method and address:
+            Withdraw.objects.create(
+                user=user,
+                amount=amount,
+                wallet_Address=address,
+                method=method,
+            )
+            return redirect('/broker/dashboard/')
     return render(request, 'dashboard-withdraw.html')
+
+# http://127.0.0.1:5000/accounts/login/?next=/broker/withdraw/
+
 
 def deposit(request):
     if request.method == 'POST':
@@ -119,10 +135,11 @@ def paymentMethod(request):
     return render(request, 'payment-method.html')
 
 def settings(request):
+    details = Profile.objects.get(user=request.user)
     # user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
-    return render(request, 'settings.html')
+    return render(request, 'settings.html', {"details":details})
 
 def signout(request):
     logout(request)
@@ -132,6 +149,7 @@ def signout(request):
 
 @login_required
 def update_profile(request):
+    details = Account.objects.get(user=request.user)
     if request.method == "POST":
         # Get the current user
         user = request.user
@@ -168,12 +186,12 @@ def update_profile(request):
 
             profile.save()
             messages.success(request, "Your profile has been updated successfully.")
-            return redirect('dashboard')  # Replace 'dashboard' with the name of your dashboard route
+            return redirect('/broker/dashboard/')  # Replace 'dashboard' with the name of your dashboard route
         except Profile.DoesNotExist:
             messages.error(request, "Profile does not exist. Please contact support.")
             return redirect('profile-setting')  # Replace 'profile-setting' with your profile settings page route
 
-    return render(request, 'profile_setting.html')  # Render the form template for GET requests
+    return render(request, 'settings.html', {'details':details})  # Render the form template for GET requests
 
 
 @login_required
@@ -243,9 +261,9 @@ def profile(request):
 
     return render(request, 'profile.html',{'profile':profile})
 
-@login_required
-def withdraw(request):
-    return render(request, 'dashboard-withdraw.html')
+# @login_required
+# def withdraw(request):
+#     return render(request, 'dashboard-withdraw.html')
 
 @login_required
 def withdrawcrypto(request):
@@ -398,14 +416,15 @@ def signup(request):
             first_name = first_name,
             last_name=last_name,
             user=user,
-            country=country,
+            # country=country,
             phone=phone,
-            referral=referrer,
-            address=address,
-            city=city,
-            state=state,
-            zipcode=zipcode
+            # referral=referrer,
+            # address=address,
+            # city=city,
+            # state=state,
+            # zipcode=zipcode
         )
+
         Dashboard.objects.create(
             user=user,
             deposit_wallet_balance=10.0,

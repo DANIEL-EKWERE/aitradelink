@@ -60,6 +60,7 @@ class Withdraw(models.Model):
     amount = models.CharField(max_length=50)
     wallet_Address = models.CharField(max_length=100)
     status = models.CharField(default="PENDING", max_length=50,choices=[('PENDING','PENDING'),('DECLINED','DECLINED'),('APPROVED','APPROVED')])
+    method = models.CharField(max_length=50, blank=True,null=True)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
