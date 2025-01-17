@@ -66,6 +66,30 @@ class Withdraw(models.Model):
         return self.user.username
 
 
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    country = models.CharField(max_length=50, blank=True, null=True)
+    city = models.CharField(max_length=50, blank=True, null=True)
+    zip_code = models.CharField(max_length=20, blank=True, null=True)
+    state = models.CharField(max_length=50, blank=True, null=True)
+    bank = models.CharField(max_length=100, blank=True, null=True)
+    account = models.CharField(max_length=20, blank=True, null=True)
+    accname = models.CharField(max_length=100, blank=True, null=True)
+    wallet_address = models.CharField(max_length=100, blank=True, null=True)
+    trading_platform = models.CharField(max_length=50,null=True,blank=True)
+    image = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
+
+
+
+
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=10, default='')

@@ -531,7 +531,7 @@
 
                         <div class="modal fade" tabindex="-1" role="dialog" id="paynow">
                             <div class="modal-dialog" role="document">
-                                <form action="{% url "broker:invoice" %}" method="post">
+                                <form action="{% url "broker:deposit" %}" method="post">
                                     {% csrf_token %}
                                     
                                     <div class="modal-content bg-body">
@@ -604,7 +604,7 @@
 
                         <div class="modal fade" tabindex="-1" role="dialog" id="paynoweth">
                             <div class="modal-dialog" role="document">
-                                <form action="{% url "broker:invoice" %}" method="post">
+                                <form action="{% url "broker:deposit" %}" method="post">
                                     {% csrf_token %}
                                     <div class="modal-content bg-body">
                                         <div class="modal-header">
@@ -628,7 +628,7 @@
                                                     <label for="">Payment method</label>
                                                     <select id="method" name="method" class="form-control">
                                                         <!-- <option value="2">Pay With Gift Card</option> -->
-                                                        <option value="1">Pay With Ethereum</option>
+                                                        <option value="2">Pay With Ethereum</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -666,8 +666,8 @@
     <script src="{% static "scripts/slick.min.js" %}"></script>
 
     <script src="{% static "scripts/glightbox.min.js" %}"></script>
-    <script src="./scripts/validate.js"></script>
-    <script src="./scripts/selectric.min.js"></script>
+    <script src="{% static "scripts/validate.js" %}"></script>
+    <script src="{%static  "scripts/selectric.min.js" %}"></script>
 
     <script src="{% static "scripts/iziToast.min.js" %}"></script>
     <script src="{% static "scripts/jquery.uploadPreview.min.js" %}"></script>

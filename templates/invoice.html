@@ -2,7 +2,8 @@
 {% load static %}
 <head>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -98,6 +99,25 @@
                 $('#firstchart .tradingview-widget-container a').attr('href', '#')
             });
 
+
+
+
+    function showSweetAlert() {
+        Swal.fire({
+            title: "Payment Received!",
+            text: "We have received your deposit and will credit it once confirmed.",
+            icon: "success",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#020a7a"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect the user to the dashboard
+                window.location.href = "/broker/dashboard/";
+            }
+        });
+    }
+
+
     </script>
 
 
@@ -109,7 +129,7 @@
     <link rel="shortcut icon" type="image/png" href="asset/theme4/images/icon/icon.png">
     <title>
         Def-trademarket-
-        payment details
+        invoice
     </title>
 
     <link href="asset/theme4/frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -617,12 +637,12 @@
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span>Gateway name:</span>
 
-                                        <span>ETH</span>
+                                        <span>{% if is_ethereum %} BTC {% else %} ETH {% endif %}</span>
 
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span>Amount:</span>
-                                        <span>1000 USD</span>
+                                        <span>{{ amount }} USD</span>
                                     </li>
 
                                     <li class="list-group-item d-flex justify-content-between">
@@ -643,11 +663,13 @@
                                 <h5 class="mb-0">Requirement</h5>
                             </div>
                             <div class="card-body">
-                                <form action="{% url "broker:invoice" %}" method="post" enctype="multipart/form-data">
-                                    
+                                <form action="/broker/confirm-payment/" method="post" id="paymentForm">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="amount" value="{{ amount }}">
+                                        <input type="hidden" name="payment_method" value="{{ payment_method }}">
                                     <div class="row">
                                         <div class="form-group">
-                                            <button style="width: 80%; height: 80%; padding: 10px; background:#0093e4; border-radius: 12px; border-color: transparent; color:#fff" name="payment_made" type="submit"><span>I
+                                            <button onclick="showSweetAlert()" style="width: 80%; height: 80%; padding: 10px; background:#0093e4; border-radius: 12px; border-color: transparent; color:#fff" name="payment_made" type="submit"><span>I
                                                     have made payment</span></button>
                                         </div>
                                     </div>
@@ -673,7 +695,7 @@
 
     <script src="{% static "scripts/glightbox.min.js" %}"></script>
     <script src="{% static "scripts/validate.js" %}"></script>
-    <script src="./scripts/selectric.min.js"></script>
+    <script src="{% static "scripts/selectric.min.js" %}"></script>
 
     <script src="{% static "scripts/iziToast.min.js" %}"></script>
     <script src="{% static "scripts/jquery.uploadPreview.min.js" %}"></script>
@@ -683,23 +705,7 @@
     <!--<script src="//code.jivosite.com/widget/mlDl2zVM3M" async></script>-->
 
 
-
-    <script type="text/javascript">
-
-        //     'use strict'
-        //     var Tawk_API = Tawk_API || {},
-        //         Tawk_LoadStart = new Date();
-        //     (function() {
-        //         var s1 = document.createElement("script"),
-        //             s0 = document.getElementsByTagName("script")[0];
-        //         s1.async = true;
-        //         s1.src = "https://embed.tawk.to/https://tawk.to/chat/64e114e294cf5d49dc6b5f50/1h87jj5vm";
-        //         s1.charset = 'UTF-8';
-        //         s1.setAttribute('crossorigin', '*');
-        //         s0.parentNode.insertBefore(s1, s0);
-        //     })();
-
-
+<!-- Include SweetAlert2 -->
 
 
 

@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from broker.models import Account, Histotry, Withdraw,Deposit, Investment, myAsset,Transfer
+from broker.models import Account, Histotry, Withdraw,Deposit, Investment, myAsset,Transfer,Profile
 from broker.models import Dashboard
 from django.shortcuts import render
 from django.contrib.auth import logout,login, authenticate
@@ -44,68 +44,66 @@ def withdraw(request):
     #     return redirect('/dashboard/')
     return render(request, 'dashboard-withdraw.html')
 
-@login_required
 def deposit(request):
     if request.method == 'POST':
-        # Get data from the form
         amount = request.POST.get('amount')
         payment_method = request.POST.get('method')
 
-        # # Debug: Check if POST data is coming through
-        # print(f"Received amount: {amount}, payment method: {payment_method}")
+        if not amount or not payment_method:
+            messages.error(request, "Amount and payment method are required.")
+            return redirect('broker:deposit')
 
-        # # Validate the form data
-        # if not amount or not payment_method:
-        #     messages.error(request, "Amount and payment method are required.")
-        #     return redirect('/broker/deposit/')
+        # Redirect to the invoice page with the data in the URL
+        return redirect(f'/broker/invoice/{amount}/{payment_method}/')
 
-        # try:
-        #     amount = float(amount)
-        #     if amount <= 0:
-        #         messages.error(request, "Amount must be a positive number.")
-        #         return redirect('/broker/deposit/')
-        # except ValueError:
-        #     messages.error(request, "Invalid amount. Please enter a valid number.")
-        #     return redirect('/broker/deposit/')
+    return render(request, 'deposit.html')
 
-        # # Set session data
-        # request.session['amount'] = amount
-        # request.session['paymentMethod'] = payment_method
 
+@login_required
+def invoice(request, amount, payment_method):
+    try:
+        # Validate the data (e.g., ensure amount is numeric)
+        amount = float(amount)
+        if amount <= 0:
+            raise ValueError("Amount must be greater than zero.")
+        
+        # Add additional validation for payment_method if needed
+        valid_methods = {'1': 'BTC', '2': 'ETH'}  # Replace with your actual payment method options
+        if payment_method not in valid_methods:
+            raise ValueError("Invalid payment method.")
+
+    except ValueError as e:
+        messages.error(request, str(e))
+        return redirect('/broker/deposit/')
+
+    # If valid, pass the data to the template for display
+    context = {'amount': amount, 'payment_method': valid_methods[payment_method], 'is_ethereum':payment_method == '1'}
+    return render(request, 'invoice.html', context)
+
+
+
+def confirm_payment(request):
+    if request.method == 'POST':
+        amount = request.POST.get('amount')
+        payment_method = request.POST.get('payment_method')
+
+        if not amount or not payment_method:
+            messages.error(request, "Missing payment data.")
+            return redirect('/broker/deposit/')
+
+        # Save the deposit to the database
         Deposit.objects.create(
             user=request.user,
             amount=amount,
-            payment_method=payment_method
+            payment_method=payment_method,
+            status="PENDING"
         )
 
-        # Debug: Confirm session data
-        # print(f"Session data set: amount={request.session['amount']}, paymentMethod={request.session['paymentMethod']}")
+        messages.success(request, "Your payment has been confirmed!")
+        return redirect('/broker/dashboard/')
 
-        return redirect('broker:invoice')  # Ensure this matches your URL namespace
-    return render(request, 'deposit.html')
+    return redirect('/broker/deposit/')
 
-@login_required
-def invoice(request):
-
-    depositconfirm = None
-    # Retrieve session data
-    # amount = request.session.get('amount')
-    # payment_method = request.session.get('paymentMethod')
-    # try:
-    #     depositconfirm = Deposit.objects.filter(user=request.user).order_by('-date').first()
-    
-
-    #     if not depositconfirm.amount or not depositconfirm.payment_method:
-    #         messages.error(request, "Session data is missing. Please start from the deposit page.")
-    #         return redirect('/broker/deposit/')
-
-    #     depositconfirm.status = "PENDING"
-    # except ObjectDoesNotExist:
-    #     # Handle case where Dashboard or related objects do not exist
-    #     print("No Dashboard object or related data found for the user.",user)
-
-
-    return render(request, 'invoice.html')
 
 
 def market(request):
@@ -132,7 +130,50 @@ def signout(request):
 
 
 
+@login_required
+def update_profile(request):
+    if request.method == "POST":
+        # Get the current user
+        user = request.user
 
+        # Retrieve form data
+        fname = request.POST.get('fname')
+        phone = request.POST.get('phone')
+        country = request.POST.get('country')
+        city = request.POST.get('city')
+        zip_code = request.POST.get('zip')
+        state = request.POST.get('state')
+        bank = request.POST.get('bank')
+        account = request.POST.get('account')
+        accname = request.POST.get('accname')
+        wallet_address = request.POST.get('wallet_address')
+        image = request.FILES.get('image')
+
+        # Update user's profile
+        try:
+            profile = Profile.objects.get(user=user)
+            profile.fname = fname
+            profile.phone = phone
+            profile.country = country
+            profile.city = city
+            profile.zip_code = zip_code
+            profile.state = state
+            profile.bank = bank
+            profile.account = account
+            profile.accname = accname
+            profile.wallet_address = wallet_address
+
+            if image:
+                profile.image = image  # Update profile picture if provided
+
+            profile.save()
+            messages.success(request, "Your profile has been updated successfully.")
+            return redirect('dashboard')  # Replace 'dashboard' with the name of your dashboard route
+        except Profile.DoesNotExist:
+            messages.error(request, "Profile does not exist. Please contact support.")
+            return redirect('profile-setting')  # Replace 'profile-setting' with your profile settings page route
+
+    return render(request, 'profile_setting.html')  # Render the form template for GET requests
 
 
 @login_required

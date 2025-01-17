@@ -1,5 +1,5 @@
 <html lang="en">
-
+{% load static %}
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -10,26 +10,26 @@
     <link rel="shortcut icon" type="image/png" href="./asset/theme4/images/icon/icon.png">
     <title>
         aitradelink
-        Profile edit
+        Payment Method
     </title>
 
-    <link href="./asset/theme4/frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{% static "asset/theme4/frontend/img/apple-touch-icon.png" %}" rel="apple-touch-icon">
 
-    <link href="./styles/bootstrap.min.css" rel="stylesheet">
-    <link href="./styles/bootstrap-icons.css" rel="stylesheet">
-    <link href="./styles/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/slick.css">
-    <link href="./styles/glightbox.min.css" rel="stylesheet">
-    <link href="./styles/remixicon.css" rel="stylesheet">
-    <link href="./styles/swiper-bundle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/selectric.css">
-    <link rel="stylesheet" href="./styles/animate.min.css">
-    <link rel="stylesheet" href="./styles/font-awsome.min.css">
-    <link rel="stylesheet" href="./styles/iziToast.min.css">
-    <link href="./styles/style.css" rel="stylesheet">
+    <link href="{% static "styles/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "styles/bootstrap-icons.css" %}" rel="stylesheet">
+    <link href="{% static "styles/boxicons.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href=".{% static "tyles/slick.css" %}">
+    <link href="{% static "styles/glightbox.min.css" %}" rel="stylesheet">
+    <link href="{% static "styles/remixicon.css" %}" rel="stylesheet">
+    <link href="{% static "styles/swiper-bundle.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "styles/selectric.css" %}">
+    <link rel="stylesheet" href="{% static "styles/animate.min.css" %}">
+    <link rel="stylesheet" href="{% static "styles/font-awsome.min.css" %}">
+    <link rel="stylesheet" href="{% static "styles/iziToast.min.css" %}">
+    <link href="{% static "styles/style.css" %}" rel="stylesheet">
 
 
-
+    
     <style>
         .menu li{
             padding-left: 20px;
@@ -46,8 +46,6 @@
 
 
 
-
-
 </head>
 
 <body cz-shortcut-listen="true">
@@ -58,7 +56,7 @@
 
 
 
-    <header id="header" class="fixed-top header-inner-pages">
+    <header id="header" class="fixed-top header-inner-pages header-scrolled">
         <h1 class="header-mark">
             <i class="bi bi-currency-exchange"></i>
         </h1>
@@ -77,8 +75,8 @@
                     </div>
 
                     <div class="d-none d-lg-block">
-                        <a href="dashboard-index.html">
-                            <img class="img-fluid rounded sm-device-img text-align" src="./images/definew.png" alt="pp">
+                        <a href="{% url "broker:dashboard-index" %}">
+                            <img class="img-fluid rounded sm-device-img text-align" src="{% static "images/definew.png" %}" alt="pp">
                         </a>
                     </div>
 
@@ -87,7 +85,7 @@
             <div class="d-flex flex-wrap align-items-center d-none d-lg-block">
                 <ul class="d-flex text-white menu">
                     <li class="active">
-                        <a href="./dashboard-index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:dashboard-index" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -95,7 +93,7 @@
                             </svg> Dashboard</a>
                     </li>
                     <li>
-                        <a href="./html/p2p-trading.html"
+                        <a href="{% url "broker:p2p" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -107,7 +105,7 @@
                     </li>
 
                     <li>
-                        <a href="./deposit.html"
+                        <a href="{% url 'broker:deposit' %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -130,7 +128,7 @@
                         </span>
                         <ul class="bg-gray dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                             <li>
-                                <a href="./dashboard-index.html" style="color:black"><svg xmlns="http://www.w3.org/2000/svg"
+                                <a href="{% url "broker:logs" %}" style="color:black"><svg xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-chevrons-right">
@@ -140,7 +138,7 @@
                             </li>
 
                             <li>
-                                <a href="./dashboard-log-my-trade.html" style="color:black"><svg xmlns="http://www.w3.org/2000/svg"
+                                <a href="{% url "broker:logs" %}" style="color:black"><svg xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-chevrons-right">
@@ -153,7 +151,7 @@
 
 
                     <li>
-                        <a href="./deposit.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:deposit" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -164,7 +162,7 @@
 
 
                     <li>
-                        <a href="./dashboard-withdraw.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:withdraw" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
                                 <line x1="22" y1="2" x2="11" y2="13" />
@@ -173,7 +171,7 @@
                     </li>
 
                     <li>
-                        <a href="./market.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:market" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
@@ -225,19 +223,19 @@
                 <div class="dropdown ms-3">
                     <span class="ms-2 dropdown-toggle user-toggle-menu" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="./images/user.png" alt="pp">
+                        <img src="{% static "images/user.png" %}" alt="pp">
                     </span>
 
                     <ul class="d-sidebar-menu dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                         <li style="padding-left:0px;">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="./images/user.png" alt="pp" class="rounded-circle">
+                                    <img src="{% static "images/user.png" %}" alt="pp" class="rounded-circle">
                                 </div>
                                 <div class="user-details">
                                     <div class="user-name">
                                         Cent Jr</div>
-                                    <div class="user-email">xoxoretaining@gmail.com</div>
+                                    <div class="user-email"> {{ request.user.email }} </div>
 
                                 </div>
                             </div>
@@ -245,7 +243,7 @@
 
 
                         <li>
-                            <a href="./html/setting.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            <a href="{% url "broker:settings" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -254,16 +252,16 @@
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                                 </svg> Profile</a>
                         </li>
-                        <li>
-                            <a href=" "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        {% comment %} <li>
+                            <a href="./broker.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                                     <circle cx="12" cy="7" r="4" />
                                 </svg> Verify broker</a>
-                        </li>
+                        </li> {% endcomment %}
                         <li>
-                            <a href="./settings.html"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            <a href="{% url "broker:settings" %}"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
                                     <circle cx="12" cy="12" r="3" />
@@ -272,7 +270,7 @@
                                 </svg>Settings</a>
                         </li>
                         <li>
-                            <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            <a href="{% url "broker:logout" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -295,16 +293,18 @@
             <div class="d-sidebar">
                 <ul class="d-sidebar-menu">
                     <li>
-                        <a href="./dashboard-index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:dashboard-index" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                 <polyline points="9 22 9 12 15 12 15 22" />
                             </svg> Dashboard</a>
                     </li>
+
+
                     <!--New Menu-->
                     <li>
-                        <a href="./dashboard-p2p-trading.html"
+                        <a href="{% url "broker:p2p" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -315,7 +315,7 @@
                             P2p trading</a>
                     </li>
 
-                    <li class="has_submenu">
+                    <li class="has_submenu open">
                         <a href="#0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-zap">
@@ -323,7 +323,7 @@
                             </svg> Trade</a>
                         <ul class="submenu">
                             <li>
-                                <a href="./dashboard-index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                <a href="{% url "broker:logs" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-chevrons-right">
@@ -331,8 +331,8 @@
                                         <polyline points="6 17 11 12 6 7" />
                                     </svg> Trade</a>
                             </li>
-                            <li>
-                                <a href="./dashboard-log-my-trade.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            <li class="active">
+                                <a href="{% url "broker:logs" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-chevrons-right">
@@ -344,7 +344,7 @@
                     </li>
 
                     <li>
-                        <a href="./deposit.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:deposit" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -353,8 +353,12 @@
                             </svg> Receive</a>
                     </li>
 
+                    <!-- <li class="">-->
+                    <!--  <a href="./transfer-money"><i data-feather="send"></i> Send</a>-->
+                    <!--</li>-->
+
                     <li>
-                        <a href="./dashboard-withdraw.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:withdraw" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
                                 <line x1="22" y1="2" x2="11" y2="13" />
@@ -363,7 +367,7 @@
                     </li>
 
                     <li>
-                        <a href="./market.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:market" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
@@ -374,7 +378,7 @@
                     <!--  <a href="./2fa"><i data-feather="shield"></i> 2fa</a>-->
                     <!--</li>-->
                     <li>
-                        <a href=" "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="./ticket.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-life-buoy">
                                 <circle cx="12" cy="12" r="10" />
@@ -387,7 +391,7 @@
                             </svg> Support</a>
                     </li>
                     <li>
-                        <a href=" "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:settings" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -397,7 +401,7 @@
                             </svg> Profile</a>
                     </li>
                     <li>
-                        <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <a href="{% url "broker:logout" %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -413,12 +417,11 @@
                 <!--</div>-->
             </div>
 
-
             <!-- mobile bottom menu start -->
             <div class="mobile-bottom-menu-wrapper">
                 <ul class="mobile-bottom-menu">
                     <li>
-                        <a href="./dashboard-index.html">
+                        <a href="{% url "broker:dashboard-index" %}">
                             <i class="bi bi-house-door"></i>
                             <span>Home</span>
                         </a>
@@ -430,7 +433,7 @@
                     <!--  </a>-->
                     <!--</li>-->
                     <li>
-                        <a href="./dashboard-log-my-trade.html">
+                        <a href="{% url "broker:logs" %}">
                             <i class="bi bi-piggy-bank"></i>
                             <span>My trade</span>
                         </a>
@@ -443,13 +446,13 @@
                     <!--  </a>-->
                     <!--</li>-->
                     <li>
-                        <a href="./dashboard-transfer-money.html">
+                        <a href="{% url "broker:transfer" %}">
                             <i class="bi bi-shuffle"></i>
                             <span>Transfer</span>
                         </a>
                     </li>
                     <li>
-                        <a href="./market.html">
+                        <a href="{% url "broker:market" %}">
                             <i class="bi bi-cash-coin"></i>
                             <span>Market</span>
                         </a>
@@ -492,7 +495,7 @@
             <section class="auth-section" style="display: flex;justify-content: center;align-items: center;">
                 <div class="mobile-page-header">
                     <h5 class="title">Payment methods</h5>
-                    <a href="./dashboard-index.html" class="back-btn" style="text-decoration: none;"><i class="bi bi-arrow-left"></i> Back</a>
+                    <a href="{% url "broker:dashboard-index" %}" class="back-btn" style="text-decoration: none;"><i class="bi bi-arrow-left"></i> Back</a>
                 </div>
                 <div class="auth-wrapper">
                     <h3 class="mb-4 text-center">Accepted Payment Methods</h3>
@@ -503,7 +506,7 @@
                             <div class="card-body row"
                                 style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
                                 <div class="col-3 text-capitalize text-dark">
-                                    <img width="60%" src="./images/zelle.png" class="t-icon">
+                                    <img width="60%" src="{% static "images/zelle.png" %}" class="t-icon">
                                 </div>
                                 <div class="col-9 text-capitalize text-dark">
                                     <h3>Zelle</h3>
@@ -516,7 +519,7 @@
                             <div class="card-body row"
                                 style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
                                 <div class="col-3 text-capitalize text-dark">
-                                    <img width="60%" src="./images/venmo.png" class="t-icon">
+                                    <img width="60%" src="{% static "images/venmo.png" %}" class="t-icon">
                                 </div>
                                 <div class="col-9 text-capitalize text-dark">
                                     <h3>Venmo</h3>
@@ -529,7 +532,7 @@
                             <div class="card-body row"
                                 style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
                                 <div class="col-3 text-capitalize text-dark">
-                                    <img width="60%" src="./images/cashapp.png" class="t-icon">
+                                    <img width="60%" src="{% static "images/cashapp.png" %}" class="t-icon">
                                 </div>
                                 <div class="col-9 text-capitalize text-dark">
                                     <h3>Cashapp</h3>
@@ -542,7 +545,7 @@
                             <div class="card-body row"
                                 style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
                                 <div class="col-3 text-capitalize text-dark">
-                                    <img width="60%" src="./images/paypal.png" class="t-icon">
+                                    <img width="60%" src="{% static "images/paypal.png" %}" class="t-icon">
                                 </div>
                                 <div class="col-9 text-capitalize text-dark">
                                     <h3>Paypal</h3>
@@ -555,7 +558,7 @@
                             <div class="card-body row"
                                 style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
                                 <div class="col-3 text-capitalize text-dark">
-                                    <img width="60%" src="./images/wire_transfer.png" class="t-icon">
+                                    <img width="60%" src="{% static "images/wire_transfer.png" %}" class="t-icon">
                                 </div>
                                 <div class="col-9 text-capitalize text-dark">
                                     <h3>Wire Bank Transfer</h3>
@@ -582,21 +585,21 @@
     </main>
 
 
-    <script src="./scripts/jquery.min.js"></script>
-    <script src="./scripts/purecounter.js"></script>
-    <script src="./scripts/bootstrap.bundle.min.js"></script>
+    <script src="{% static "scripts/jquery.min.js" %}"></script>
+    <script src="{% static "scripts/purecounter.js" %}"></script>
+    <script src="{% static "scripts/bootstrap.bundle.min.js" %}"></script>
 
-    <script src="./scripts/feather.min.js"></script>
+    <script src="{% static "scripts/feather.min.js" %}"></script>
 
-    <script src="./scripts/slick.min.js"></script>
+    <script src="{% static "scripts/slick.min.js" %}"></script>
 
-    <script src="./scripts/glightbox.min.js"></script>
-    <script src="./scripts/validate.js"></script>
-    <script src="./scripts/selectric.min.js"></script>
+    <script src="{% static "scripts/glightbox.min.js" %}"></script>
+    <script src="{% static "scripts/validate.js" %}"></script>
+    <script src="{% static "scripts/selectric.min.js" %}"></script>
 
-    <script src="./scripts/iziToast.min.js"></script>
-    <script src="./scripts/jquery.uploadPreview.min.js"></script>
-    <script src="./scripts/user_dashboard.js"></script>
+    <script src="{% static "scripts/iziToast.min.js" %}"></script>
+    <script src="{% static "scripts/jquery.uploadPreview.min.js" %}"></script>
+    <script src="{% static "scripts/user_dashboard.js" %}"></script>
 
 </body>
 

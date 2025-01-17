@@ -1,5 +1,5 @@
 from django.contrib import admin
-from broker.models import Account, Dashboard,Histotry,Withdraw,Deposit,Investment, myAsset, Transfer
+from broker.models import Account, Dashboard,Histotry,Withdraw,Deposit,Investment, myAsset, Transfer,Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
@@ -36,6 +36,29 @@ class AdminTransfer(admin.ModelAdmin):
         'date',
 
     ]
+
+@admin.register(Profile)
+class AdminProfile(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'first_name',
+        'last_name',
+        'phone',
+        'country',
+        'city',
+        'zip_code',
+        'state',
+        'bank',
+        'account',
+        'accname',
+        'wallet_address',
+        'trading_platform',
+        'image'
+    ]
+
+
+
+
 
 @admin.register(myAsset)
 class AdminMyAsset(admin.ModelAdmin):
