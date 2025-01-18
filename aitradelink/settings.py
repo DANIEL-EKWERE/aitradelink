@@ -95,9 +95,9 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # }
 
 
-# DATABASES = {
-#     'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
-# }
+DATABASES = {
+    'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
+}
 
 
 
@@ -140,10 +140,10 @@ STATIC_URL = 'static/'
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, 'static')
-]
-# STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static')
+# ]
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
