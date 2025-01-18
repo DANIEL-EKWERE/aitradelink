@@ -1064,11 +1064,15 @@ about
 										data-settings="{&quot;_position&quot;:&quot;absolute&quot;}"
 										data-widget_type="image.default">
 										<div class="elementor-widget-container">
-											<img decoding="async" width="836" height="584"
+											<img decoding="async" width="836" height="584" 
 												src="{% static "images/Services-Hero-Image-3.webp" %}"
 												class="attachment-full size-full wp-image-197" alt="">
 										</div>
+
+
 									</div>
+
+									<div style="height:40%;"></div>
 									<div class="elementor-element elementor-element-48af68cb elementor-widget__width-auto elementor-absolute elementor-widget elementor-widget-image"
 										data-id="48af68cb" data-element_type="widget"
 										data-settings="{&quot;_position&quot;:&quot;absolute&quot;}"
@@ -1081,8 +1085,12 @@ about
 									</div>
 								</div>
 							</div>
+
+
 						</div>
 					</div>
+					<div style="height:150px; width:100%"></div>
+					{% comment %} <div style="height:50%; width:100%"></div> {% endcomment %}
 					<div class="elementor-section elementor-top-section elementor-element elementor-element-548fb77c elementor-section-boxed elementor-section-height-default"
 						data-id="548fb77c" data-element_type="section"
 						data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
@@ -1095,7 +1103,7 @@ about
 										data-id="25f84ab6" data-element_type="widget"
 										data-widget_type="heading.default">
 										<div class="elementor-widget-container">
-											<h5 class="elementor-heading-title elementor-size-default">Why Finflow?</h5>
+											<h5 class="elementor-heading-title elementor-size-default">Why aitradelink?</h5>
 										</div>
 									</div>
 									<div class="elementor-element elementor-element-56a20397 elementor-widget__width-initial elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-widget elementor-widget-heading"
@@ -1501,6 +1509,89 @@ about
 	<script src="./scripts/wp-polyfill.min2c7c.js" id="wp-polyfill-js"></script>
 	<script src="./scripts/hooks.min2757.js" id="wp-hooks-js"></script>
 	<script src="./scripts/i18n.minc33c.js" id="wp-i18n-js"></script> {% endcomment %}
+
+<!-- WhatsApp and Telegram Floating Buttons -->
+<a href="https://wa.me/+15612071985" target="_blank" class="fab fab-left" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<a href="https://t.me/caesar_alpha" target="_blank" class="fab fab-right" aria-label="Telegram">
+    <i class="fab fa-telegram"></i>
+</a>
+
+
+<style>
+
+	.fab {
+		position: fixed;
+		bottom: 20px;
+		width: 60px;
+		height: 60px;
+		color: white;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		text-decoration: none;
+		z-index: 1000;
+		font-size: 28px;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	  }
+	  
+	  
+	  .fab-left {
+		left: 20px;
+		background-color: #25d366; /* WhatsApp green */
+	  }
+	  
+	  .fab-right {
+		right: 20px;
+		background-color: #0088cc; /* Telegram blue */
+	  }
+	  
+	  .fab:hover {
+		opacity: 0.8;
+		transform: scale(1.1);
+	  }
+	  
+	  .fab i {
+		line-height: 1;
+	  }
+	  
+
+</style>
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuToggler = document.querySelector('.elementskit-menu-hamburger'); // Hamburger menu button
+        const menuContainer = document.querySelector('.elementskit-menu-container'); // Menu container
+        const closeButton = document.querySelector('.elementskit-menu-close'); // Close button
+        const overlay = document.querySelector('.elementskit-menu-overlay'); // Optional overlay
+
+        if (menuToggler && menuContainer) {
+            // Toggle menu open/close on hamburger button click
+            menuToggler.addEventListener('click', function () {
+                menuContainer.classList.toggle('active');
+                overlay?.classList.toggle('active');
+            });
+
+            // Close menu on close button click
+            closeButton?.addEventListener('click', function () {
+                menuContainer.classList.remove('active');
+                overlay?.classList.remove('active');
+            });
+
+            // Close menu on overlay click
+            overlay?.addEventListener('click', function () {
+                menuContainer.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+    });
+</script>
+{% endblock %}
 
 </body>
 
