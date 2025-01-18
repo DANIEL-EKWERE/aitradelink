@@ -67,7 +67,7 @@ def deposit(request):
         payment_method = request.POST.get('method')
 
         if not amount or not payment_method:
-            messages.error(request, "Amount and payment method are required.")
+            # messages.error(request, "Amount and payment method are required.")
             return redirect('broker:deposit')
 
         # Redirect to the invoice page with the data in the URL
@@ -90,7 +90,7 @@ def invoice(request, amount, payment_method):
             raise ValueError("Invalid payment method.")
 
     except ValueError as e:
-        messages.error(request, str(e))
+        # messages.error(request, str(e))
         return redirect('/broker/deposit/')
 
     # If valid, pass the data to the template for display
@@ -105,7 +105,7 @@ def confirm_payment(request):
         payment_method = request.POST.get('payment_method')
 
         if not amount or not payment_method:
-            messages.error(request, "Missing payment data.")
+            # messages.error(request, "Missing payment data.")
             return redirect('/broker/deposit/')
 
         # Save the deposit to the database
@@ -116,7 +116,7 @@ def confirm_payment(request):
             status="PENDING"
         )
 
-        messages.success(request, "Your payment has been confirmed!")
+        # messages.success(request, "Your payment has been confirmed!")
         return redirect('/broker/dashboard/')
 
     return redirect('/broker/deposit/')
@@ -186,10 +186,10 @@ def update_profile(request):
                 profile.image = image  # Update profile picture if provided
 
             profile.save()
-            messages.success(request, "Your profile has been updated successfully.")
+            # messages.success(request, "Your profile has been updated successfully.")
             return redirect('/broker/dashboard/')  # Replace 'dashboard' with the name of your dashboard route
         except Profile.DoesNotExist:
-            messages.error(request, "Profile does not exist. Please contact support.")
+            # messages.error(request, "Profile does not exist. Please contact support.")
             return redirect('profile-setting')  # Replace 'profile-setting' with your profile settings page route
 
     return render(request, 'settings.html', {'details':details})  # Render the form template for GET requests
@@ -456,9 +456,9 @@ def signin(request):
         user = authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user=user)
-            messages.success(request,"login successful")
+            # messages.success(request,"login successful")
             return render(request, 'dashboard.html')
-    messages.error(request,"login not successful, check details and try again.")
+    # messages.error(request,"login not successful, check details and try again.")
     return render(request, 'signin.html')
 
 def resetpassword(request):
