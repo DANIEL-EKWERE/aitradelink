@@ -1274,12 +1274,14 @@ Buy Bitcoin, Ethereum, and other top cryptocurrencies on a platform trusted by m
 		</article>
 
 	</div><!-- #primary -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% block script %}
 	
 	 <script>
 		document.addEventListener('DOMContentLoaded', function () {
-			const menuToggler = document.querySelector('.elementskit-menu-hamburger');
-			const menuContainer = document.querySelector('.elementskit-menu-container');
+			document.querySelector('.elementskit-menu-hamburger'); // Should not return null
+document.querySelector('.elementskit-menu-container'); // Should not return null
+
 		
 			if (menuToggler && menuContainer) {
 				menuToggler.addEventListener('click', function () {
