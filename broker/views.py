@@ -43,12 +43,12 @@ def withdraw(request):
     user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
-    
+    details = Dashboard.objects.get(user=request.user)
     if request.method == "POST":
         amount = request.POST.get("amount")
         method = request.POST.get("method")
         address = request.POST.get("address")
-        if float(amount) > 0 and method and address:
+        if float(amount) > 0 and method and address and float(amount) <= details.deposit_wallet_balance:
             Withdraw.objects.create(
                 user=user,
                 amount=amount,
@@ -214,6 +214,19 @@ def dashboard(request):
         details = Dashboard.objects.get(user=user)
         assets = myAsset.objects.get(user=user)
         print("assets",assets.bitcoin,assets.ethereum)
+
+
+
+        deposits = Deposit.objects.filter(user=user).order_by("-date")
+        withdraws = Withdraw.objects.filter(user=user)
+        # profile = Account.objects.get(user=user)
+        for x in deposits:
+            if x.status == "APPROVED":
+                details.deposit_wallet_balance += int(x.amount)
+
+        for x in withdraws:
+            if x.status == "APPROVED":
+                details.deposit_wallet_balance -= int(x.amount)
         # Fetch History objects based on transaction type
         # pending = Histotry.objects.filter(user=user, tType="PENDING")
         # approved = Histotry.objects.filter(user=user, tType="APPROVED")
