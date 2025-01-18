@@ -987,11 +987,7 @@ body {
 			transform: rotate(0deg)
 		}
 	</style>
-	<style class="gtranslate_css">
-		div.skiptranslate,
-		#google_translate_element2 {
-			display: none !important
-		}
+	
 
 		body {
 			top: 0 !important
@@ -1108,6 +1104,7 @@ body {
 			transform: rotate(0deg)
 		}
 	</style>
+
 	<style id="cky-style">
 		.cky-overlay {
 			background: #000000;

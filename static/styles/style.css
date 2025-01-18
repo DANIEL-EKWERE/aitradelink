@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import url('./reset.css');
 @import url('./helper.css');
 
@@ -6,6 +7,15 @@
 Item wrapper css
 ==============================
 */
+
+
+body{
+    font-family: 'Poppins', sans-serif;
+    /* background-color: var(--darkblue);
+    color: var(--white); */
+}
+
+
 .row>* {
     padding-right: 0px !important;
 }
@@ -1110,7 +1120,7 @@ Header css
 .header .sp_main_menu li.has_children > a::before {
     position: absolute;
     content: "\f067";
-    font-family: "Line Awesome Free";
+    font-family: 'Poppins', sans-serif;
     font-weight: 900;
     top: 1.9375rem;
     right: 5px;
@@ -2512,7 +2522,7 @@ Faq section css
     width: 25px;
     height: 25px;
     background-color: var(--default-bg);
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Poppins', sans-serif;
     font-weight: 900;
     font-size: 0.875rem;
 }

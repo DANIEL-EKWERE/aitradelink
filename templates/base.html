@@ -11,19 +11,20 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> {% endcomment %}
 
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 	
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	{% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> {% endcomment %}
 	
 	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script type="text/javascript" charset="utf-8" async src="./scripts/loader.js"></script>
+	<script type="text/javascript" charset="utf-8" async src="{% static "scripts/loader.js" %}"></script>
 	<script>
 		var uicore_animations_list = { "Fading": { "fadeIn": "Fade In", "fadeInDown": "Fade In Down", "fadeInLeft": "Fade In Left", "fadeInRight": "Fade In Right", "fadeInUp": "Fade In Up" }, "Zooming": { "zoomIn": "Zoom In", "zoomInDown": "Zoom In Down", "zoomInLeft": "Zoom In Left", "zoomInRight": "Zoom In Right", "zoomInUp": "Zoom In Up" }, "Bouncing": { "bounceIn": "Bounce In", "bounceInDown": "Bounce In Down", "bounceInLeft": "Bounce In Left", "bounceInRight": "Bounce In Right", "bounceInUp": "Bounce In Up" }, "Sliding": { "slideInDown": "Slide In Down", "slideInLeft": "Slide In Left", "slideInRight": "Slide In Right", "slideInUp": "Slide In Up" }, "Rotating": { "rotateIn": "Rotate In", "rotateInDownLeft": "Rotate In Down Left", "rotateInDownRight": "Rotate In Down Right", "rotateInUpLeft": "Rotate In Up Left", "rotateInUpRight": "Rotate In Up Right" }, "Attention Seekers": { "bounce": "Bounce", "flash": "Flash", "pulse": "Pulse", "rubberBand": "Rubber Band", "shake": "Shake", "headShake": "Head Shake", "swing": "Swing", "tada": "Tada", "wobble": "Wobble", "jello": "Jello" }, "Light Speed": { "lightSpeedIn": "Light Speed In" }, "Specials": { "rollIn": "Roll In" } };
 	</script>
@@ -40,18 +41,14 @@
 	<meta name="description"
 		content="aitradelink allows you to buy Bitcoin, Ethereum, and other Leading cryptocurrencies on a platform trusted my millions">
 	{% comment %} <link rel="canonical" href="index.html"> {% endcomment %}
-	<meta property="og:locale" content="en_US">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="aitradelink - Buy , Invest & Trade Cryptocurrencies">
-	<meta property="og:description"
-		content="aitradelink allows you to buy Bitcoin, Ethereum, and other Leading cryptocurrencies on a platform trusted my millions">
+	
 
 	<link rel="stylesheet" id="elementor-frontend-css" href="{% static "styles/frontend-lite.minb73d.css" %}" media="all">
 	<link rel="stylesheet" id="elementor-post-563-css" href="{% static "styles/post-563f9e7.css" %}" media="all">
 	<link rel="stylesheet" id="elementor-post-403-css" href="{% static "styles/post-4032eee.css" %}" media="all">
 	<link rel="stylesheet" id="bdt-uikit-css" href="{% static "styles/bdt-uikit5829.css" %}" media="all">
 	<link rel="stylesheet" id="ep-helper-css" href="{% static "styles/ep-helperd833.css" %}" media="all">
-	<link rel="stylesheet" id="wp-block-library-css" href="{% static "styles/style.minef10.css" media="all">
+	<link rel="stylesheet" id="wp-block-library-css" href="{% static "styles/style.minef10.css" %}" media="all">
 	
 	
 	<link rel="stylesheet" id="elementor-icons-ekiticons-css" href="{% static "styles/ekiticonsab7d.css" %}" media="all">
@@ -68,9 +65,9 @@
 	<link rel="stylesheet" id="elementor-icons-shared-1-css" href="{% static "styles/themify-icons8a54.css" %}" media="all">
 	<link rel="stylesheet" id="elementor-icons-uicore-icons-css" href="{% static "styles/themify-icons8a54.css" %}" media="all">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-	<script src="./scripts/script.min0226.js" id="cookie-law-info-js"></script>
-	<script src="./scripts/jquery.minf43b.js" id="jquery-core-js"></script>
-	<script src="./scripts/jquery-migrate.min5589.js" id="jquery-migrate-js"></script>
+	<script src="{% static "scripts/script.min0226.js" %}" id="cookie-law-info-js"></script>
+	<script src="{% static "scripts/jquery.minf43b.js" %}" id="jquery-core-js"></script>
+	<script src="{% static "scripts/jquery-migrate.min5589.js" %}" id="jquery-migrate-js"></script>
 	<link rel="https://api.w.org/" href="wp-json/index.html">
 	<link rel="alternate" type="application/json" href="wp-json/wp/v2/pages/7.json">
 	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc0db0.php?rsd">
@@ -93,15 +90,9 @@
 	<meta name="generator"
 		content="Elementor 3.15.3; features: e_dom_optimization, e_optimized_assets_loading, e_optimized_css_loading, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-swap">
 	<meta name="theme-color" content="#FFFFFF">
-	<link rel="shortcut icon" href="../cryptogoldmill.com/wp-content/uploads/2023/07/crypto-logo-A.png">
-	<link rel="icon" href="../cryptogoldmill.com/wp-content/uploads/2023/07/crypto-logo-A.png">
-	<link rel="apple-touch-icon" sizes="152x152"
-		href="../cryptogoldmill.com/wp-content/uploads/2023/07/crypto-logo-A.png">
+	
 	<link rel="apple-touch-icon" sizes="120x120"
-		href="../cryptogoldmill.com/wp-content/uploads/2023/07/crypto-logo-A.png">
-	<link rel="apple-touch-icon" sizes="76x76"
-		href="../cryptogoldmill.com/wp-content/uploads/2023/07/crypto-logo-A.png">
-	<link rel="apple-touch-icon" href="../cryptogoldmill.com/wp-content/uploads/2023/07/crypto-logo-A.png">
+	
 
 </head>
 
@@ -132,14 +123,14 @@
                                         class="attachment-full size-full wp-image-1164" alt="" loading="lazy"> </a>
                             </div>
                         </div>
-                        <!-- <div class="elementor-element elementor-element-52a1beeb elementor-widget elementor-widget-text-editor"
+                         <div class="elementor-element elementor-element-52a1beeb elementor-widget elementor-widget-text-editor"
                             data-id="52a1beeb" data-element_type="widget" data-widget_type="text-editor.default">
                             <div class="elementor-widget-container">
                                 <p><strong>Address:&#160;</strong> 100 N 18th St Philadelphia, PA 19130, USA<br><i
-                                        class="fa fa-envelope-o"></i><strong>Email:&#160;</strong>support@def-trademarket.com<br><strong>Phone:</strong>
-                                    +1 4752377805<br><br></p>
+                                        class="fa fa-envelope-o"></i><strong>Email:&#160;</strong>support@aitradelink.com<br><strong>Phone:</strong>
+                                    +1 (561) 207-1985<br><br></p>
                             </div>
-                        </div> -->
+                        </div> 
                     </div>
                 </div>
                 <div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-6faf2dee"

@@ -250,11 +250,11 @@ home
 																		class="ekit-menu-nav-link">About</a></li>
 																<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-767 nav-item elementskit-mobile-builder-content"
 																	data-vertical-menu="750px"><a
-																		href="./dashboard-log-my-trade.html"
+																		href="#"
 																		class="ekit-menu-nav-link">Invest</a></li>
 																<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-766 nav-item elementskit-mobile-builder-content"
 																	data-vertical-menu="750px"><a
-																		href="./dashboard-log-my-trade.html"
+																		href="#"
 																		class="ekit-menu-nav-link">Trade</a></li>
 																<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-984 nav-item elementskit-mobile-builder-content"
 																	data-vertical-menu="750px"><a
@@ -355,7 +355,7 @@ home
 										data-widget_type="heading.default">
 										<div class="elementor-widget-container">
 										
-											<h1 class="elementor-heading-title elementor-size-default">The world’s most popular way to store, invest in, and trade crypto. </h1>
+											<h1 class="elementor-heading-title elementor-size-default" style="font-family: 'Roboto', sans-serif;">The world’s most popular way to store, invest in, and trade crypto. </h1>
 										</div>
 									</div>
 									<div class="elementor-element elementor-element-6388dcd elementor-widget elementor-widget-text-editor"
@@ -576,7 +576,7 @@ Buy Bitcoin, Ethereum, and other top cryptocurrencies on a platform trusted by m
 										<iframe scrolling="no" allowtransparency="true" frameborder="0"
 											src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22FOREXCOM%3ASPXUSD%22%2C%22title%22%3A%22S%26P%20500%20Index%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3ANSXUSD%22%2C%22title%22%3A%22US%20100%20Cash%20CFD%22%7D%2C%7B%22proName%22%3A%22FX_IDC%3AEURUSD%22%2C%22title%22%3A%22EUR%20to%20USD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22title%22%3A%22Bitcoin%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3AETHUSD%22%2C%22title%22%3A%22Ethereum%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Afalse%2C%22displayMode%22%3A%22adaptive%22%2C%22colorTheme%22%3A%22light%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A46%2C%22utm_source%22%3A%22def-trademarket.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22def-trademarket.com%2F%22%7D"
 											title="ticker tape TradingView widget" lang="en"
-											style="user-select: none; box-sizing: border-box; display: block; height: 46px; width: 100%;"></iframe>
+											style="user-select: none; box-sizing: border-box; display: block; height: 50px; width: 100%;"></iframe>
 										<!--<div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>-->
 
 									</div>
@@ -1274,13 +1274,27 @@ Buy Bitcoin, Ethereum, and other top cryptocurrencies on a platform trusted by m
 		</article>
 
 	</div><!-- #primary -->
-
+{% block script %}
 	
 	 <script>
-		var uicore_frontend = { 'back': 'Back', 'rtl': '', 'mobile_br': '1025' };
-		console.log('Using Level v.3.0.0');
-		console.log('Powered By UiCore Framework v.5.0.0');
+		document.addEventListener('DOMContentLoaded', function () {
+			const menuToggler = document.querySelector('.elementskit-menu-hamburger');
+			const menuContainer = document.querySelector('.elementskit-menu-container');
+		
+			if (menuToggler && menuContainer) {
+				menuToggler.addEventListener('click', function () {
+					menuContainer.classList.toggle('active');
+				});
+		
+				// Optional: Close menu when clicking the "X" button
+				const closeButton = document.querySelector('.elementskit-menu-close');
+				closeButton?.addEventListener('click', function () {
+					menuContainer.classList.remove('active');
+				});
+			}
+		});
+		
 	</script>
-	
+	{% endblock %}
 	
 	{% endblock %}
