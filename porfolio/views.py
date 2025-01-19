@@ -23,9 +23,6 @@ def termOfUse(request):
     return render(request, 'terms-of-use.html')
 
 def signup(request):
-    # user = request.user
-    # if user.is_authenticated:
-    #     return redirect('/dashboard/')
     if request.method == 'POST':
         # Get form data
         username = request.POST.get('username')
@@ -34,17 +31,13 @@ def signup(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('password_confirmation')
         email = request.POST.get('email')
-        # country = request.POST.get('country')
         phone = request.POST.get('phone')
         trading_platform = request.POST.get('trading_platform')
+        next_url = request.POST.get('next', '/broker/dashboard/')  # Get `next` from the POST data
 
-        # address = request.POST.get('aadress')
-        # state = request.POST.get('state')
-        # city = request.POST.get('city')
-        # zipcode = request.POST.get('zipCode')
-       
-        # Debug: Log all inputs
-        #print("Form Data:", username, first_name, last_name, email, phone, country, address, state, city,zipcode)
+        # Debug: Log inputs and next_url
+        print("Form Data:", username, first_name, last_name, email, phone, trading_platform)
+        print("Next URL:", next_url)
 
         # Validate input
         errors = []
@@ -57,14 +50,11 @@ def signup(request):
         if Account.objects.filter(phone=phone).exists():
             errors.append("Phone number already exists.")
 
-         # Debug: Log errors
-        print("Errors:", errors)
-
         if errors:
             # Return errors to the template
-            return render(request, 'register.html', {'errors': errors})
+            return render(request, 'register.html', {'errors': errors, 'next': next_url})
 
-        # Create user and account if no errors
+        # Create user and related models
         user = User.objects.create_user(
             username=username,
             email=email,
@@ -73,22 +63,18 @@ def signup(request):
             last_name=last_name
         )
         Account.objects.create(
-            first_name = first_name,
+            first_name=first_name,
             last_name=last_name,
             user=user,
             phone=phone,
-           trading_platform=trading_platform,
+            trading_platform=trading_platform,
         )
-
         Profile.objects.create(
-        user=user,
-        first_name=first_name,
-        last_name=last_name,
-        phone=phone,
-        
+            user=user,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone,
         )
-
-
         myAsset.objects.create(
             user=user,
             bitcoin=10,
@@ -103,37 +89,40 @@ def signup(request):
             total_withdraw=0.0,
             referral_balance=0.0,
             trading_platform=trading_platform
-
         )
-        # Deposit.objects.create(user=user,amount=0.0,wallet_Address="N/A",status="PENDING")
-        # Withdraw.objects.create(user=user,amount=0.0,wallet_Address="N/A",status="PENDING")
 
-
+        # Automatically log in the user after signup
         login(request, user)
-        next_url = request.GET.get('next','/')
-        # return redirect('/broker/dashboard/')
-        return redirect(next_url)
+        messages.success(request, "Signup successful!")
+        return redirect(next_url)  # Redirect to the `next` URL or default to '/'
 
-
-    return render(request, 'register.html')
+    # Handle GET requests: Pass `next` to the template
+    next_url = request.GET.get('next', '/broker/dashboard/')
+    return render(request, 'register.html', {'next': next_url})
 
 def signin(request):
-
     if request.method == 'POST':
-        # Get form data
+        # Get the form data
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(username,password)
-        user = authenticate(request,username=username,password=password)
-        print(user)
+        next_url = request.POST.get('next', '/broker/dashboard/')  # Get `next` parameter from the form, default to '/'
+
+        print("GET next:", request.GET.get('next'))
+        print("POST next:", request.POST.get('next'))
+
+        # Authenticate user
+        user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request,user=user)
-            messages.success(request,"login successful")
-            next_url = request.GET.get('next','/')
-            # return redirect('/broker/dashboard/')
-            return redirect(next_url)
-    messages.error(request,"login not successful, check details and try again.")
-    return render(request, 'login.html')
+            login(request, user)  # Log the user in
+            messages.success(request, "Login successful")
+            return redirect(next_url)  # Redirect to the original page or default to '/'
+        else:
+            messages.error(request, "Login not successful. Check details and try again.")
+    else:
+        # Pass the `next` parameter to the template when rendering the form
+        next_url = request.GET.get('next', '/broker/dashboard/')
+    
+    return render(request, 'login.html', {'next': next_url})
 
 def about(request):
     # user = request.user

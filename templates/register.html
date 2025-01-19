@@ -54,7 +54,8 @@
                             {% csrf_token %} 
 
                             {% comment %} <input type="hidden" name="_token" value="XVQq9FFTzxxBMoMlMTN4B6LCzfxzKfW56hk2fpmE"> {% endcomment %}
-                            <input type="hidden" name="next" value={{ request.GET.next }}>
+                            <input type="hidden" name="next" value="{{ next }}">
+                            {% comment %} <input type="hidden" name="next" value={{ request.GET.next }}> {% endcomment %}
                             <div class="row gy-3">
                                 <div class="col-lg-12">
                                 </div>

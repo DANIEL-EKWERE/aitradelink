@@ -36,7 +36,7 @@
         <section class="auth-section" style="display: flex;justify-content: center;align-items: center;">
             <div class="auth-wrapper">
                 <div class="auth-top-part">
-                    <a href="./index.html" class="auth-logo">
+                    <a href="{% url "porfolio:home" %}" class="auth-logo">
                                                                                                                                         <span style="font-weight:bold; font-size:100%; color:#00529e" >AITRADELINK</span>
                     </a>
                     <p class="mb-0"><span class="me-2">Haven't an account?</span> <a href="{% url "porfolio:register" %}"
@@ -57,7 +57,8 @@
                                 {% endfor %}
                             </ul>
                             {% endif %} {% endcomment %}
-                            <input type="hidden" name="next" value={{ request.GET.next }}>
+                            <input type="hidden" name="next" id="next" value="{{ request.GET.next|default:'/' }}">
+
                             <div class="mb-3">
                                 <label for="formGroupExampleInput">User name</label>
                                 <input type="name" class="form-control" name="username" value="" id="username" style="width: 100%; height:20%; padding: 15px; border: 1px solid blue; border-radius: 5px; outline: none;"
