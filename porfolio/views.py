@@ -110,7 +110,9 @@ def signup(request):
 
 
         login(request, user)
-        return redirect('/broker/dashboard/')
+        next_url = request.GET.get('next','/')
+        # return redirect('/broker/dashboard/')
+        return redirect(next_url)
 
 
     return render(request, 'register.html')
@@ -127,7 +129,9 @@ def signin(request):
         if user is not None:
             login(request,user=user)
             messages.success(request,"login successful")
-            return redirect('/broker/dashboard/')
+            next_url = request.GET.get('next','/')
+            # return redirect('/broker/dashboard/')
+            return redirect(next_url)
     messages.error(request,"login not successful, check details and try again.")
     return render(request, 'login.html')
 

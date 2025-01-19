@@ -10,12 +10,14 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 # Create your views here.
 
+@login_required(login_url='/login/')
 def index(request):
     # user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
     return render(request, 'dashboard-index.html')
 
+@login_required(login_url='/login/')
 def log(request):
     details = Dashboard.objects.get(user=request.user)
     # user = request.userjjjjjjjjjjjjjjjjjjjjjjjjj
@@ -24,21 +26,21 @@ def log(request):
     return render(request, 'dashboard-log-my-trade.html', {'details':details})
 
 
-
+@login_required(login_url='/login/')
 def p2p(request):
     # user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
     return render(request, 'dashboard-p2p-trading.html')
 
-
+@login_required(login_url='/login/')
 def transfer(request):
     # user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
     return render(request, 'dashboard-transfer-money.html')
 
-
+@login_required(login_url='/login/')
 def withdraw(request):
     user = request.user
     # if user.is_authenticated:
@@ -60,7 +62,7 @@ def withdraw(request):
 
 # http://127.0.0.1:5000/accounts/login/?next=/broker/withdraw/
 
-
+@login_required(login_url='/login/')
 def deposit(request):
     if request.method == 'POST':
         amount = request.POST.get('amount')
@@ -76,7 +78,7 @@ def deposit(request):
     return render(request, 'deposit.html')
 
 
-@login_required
+@login_required(login_url='/login/')
 def invoice(request, amount, payment_method):
     try:
         # Validate the data (e.g., ensure amount is numeric)
@@ -98,7 +100,7 @@ def invoice(request, amount, payment_method):
     return render(request, 'invoice.html', context)
 
 
-
+@login_required(login_url='/login/')
 def confirm_payment(request):
     if request.method == 'POST':
         amount = request.POST.get('amount')
@@ -122,19 +124,21 @@ def confirm_payment(request):
     return redirect('/broker/deposit/')
 
 
-
+@login_required(login_url='/login/')
 def market(request):
     # user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
     return render(request, 'market.html')
 
+@login_required(login_url='/login/')
 def paymentMethod(request):
     # user = request.user
     # if user.is_authenticated:
     #     return redirect('/dashboard/')
     return render(request, 'payment-method.html')
 
+@login_required(login_url='/login/')
 def settings(request):
     details = Profile.objects.get(user=request.user)
     # user = request.user
@@ -142,13 +146,14 @@ def settings(request):
     #     return redirect('/dashboard/')
     return render(request, 'settings.html', {"details":details})
 
+@login_required(login_url='/login/')
 def signout(request):
     logout(request)
     return redirect('/')
 
 
 
-@login_required
+@login_required(login_url='/login/')
 def update_profile(request):
     details = Account.objects.get(user=request.user)
     if request.method == "POST":
@@ -195,7 +200,7 @@ def update_profile(request):
     return render(request, 'settings.html', {'details':details})  # Render the form template for GET requests
 
 
-@login_required
+@login_required(login_url='/login/')
 def dashboard(request):
     user = request.user
 
