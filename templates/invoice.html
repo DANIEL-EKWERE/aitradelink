@@ -185,7 +185,7 @@
 
                     <div class="d-block d-sm-none">
                         <p class="text-small mb-0 text-dark">Total portfolio</p>
-                        <h5>$0
+                        <h5>${{ details.deposit_wallet_balance }}
 
                         </h5>
                     </div>
@@ -593,11 +593,11 @@
                                 <ul class="list-group">
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span>Method currency</span>
-                                        <span>ETH</span>
+                                        <span>{{ payment_method }}</span>
                                     </li>
                                     <li class="list-group-item text-light">
                                         <span style="color:black">
-                                            <p>THIS IS YOUR ETH WALLET QR CODE</p>
+                                            <p>Make deposit on the {} network</p>
                                         </span>
                                         <span class="w-100 text-center">
                                             <img src="{% static "mages/660e0e0958c1d1712197129.jpeg" %}" alt="">
@@ -637,7 +637,7 @@
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span>Gateway name:</span>
 
-                                        <span>{% if is_ethereum %} BTC {% else %} ETH {% endif %}</span>
+                                        <span>{{ payment_method }}</span>
 
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">

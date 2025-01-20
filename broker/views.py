@@ -64,18 +64,25 @@ def withdraw(request):
 
 @login_required(login_url='/signin/')
 def deposit(request):
+    details = None
+    details = Dashboard.objects.get(user=request.user)
+    print("details",details)
     if request.method == 'POST':
         amount = request.POST.get('amount')
         payment_method = request.POST.get('method')
-
+             # Fetch the Dashboard object for the user
+        
+        assets = myAsset.objects.get(user=request.user)
+        print("assets",assets.bitcoin,assets.ethereum,details)
+        print("details",details)
         if not amount or not payment_method:
             # messages.error(request, "Amount and payment method are required.")
             return redirect('broker:deposit')
 
         # Redirect to the invoice page with the data in the URL
-        return redirect(f'/broker/invoice/{amount}/{payment_method}/')
+        return redirect(f'/broker/invoice/{amount}/{payment_method}/', {"details":details})
 
-    return render(request, 'deposit.html')
+    return render(request, 'deposit.html',{"details":details})
 
 
 @login_required(login_url='/signin/')
@@ -87,7 +94,7 @@ def invoice(request, amount, payment_method):
             raise ValueError("Amount must be greater than zero.")
         
         # Add additional validation for payment_method if needed
-        valid_methods = {'1': 'BTC', '2': 'ETH'}  # Replace with your actual payment method options
+        valid_methods = {'1': 'BTC', '2': 'ETH','3': 'SOL'}  # Replace with your actual payment method options
         if payment_method not in valid_methods:
             raise ValueError("Invalid payment method.")
 

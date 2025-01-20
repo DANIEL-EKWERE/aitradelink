@@ -497,7 +497,7 @@
                     <div class="row auth-wrapper g-sm-4 g-3 justify-content-center">
                         <div class="text-center">
                             <p>Available balance</p>
-                            <h2 class="text-dark">$0</h2>
+                            <h2 class="text-dark">${{ details.deposit_wallet_balance }}</h2>
                         </div>
                         <p>Select Prefered Currency</p>
 
@@ -602,6 +602,10 @@
                             </div>
                         </div>
 
+
+
+                       
+
                         <div class="modal fade" tabindex="-1" role="dialog" id="paynoweth">
                             <div class="modal-dialog" role="document">
                                 <form action="{% url "broker:deposit" %}" method="post">
@@ -643,6 +647,77 @@
                                 </form>
                             </div>
                         </div>
+
+
+
+                        <div class="col-xl-12 col-lg-12 card ml-2 text-white my-3"
+                        style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                        <div class="card-body row"
+                            style=" padding: 10px 20px 10px 1px !important; display: flex; justify-content: center; align-items: center;">
+                            <div class="col-2 text-capitalize text-dark">
+                                <img wd="" src="{% static "images/solana.png" %}" class="t-icon"
+                                    style="width: 80%; height: auto;">
+                            </div>
+                            <div class="col-3 text-capitalize text-dark" style="font-size:14px">
+                                Solana <br>
+                                <span class="text-muted text-uppercase">sol</span>
+                            </div>
+                            <div class="col-4 text-dark" style="font-size:14px">
+                                $0<br>
+                                <span>Total sol Balance</span>
+                            </div>
+                            <div class="col-3">
+                                <button data-href="./paynowsol/33" data-id="33" class="paynowsol"
+                                    style="width: 100%; height: 40%; padding: 10px; background: #00529e; border-radius: 12px; border-color: transparent;">
+                                    <span style="color: white;">Fund</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" tabindex="-1" role="dialog" id="paynowsol">
+                            <div class="modal-dialog" role="document">
+                                <form action="{% url "broker:deposit" %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="modal-content bg-body">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"><span>Deposit amount</span></h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true" class="text-light">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row" style="margin-right: 0px">
+                                                <input type="hidden" name="currency" value="SOL">
+                                                <div class="form-group">
+                                                    <label for="">Amount</label>
+                                                    <input type="text" name="amount" id="amount" class="form-control"
+                                                        placeholder="Enter amount">
+
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Payment method</label>
+                                                    <select id="method" name="method" class="form-control">
+                                                        <!-- <option value="2">Pay With Gift Card</option> -->
+                                                        <option value="3">Pay With Solana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn sp_btn_danger"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" style="width: 40%; height: 40%; padding: 10px; background: #00529e; border-radius: 12px; border-color: transparent; color:White;"><span>Deposit now</span></button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     </div>
                 </section>
@@ -751,6 +826,11 @@
             
             $('.paynoweth').on('click', function() {
                 const modal = $('#paynoweth')
+                modal.modal('show')
+            })
+
+            $('.paynowsol').on('click', function() {
+                const modal = $('#paynowsol')
                 modal.modal('show')
             })
 
