@@ -838,7 +838,7 @@
 
                                     <p class="caption mb-2 text-center" style="color: white;">
                                         Hello, <b>{{ request.user.first_name }} {{ profile.last_name }}</b><br>
-                                        Welcome to aitradelink Investment <br> Trade Crypto with ease
+                                        Welcome to aitradelink Investment, <br> Trade Crypto with ease
                                     </p>
                                     <br>
                                     <a href="{% url "broker:logs" %}"
@@ -1048,18 +1048,21 @@
                             <!-- Buy Crypto Buttons -->
                             <div class="col-12 text-center" style="margin-top: 10px;">
                                 <div class="row">
-                                    <div class="col-6">
+                                    {% comment %} <div class="col-6">
                                         <a href="{% url "broker:p2p" %}" class="w-100 btn btn-sm trading-btn"
                                             style="background-color: #0093e4; color: white; border-radius: 8px;">
                                             BUY CRYPTO<br>(P2P)
                                         </a>
-                                    </div>
-                                    <div class="col-6">
+                                    </div> {% endcomment %}
+                                    <center>
+
+                                    <div style="width:90%; ">
                                         <a href="{% url "broker:deposit" %}" class="w-100 btn btn-sm trading-btn"
-                                            style="background-color: #0093e4; color: white; border-radius: 8px;">
-                                            BUY CRYPTO<br>(Gift Card)
+                                            style="background-color: #0093e4; color: white; border-radius: 8px; width:100%">
+                                            BUY CRYPTO
                                         </a>
                                     </div>
+                                    </center>
                                 </div>
                             </div>
                         </div>

@@ -94,6 +94,8 @@ def signup(request):
         # Automatically log in the user after signup
         login(request, user)
         messages.success(request, "Signup successful!")
+        if next_url == "/":
+            return redirect("/broker/dashboard/")
         return redirect(next_url)  # Redirect to the `next` URL or default to '/'
 
     # Handle GET requests: Pass `next` to the template
@@ -115,6 +117,8 @@ def signin(request):
         if user is not None:
             login(request, user)  # Log the user in
             messages.success(request, "Login successful")
+            if next_url == "/":
+                return redirect("/broker/dashboard/")
             return redirect(next_url)  # Redirect to the original page or default to '/'
         else:
             messages.error(request, "Login not successful. Check details and try again.")

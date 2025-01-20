@@ -254,11 +254,11 @@ home
 																		class="ekit-menu-nav-link">About</a></li>
 																<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-767 nav-item elementskit-mobile-builder-content"
 																	data-vertical-menu="750px"><a
-																		href="#"
+																		href="{% url "broker:deposit" %}"
 																		class="ekit-menu-nav-link">Invest</a></li>
 																<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-766 nav-item elementskit-mobile-builder-content"
 																	data-vertical-menu="750px"><a
-																		href="#"
+																		href="{% url "broker:logs" %}"
 																		class="ekit-menu-nav-link">Trade</a></li>
 																<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-984 nav-item elementskit-mobile-builder-content"
 																	data-vertical-menu="750px"><a
@@ -356,7 +356,7 @@ home
 										data-widget_type="heading.default">
 										<div class="elementor-widget-container">
 										
-											<h1 class="elementor-heading-title elementor-size-default" style="font-family: 'Roboto', sans-serif;">The world’s most popular way to store, invest in, and trade crypto. </h1>
+											<h1 class="elementor-heading-title elementor-size-default" style="font-family: 'Roboto', sans-serif;">The most popular way platform for storing, investing in, and exchanging cryptocurrency worldwide. </h1>
 										</div>
 									</div>
 									<div class="elementor-element elementor-element-6388dcd elementor-widget elementor-widget-text-editor"
@@ -364,7 +364,7 @@ home
 										data-widget_type="text-editor.default">
 										<div class="elementor-widget-container">
 											
-Buy Bitcoin, Ethereum, and other top cryptocurrencies on a platform trusted by millions.
+Trusted by millions, it allows you to buy Bitcoin, Ethereum, and other leading cryptocurrencies with ease.
 										</div>
 									</div>
 									<div class="elementor-element elementor-element-7ee4c21 elementor-align-center elementor-hidden-mobile elementor-widget elementor-widget-button"
@@ -1191,6 +1191,270 @@ Buy Bitcoin, Ethereum, and other top cryptocurrencies on a platform trusted by m
 							</div>
 						</div>
 					</section>
+
+					<div class="plans-container">
+						<center><h1 style="font-family: Arial, sans-serif;font-size:200%">INVESTMENT PLAN</h1></center>
+						<!-- Additional plans can be replicated below -->
+						<div class="plan">
+							<h3>BASIC PLAN</h3>
+							<p>Return  20%</p>
+							<hr class="hr">
+							<p>After  24  hours</p>
+							<hr class="hr">
+							<p>Total  20% <span class="highlight1">  + CAPITAL </span></p>
+							<hr class="hr">
+							<p><b>$2500  -  $599</b></p>
+							<hr class="hr">
+							<button>Invest Now</button>
+						  </div>
+					  <div style="width: 100%; height:30px"></div>
+						  <div class="plan">
+							<h3>SILVER  PLAN</h3>
+							<p>Return  50%</p>
+							<hr class="hr">
+							<p>After  48 hours</p>
+							<hr class="hr">
+							<p>Total  50%<span class="highlight1">  + CAPITAL </span></p>
+							<hr class="hr">
+							<p><b>$500  -  $9,999</b></p>
+							<hr class="hr">
+							<button>Invest Now</button>
+						  </div>
+						  <div style="width: 100%; height:30px"></div>
+						  <div class="plan">
+							<h3>GOLD PLAN</h3>
+							<hr class="hr">
+							<p>Return   80%</p>
+							<hr class="hr">
+							<p>After   72 hours</p>
+							<hr class="hr">
+							<p>Total   80% <span class="highlight1">  + CAPITAL </span></p>
+							<hr class="hr">
+							<p><b>$,1000  -  $4,999</b></p>
+							<hr class="hr">
+							<button>Invest Now</button>
+						  </div>
+						  <div style="width: 100%; height:30px"></div>
+						<!-- VIP Plan -->
+						<div class="plan">
+						  <h3>VIP PLAN</h3>
+						  <hr class="hr">
+						  <p>Return   100%</p>
+						  <hr class="hr">
+						  <p>After  96  hours</p>
+						  <hr class="hr">
+						  <p>Total  100%<span class="highlight1">  + CAPITAL </span></p>
+						  <hr class="hr">
+						  <p> <b>$20,000  -  $49,999</b></p>
+						  <button>Invest Now</button>
+						</div>
+					  </div>
+
+					  <style>
+						{% comment %} body {
+						  font-family: Arial, sans-serif;
+						  background-color: #121212;
+						  color: #ffffff;
+						  display: flex;
+						  justify-content: center;
+						  align-items: center;
+						  min-height: 100vh;
+						  margin: 0;
+						} {% endcomment %}
+					
+						.plans-container {
+						  background-color: transparent
+						  display: flex;
+						  flex-wrap: wrap;
+						  gap: 20px;
+						  justify-content: center;
+						  padding: 20px;
+						}
+					
+						.plan {
+						  {% comment %} background-color: #1a1a1a; {% endcomment %}
+						  border: 1px solid #333;
+						  border-radius: 8px;
+						  padding: 20px;
+						  width: 100%;
+						  max-width: 250px;
+						  text-align: center;
+						  box-sizing: border-box;
+						}
+					
+						.plan h3 {
+						  font-size: 1.5rem;
+						  margin-bottom: 20px;
+						}
+					
+						.plan p {
+						  font-size: 1rem;
+						  margin: 10px 0;
+						  white-space: pre;
+						}
+					
+						.plan .highlight {
+						  font-weight: bold;
+						  color: #00ff00;
+						}
+					
+						.plan .highlight1 {
+						  /* font-weight: bold; */
+						  /* color: #00ff00; */
+						  background-color: #e5ffe5;
+						  padding: 2px;
+						  color: #00ff00;
+						  border-radius: 3px;
+						}
+					
+						.plan button {
+						  margin-top: 20px;
+						  background-color: #007bff;
+						  color: #ffffff;
+						  border: none;
+						  border-radius: 5px;
+						  padding: 10px 20px;
+						  cursor: pointer;
+						  font-size: 1rem;
+						}
+					
+						.plan .hr{
+							margin: 8%;
+						}
+					
+						.plan button:hover {
+						  background-color: #0056b3;
+						}
+					
+						@media (max-width: 768px) {
+						  .plan {
+							max-width: 300px;
+						  }
+						}
+					
+						@media (max-width: 480px) {
+						  .plan {
+							max-width: 100%;
+						  }
+						}
+					  </style>
+					<center>
+					  <section style="background-color:white; padding-top: 10%">
+					  <h1 style="color:#0088cc; font-size:250%; font-family: Arial, sans-serif;">What our clients says</h1>
+					  <p style="color:black;font-size:15px; padding:10px">We are doing really good at this market and here are the words we loved to get from a few of our users.</p>
+					  <div class="carousel">
+						<div class="carousel-images">
+						  <img src="{% static "images/WhatsApp Image 1.jpeg" %}" alt="Image 1">
+						  <img src="{% static "images/WhatsApp Image 2.jpeg" %}" alt="Image 2">
+						  <img src="{% static "images/WhatsApp Image 3.jpeg" %}" alt="Image 3">
+						  <img src="{% static "images/WhatsApp Image 4.jpeg" %}" alt="Image 4">
+						  <img src="{% static "images/WhatsApp Image 5.jpeg" %}" alt="Image 5">
+						  <img src="{% static "images/WhatsApp Image 6.jpeg" %}" alt="Image 6">
+						  <img src="{% static "images/WhatsApp Image 7.jpeg" %}" alt="Image 5">
+						  <img src="{% static "images/WhatsApp Image 8.jpeg" %}" alt="Image 6">
+						</div>
+						<div class="carousel-buttons">
+						  <button id="prev">&#9664;</button>
+						  <button id="next">&#9654;</button>
+						</div>
+						<div class="carousel-dots">
+						  <button data-index="0" class="active"></button>
+						  <button data-index="1"></button>
+						  <button data-index="2"></button>
+						  <button data-index="3"></button>
+						  <button data-index="4"></button>
+						  <button data-index="5"></button>
+						  <button data-index="6"></button>
+						  <button data-index="7"></button>
+						</div>
+					  </div>
+
+
+					  <style>
+					
+					
+						.carousel {
+						  width: 90%;
+						  max-width: 800px;
+						  overflow: hidden;
+						  position: relative;
+						  border-radius: 10px;
+						  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+						}
+					
+						.carousel-images {
+						  display: flex;
+						  transition: transform 0.5s ease-in-out;
+						}
+					
+						.carousel-images img {
+						  width: calc(100% / 3);
+						  flex-shrink: 0;
+						}
+					
+						.carousel-buttons {
+						  position: absolute;
+						  top: 50%;
+						  width: 100%;
+						  display: flex;
+						  justify-content: space-between;
+						  transform: translateY(-50%);
+						}
+					
+						.carousel-buttons button {
+						  background-color: rgba(0, 0, 0, 0.5);
+						  color: white;
+						  border: none;
+						  padding: 10px 20px;
+						  cursor: pointer;
+						  border-radius: 5px;
+						}
+					
+						.carousel-buttons button:hover {
+						  background-color: rgba(0, 0, 0, 0.8);
+						}
+					
+						.carousel-dots {
+						  position: absolute;
+						  bottom: 10px;
+						  width: 100%;
+						  display: flex;
+						  justify-content: center;
+						  gap: 10px;
+						}
+					
+						.carousel-dots button {
+						  width: 10px;
+						  height: 10px;
+						  border-radius: 50%;
+						  border: none;
+						  background-color: rgba(255, 255, 255, 0.5);
+						  cursor: pointer;
+						}
+					
+						.carousel-dots button.active {
+						  background-color: white;
+						}
+					
+						@media (max-width: 768px) {
+						  .carousel-images img {
+							width: calc(100% / 2);
+						  }
+						}
+					
+						@media (max-width: 480px) {
+						  .carousel-images img {
+							width: 100%;
+						  }
+						}
+					  </style>
+
+
+
+					</section>
+
+				</center>
+					
 					<section
 						class="elementor-section elementor-top-section elementor-element elementor-element-4c5368a8 elementor-section-boxed elementor-section-height-default"
 						data-id="4c5368a8" data-element_type="section"
@@ -1360,6 +1624,70 @@ access token secret ygpeaY8rDNFVawkCvZaln8ORVNbIczn5LXfab5AGNryuL {% endcomment 
 {% block script %}
 	
 	 <script>
+
+
+
+
+
+
+
+		const carouselImages = document.querySelector('.carousel-images');
+		const images = document.querySelectorAll('.carousel-images img');
+		const prevButton = document.getElementById('prev');
+		const nextButton = document.getElementById('next');
+		const dots = document.querySelectorAll('.carousel-dots button');
+	
+		let currentIndex = 0;
+		const slidesToShow = () => {
+		  if (window.innerWidth <= 480) return 1;
+		  if (window.innerWidth <= 768) return 2;
+		  return 3;
+		};
+	
+		function updateCarousel() {
+		  const imageWidth = images[0].clientWidth;
+		  carouselImages.style.transform = `translateX(${-currentIndex * imageWidth}px)`;
+		  dots.forEach(dot => dot.classList.remove('active'));
+		  dots[Math.floor(currentIndex / slidesToShow())].classList.add('active');
+		}
+	
+		function nextSlide() {
+		  currentIndex = (currentIndex + slidesToShow()) % images.length;
+		  updateCarousel();
+		}
+	
+		function prevSlide() {
+		  currentIndex = (currentIndex - slidesToShow() + images.length) % images.length;
+		  updateCarousel();
+		}
+	
+		nextButton.addEventListener('click', nextSlide);
+		prevButton.addEventListener('click', prevSlide);
+	
+		dots.forEach(dot => {
+		  dot.addEventListener('click', (e) => {
+			currentIndex = parseInt(e.target.dataset.index) * slidesToShow();
+			updateCarousel();
+		  });
+		});
+	
+		window.addEventListener('resize', updateCarousel);
+	
+		// Auto-slide every 3 seconds
+		setInterval(nextSlide, 3000);
+
+
+
+
+
+
+
+
+
+
+
+
+
 		document.addEventListener('DOMContentLoaded', function () {
 			document.querySelector('.elementskit-menu-hamburger'); // Should not return null
 document.querySelector('.elementskit-menu-container'); // Should not return null
