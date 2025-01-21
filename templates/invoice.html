@@ -192,7 +192,7 @@
 
                     <div class="d-none d-lg-block">
                         <a href="{% url "broker:dashboard-index" %}">
-                            <img class="img-fluid rounded sm-device-img text-align" src="{% static "images/definew.png" %}" alt="pp">
+                            <span style="font-weight:bold; font-size:100%; color:white" >AITRADEEX</span> </a>
                         </a>
                     </div>
 
@@ -209,7 +209,7 @@
                             </svg> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -217,7 +217,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            Buy crypto (p2p)</a>
+                            SWAP</a>
                     </li>
 
                     <li>
@@ -339,7 +339,7 @@
                 <div class="dropdown ms-3">
                     <span class="ms-2 dropdown-toggle user-toggle-menu" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="./images/user.png" alt="pp">
+                        <img src="{% static "images/user.png" %}" alt="pp">
                     </span>
 
                     <ul class="d-sidebar-menu dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
@@ -419,7 +419,7 @@
 
                     <!--New Menu-->
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -427,7 +427,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            P2p trading</a>
+                            swap trading</a>
                     </li>
 
                     <li class="has_submenu">
@@ -597,7 +597,7 @@
                                     </li>
                                     <li class="list-group-item text-light">
                                         <span style="color:black">
-                                            <p>Make deposit on the {} network</p>
+                                            <p>Make deposit on the  <b>TON</b> network</p>
                                         </span>
                                         <span class="w-100 text-center">
                                             <img src="{% static "mages/660e0e0958c1d1712197129.jpeg" %}" alt="">
@@ -615,7 +615,7 @@
                             <div class="card-body text-center row">
                                 <div class="col-sm">
                                     <input type="text" id="referral_input" class="form-control" readonly
-                                        value="0xee9366E8A1f0b33C28Cf8396c1DE3f883B8A67D0">
+                                        value="UQA3mn5MXdRapCKDw6QIJWo-i8mXHeNKrWvXp0OSaAGlP8M2">
                                 </div>
                                 <div class="col-sm">
                                     <button class="btn" onclick="referral_copy()" id="copy_button" data-toggle="tooltip"

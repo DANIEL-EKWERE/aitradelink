@@ -8,6 +8,11 @@ from broker.models import Account, Dashboard, Histotry, Withdraw,Deposit, Invest
 from django.contrib import messages
 
 
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
+
 # Create your views here.
 
 def index(request):
@@ -91,6 +96,22 @@ def signup(request):
             trading_platform=trading_platform
         )
 
+        #send mail here
+        mail_subject = "WELCOME TO AITRADEEX"
+        mail_context = {
+            'email': request.user.email,
+            'name': request.user.username,
+        }
+        html_message = render_to_string('welcome-mail.html',mail_context)
+        plain_text = strip_tags(html_message)
+        from_email = settings.Email_HOST_USER
+        recipient_list = [request.user.email]
+        try:
+            email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+            email_message.send()
+        except(Exception) as e:
+            print('an error occured')
+        
         # Automatically log in the user after signup
         login(request, user)
         messages.success(request, "Signup successful!")

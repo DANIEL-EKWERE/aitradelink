@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Swap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f4f4f4;
+    }
+    .swap-container {
+      width: 400px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .swap-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .swap-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .swap-button:hover {
+      background-color: #0056b3;
+    }
+    .info {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+      color: #555;
+    }
+    .warning {
+      color: #d9534f;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 -->
+</head>
+<body>
+  <div class="swap-container">
+    <h2>Token Swap</h2>
+    <h3>Total Portfolio {{ balance }}</h3>
+    <form id="swap-form" method="POST" action="{% url 'process_swap' %}">
+      {% csrf_token %}
+      <div class="input-group">
+        <label for="network">Network</label>
+        <select id="network" name="network">
+          <option value="ethereum">Ton</option>
+          <option value="bsc">Binance Smart Chain</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="from-token">From</label>
+        <select id="from-token" name="from_token">
+          <option value="USDT">Tether (USDT)</option>
+          <option value="ETH">Solana (SOL)</option>
+          <option value="BTC">Binance Coin (BNB)</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="to-token">To</label>
+        <select id="to-token" name="to_token">
+          <option value="ETH">Solana (SOL)</option>
+          <option value="BTC">Binance Coin (BNB)</option>
+          <option value="USDT">Tether (USDT)</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" name="amount" placeholder="Enter amount" required />
+      </div>
+      <button type="button" class="swap-button" onclick="handleSwap()">Swap Tokens</button>
+    </form>
+    <p class="info" id="exchange-rate">Exchange Rate: 1 ETH = 1000 USDT</p>
+    <p class="info" id="fees">Network Fees: 0.001 ETH</p>
+    <p class="warning">
+      Warning: If you send tokens to the wrong network or address, they will be lost permanently. Double-check all details before confirming the swap.
+    </p>
+  </div>
+
+  <script>
+    function handleSwap() {
+      const form = document.getElementById('swap-form');
+      const network = document.getElementById('network').value;
+      const fromToken = document.getElementById('from-token').value;
+      const toToken = document.getElementById('to-token').value;
+      const amount = document.getElementById('amount').value;
+
+      const bal = {{ balance|default:0|safe }}
+
+      if (!amount || amount <= 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Amount',
+          text: 'Please enter a valid amount.',
+        });
+        return;
+      }
+
+
+      if (amount > bal) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Insufficient Amount',
+          text: 'Please enter an amount less or equals your balance.',
+        });
+        return;
+      }
+
+      // SweetAlert for confirmation
+      Swal.fire({
+        icon: 'success',
+        title: 'Swap Request Received',
+        html: `
+          <p>Your request to swap <b>${amount} ${fromToken}</b> to <b>${toToken}</b> on the <b>${network}</b> network has been received.</p>
+          <p>Please wait while we process your transaction.</p>
+        `,
+        confirmButtonText: 'Submit',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit(); // Submit the form to Django
+        }
+      });
+    }
+  </script>
+</body>
+</html>

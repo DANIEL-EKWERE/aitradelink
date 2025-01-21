@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0c0a0a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #111;
+            border-radius: 10px;
+            border-top: 5px solid #6a0dad;
+            border-bottom: 5px solid #6a0dad;
+            border-radius: 20px;
+            border-left:  2px solid #6a0dad;
+            border-right: 2px solid #6a0dad;
+        }
+        .email-header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .email-body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .email-footer {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .email-footer a {
+            color: #6a0dad;
+            text-decoration: none;
+        }
+        .email-footer a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            /* margin-left: 10%;
+            margin-right: 10%; */
+            padding-left: 10%;
+            padding-right: 10%;
+            width: 80%;
+            background-color: #111;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            align-self: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">Welcome to AITRADEEx</div>
+        <div class="email-body">
+            <p>Hi {{ request.user.username }},</p>
+            <p>Your account at AITRADEEx has been created successfully.</p>
+            <p>You can now log in to your account.</p>
+            <p>Best Regards,<br>Management,<br>AITRADEEx.</p>
+        </div>
+        
+    </div>
+    <div class="footer">
+        <div class="email-footer">
+            <p>Have a problem? Contact us. We're active from Mondays to Fridays 8am - 5pm, then Saturdays 10am - 4pm.</p>
+            <p><a href="#">211 W Aspen Ave, Flagstaff, AZ 86001</a></p>
+            <p>©2025 - 2029. aitradelink . All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

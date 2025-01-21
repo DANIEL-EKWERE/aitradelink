@@ -2,12 +2,20 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from broker.models import Account, Histotry, Withdraw,Deposit, Investment, myAsset,Transfer,Profile
+from broker.models import Account, Histotry, Withdraw,Deposit, Investment, myAsset,Transfer,Profile,Swap
 from broker.models import Dashboard
 from django.shortcuts import render
 from django.contrib.auth import logout,login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
+
+
+
 # Create your views here.
 
 @login_required(login_url='/signin/')
@@ -57,6 +65,25 @@ def withdraw(request):
                 wallet_Address=address,
                 method=method,
             )
+
+            #send mail here
+            mail_subject = "WITHDRAW REQUEST PLACED"
+            mail_context = {
+                'email': request.user.email,
+                'name': request.user.username,
+            }
+            html_message = render_to_string('withdraw-mail.html',mail_context)
+            plain_text = strip_tags(html_message)
+            from_email = settings.Email_HOST_USER
+            recipient_list = [request.user.email]
+            try:
+                email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+                email_message.send()
+            except(Exception) as e:
+                print('an error occured')
+
+
+
             return redirect('/broker/dashboard/')
     return render(request, 'dashboard-withdraw.html')
 
@@ -94,7 +121,7 @@ def invoice(request, amount, payment_method):
             raise ValueError("Amount must be greater than zero.")
         
         # Add additional validation for payment_method if needed
-        valid_methods = {'1': 'BTC', '2': 'ETH','3': 'SOL'}  # Replace with your actual payment method options
+        valid_methods = {'1': 'USDT'}  # Replace with your actual payment method options
         if payment_method not in valid_methods:
             raise ValueError("Invalid payment method.")
 
@@ -125,6 +152,21 @@ def confirm_payment(request):
             status="PENDING"
         )
 
+        #send mail here
+        mail_subject = "DEPOSIT REQUEST PLACED"
+        mail_context = {
+            'email': request.user.email,
+            'name': request.user.username,
+        }
+        html_message = render_to_string('deposit-mail.html',mail_context)
+        plain_text = strip_tags(html_message)
+        from_email = settings.Email_HOST_USER
+        recipient_list = [request.user.email]
+        try:
+            email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+            email_message.send()
+        except(Exception) as e:
+            print('an error occured')
         # messages.success(request, "Your payment has been confirmed!")
         return redirect('/broker/dashboard/')
 
@@ -158,6 +200,52 @@ def signout(request):
     logout(request)
     return redirect('/')
 
+
+
+@login_required(login_url='/signin/')
+def swap(request):
+
+    balance = Dashboard.objects.get(user=request.user).deposit_wallet_balance    
+
+    return render(request, 'swap.html',{'balance':balance})
+
+
+@login_required(login_url='/signin/')
+def process_swap(request):
+    balance = Dashboard.objects.get(user=request.user).deposit_wallet_balance    
+    if request.method == 'POST':
+
+            network = request.POST.get('network')
+            from_token = request.POST.get('from_token')
+            to_token = request.POST.get('to_token')
+            amount = request.POST.get('amount')
+
+            #store the swap transaction
+            Swap.objects.create(
+                user=request.user,
+                from_token=from_token,
+                to_token=to_token,
+                amount=amount
+            )
+
+
+            #send mail here
+            mail_subject = "SWAP REQUEST PLACED"
+            mail_context = {
+                'email': request.user.email,
+                'name': request.user.username,
+            }
+            html_message = render_to_string('swap-mail.html',mail_context)
+            plain_text = strip_tags(html_message)
+            from_email = settings.Email_HOST_USER
+            recipient_list = [request.user.email]
+            try:
+                email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+                email_message.send()
+            except(Exception) as e:
+                print('an error occured')
+            return redirect('/broker/dashboard/')  # Replace 'dashboard' with the name of your dashboard route
+    return render(request, 'swap.html',{'balance':balance})
 
 
 @login_required(login_url='/signin/')
@@ -383,6 +471,24 @@ def process_transfer(request):
                     receiver_email=email,
 
                 )
+
+            #send mail here
+            mail_subject = "TRANSFER REQUEST PLACED"
+            mail_context = {
+                'email': request.user.email,
+                'name': request.user.username,
+            }
+            html_message = render_to_string('transfer-mail.html',mail_context)
+            plain_text = strip_tags(html_message)
+            from_email = settings.Email_HOST_USER
+            recipient_list = [request.user.email]
+            try:
+                email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+                email_message.send()
+            except(Exception) as e:
+                print('an error occured')
+
+
                 return JsonResponse({'success': True, 'message': 'Transfer processed successfully!'})
             else:
                 return JsonResponse({'success': False, 'message': 'Amount must be between 1000 and 10000 USD, and withdraw amount must not be greater than the balance.'})

@@ -120,7 +120,18 @@ class Investment(models.Model):
 class myAsset(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bitcoin = models.CharField(max_length=100)
-    ethereum = models.CharField(max_length=100)
+    solana = models.CharField(max_length=100)
+    usdt = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.user.username
+    
+class Swap(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    network = models.CharField(max_length=100)
+    from_token = models.CharField(max_length=100)
+    to_token = models.CharField(max_length=100)
+    amount = models.CharField(max_length=100)
 
     def __str__(self):
         return self.user.username

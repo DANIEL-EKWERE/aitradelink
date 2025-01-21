@@ -91,7 +91,7 @@
                             </svg> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -99,7 +99,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            Buy crypto (p2p)</a>
+                            SWAP</a>
                     </li>
 
                     <li>
@@ -302,7 +302,7 @@
 
                     <!--New Menu-->
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -310,7 +310,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            P2p trading</a>
+                            swap trading</a>
                     </li>
 
                     <li class="has_submenu open">
@@ -508,17 +508,17 @@
                             <div class="card-body row"
                                 style=" padding: 10px 20px 10px 1px !important; display: flex; justify-content: center; align-items: center;">
                                 <div class="col-2 text-capitalize text-dark">
-                                    <img wd="" src="{% static "images/64cd7b9fe98ce1691188127.png" %}" class="t-icon"
+                                    <img wd="" src="{% static "images/Tether.png" %}" class="t-icon"
                                         style="width: 80%; height: auto;">
 
                                 </div>
                                 <div class="col-3 text-capitalize text-dark" style="font-size:14px">
-                                    Bitcoin <br>
-                                    <span class="text-muted text-uppercase">btc</span>
+                                    USDT <br>
+                                    <span class="text-muted text-uppercase">usdt</span>
                                 </div>
                                 <div class="col-4 text-dark" style="font-size:14px">
                                     $0 <br>
-                                    <span>Total btc Balance</span>
+                                    <span>Total usdt Balance</span>
                                 </div>
                                 <div class="col-3">
                                     <button data-href="./paynow/38" data-id="38" class="paynow"
@@ -544,7 +544,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row" style="margin-right: 0px">
-                                                <input type="hidden" name="currency" value="BTC">
+                                                <input type="hidden" name="currency" value="USDT">
                                                 <div class="form-group">
                                                     <label for="">Amount</label>
                                                     <input type="text" id="amount" name="amount" class="form-control"
@@ -554,7 +554,7 @@
                                                     <label for="">Payment method</label>
                                                     <select id="method" name="method" class="form-control">
                                                         <!-- <option value="2">Pay With Gift Card</option> -->
-                                                        <option value="1">Pay With BTC</option>
+                                                        <option value="1">Pay With USDT</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -577,7 +577,7 @@
 
 
 
-                        <div class="col-xl-12 col-lg-12 card ml-2 text-white my-3"
+                        {% comment %} <div class="col-xl-12 col-lg-12 card ml-2 text-white my-3"
                             style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
                             <div class="card-body row"
                                 style=" padding: 10px 20px 10px 1px !important; display: flex; justify-content: center; align-items: center;">
@@ -646,11 +646,11 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
 
 
 
-                        <div class="col-xl-12 col-lg-12 card ml-2 text-white my-3"
+                        {% comment %} <div class="col-xl-12 col-lg-12 card ml-2 text-white my-3"
                         style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
                         <div class="card-body row"
                             style=" padding: 10px 20px 10px 1px !important; display: flex; justify-content: center; align-items: center;">
@@ -714,7 +714,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
 
 

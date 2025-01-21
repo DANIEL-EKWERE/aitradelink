@@ -88,7 +88,7 @@
                             </svg> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -96,7 +96,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            Buy crypto (p2p)</a>
+                            SWAP</a>
                     </li>
 
                     <li>
@@ -305,7 +305,7 @@
 
                     <!--New Menu-->
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -313,7 +313,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            P2p trading</a>
+                            swap</a>
                     </li>
 
                     <li class="has_submenu open">
@@ -1048,21 +1048,24 @@
                             <!-- Buy Crypto Buttons -->
                             <div class="col-12 text-center" style="margin-top: 10px;">
                                 <div class="row">
-                                    {% comment %} <div class="col-6">
-                                        <a href="{% url "broker:p2p" %}" class="w-100 btn btn-sm trading-btn"
-                                            style="background-color: #0093e4; color: white; border-radius: 8px;">
-                                            BUY CRYPTO<br>(P2P)
-                                        </a>
-                                    </div> {% endcomment %}
-                                    <center>
 
-                                    <div style="width:90%; ">
+                                    <div class="col-6">
                                         <a href="{% url "broker:deposit" %}" class="w-100 btn btn-sm trading-btn"
                                             style="background-color: #0093e4; color: white; border-radius: 8px; width:100%">
                                             BUY CRYPTO
                                         </a>
                                     </div>
-                                    </center>
+                                    
+                                    <div class="col-6">
+                                        <a href="{% url "broker:swap" %}" class="w-100 btn btn-sm trading-btn"
+                                            style="background-color: #0093e4; color: white; border-radius: 8px;">
+                                            SWAP
+                                        </a>
+                                    </div> 
+                                    
+
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
