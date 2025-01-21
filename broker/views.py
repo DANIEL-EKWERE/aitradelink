@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
@@ -9,7 +10,7 @@ from django.contrib.auth import logout,login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
@@ -51,14 +52,13 @@ def transfer(request):
 @login_required(login_url='/signin/')
 def withdraw(request):
     user = request.user
-    # if user.is_authenticated:
-    #     return redirect('/dashboard/')
     details = Dashboard.objects.get(user=request.user)
     if request.method == "POST":
         amount = request.POST.get("amount")
         method = request.POST.get("method")
         address = request.POST.get("address")
         if float(amount) > 0 and method and address and float(amount) <= details.deposit_wallet_balance:
+            # Create a withdrawal request
             Withdraw.objects.create(
                 user=user,
                 amount=amount,
@@ -66,26 +66,35 @@ def withdraw(request):
                 method=method,
             )
 
-            #send mail here
+            # Send withdrawal request email
             mail_subject = "WITHDRAW REQUEST PLACED"
             mail_context = {
                 'email': request.user.email,
                 'name': request.user.username,
             }
-            html_message = render_to_string('withdraw-mail.html',mail_context)
-            plain_text = strip_tags(html_message)
-            from_email = settings.Email_HOST_USER
+
+            html_message = render_to_string('withdraw-mail.html', mail_context)
+            plain_text = strip_tags(html_message)  # Fallback for plain text email clients
+            from_email = settings.EMAIL_HOST_USER
             recipient_list = [request.user.email]
+
             try:
-                email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+                email_message = EmailMultiAlternatives(
+                    subject=mail_subject,
+                    body=plain_text,  # Use the plain text as fallback
+                    from_email=from_email,
+                    to=recipient_list,
+                )
+                email_message.content_subtype = "plain"  # Ensure the fallback is plain text
+                email_message.attach_alternative(html_message, "text/html")  # Attach HTML version
                 email_message.send()
-            except(Exception) as e:
-                print('an error occured')
-
-
+            except Exception as e:
+                print(f"An error occurred: {e}")
 
             return redirect('/broker/dashboard/')
-    return render(request, 'dashboard-withdraw.html')
+
+    return render(request, 'dashboard-withdraw.html', {'balance': details.deposit_wallet_balance})
+
 
 # http://127.0.0.1:5000/accounts/signin/?next=/broker/withdraw/
 
@@ -100,7 +109,6 @@ def deposit(request):
              # Fetch the Dashboard object for the user
         
         assets = myAsset.objects.get(user=request.user)
-        print("assets",assets.bitcoin,assets.ethereum,details)
         print("details",details)
         if not amount or not payment_method:
             # messages.error(request, "Amount and payment method are required.")
@@ -152,21 +160,30 @@ def confirm_payment(request):
             status="PENDING"
         )
 
-        #send mail here
+        # Send withdrawal request email
         mail_subject = "DEPOSIT REQUEST PLACED"
         mail_context = {
             'email': request.user.email,
             'name': request.user.username,
         }
-        html_message = render_to_string('deposit-mail.html',mail_context)
-        plain_text = strip_tags(html_message)
-        from_email = settings.Email_HOST_USER
+
+        html_message = render_to_string('deposit-mail.html', mail_context)
+        plain_text = strip_tags(html_message)  # Fallback for plain text email clients
+        from_email = settings.EMAIL_HOST_USER
         recipient_list = [request.user.email]
+
         try:
-            email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+            email_message = EmailMultiAlternatives(
+                subject=mail_subject,
+                body=plain_text,  # Use the plain text as fallback
+                from_email=from_email,
+                to=recipient_list,
+            )
+            email_message.content_subtype = "plain"  # Ensure the fallback is plain text
+            email_message.attach_alternative(html_message, "text/html")  # Attach HTML version
             email_message.send()
-        except(Exception) as e:
-            print('an error occured')
+        except Exception as e:
+            print(f"An error occurred: {e}")
         # messages.success(request, "Your payment has been confirmed!")
         return redirect('/broker/dashboard/')
 
@@ -188,7 +205,7 @@ def paymentMethod(request):
     return render(request, 'payment-method.html')
 
 @login_required(login_url='/signin/')
-def settings(request):
+def setting(request):
     details = Profile.objects.get(user=request.user)
     # user = request.user
     # if user.is_authenticated:
@@ -204,14 +221,15 @@ def signout(request):
 
 @login_required(login_url='/signin/')
 def swap(request):
-
-    balance = Dashboard.objects.get(user=request.user).deposit_wallet_balance    
+    user = request.user
+    balance = Dashboard.objects.get(user=user).deposit_wallet_balance  
 
     return render(request, 'swap.html',{'balance':balance})
 
 
 @login_required(login_url='/signin/')
 def process_swap(request):
+    user = request.user
     balance = Dashboard.objects.get(user=request.user).deposit_wallet_balance    
     if request.method == 'POST':
 
@@ -220,30 +238,54 @@ def process_swap(request):
             to_token = request.POST.get('to_token')
             amount = request.POST.get('amount')
 
+
+
+            # try:
+            #     swap, created = Swap.objects.get_or_create(user=user)
+            #     if created:
+            #         # Handle the case where the record was newly created
+            #         pass
+            #     else:
+            #         # Handle the case where the record already exists
+            #         pass
+            # except IntegrityError as e:
+            #     # Log the error and provide feedback to the user
+            #     print(f"IntegrityError: {e}")
+
             #store the swap transaction
-            Swap.objects.create(
-                user=request.user,
+            swap = Swap.objects.create(
+                user=user,
                 from_token=from_token,
+                network=network,
                 to_token=to_token,
                 amount=amount
             )
 
 
-            #send mail here
+            # Send swap request email
             mail_subject = "SWAP REQUEST PLACED"
             mail_context = {
                 'email': request.user.email,
                 'name': request.user.username,
             }
-            html_message = render_to_string('swap-mail.html',mail_context)
-            plain_text = strip_tags(html_message)
-            from_email = settings.Email_HOST_USER
+
+            html_message = render_to_string('swap-mail.html', mail_context)
+            plain_text = strip_tags(html_message)  # Fallback for plain text email clients
+            from_email = settings.EMAIL_HOST_USER
             recipient_list = [request.user.email]
+
             try:
-                email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+                email_message = EmailMultiAlternatives(
+                    subject=mail_subject,
+                    body=plain_text,  # Use the plain text as fallback
+                    from_email=from_email,
+                    to=recipient_list,
+                )
+                email_message.content_subtype = "plain"  # Ensure the fallback is plain text
+                email_message.attach_alternative(html_message, "text/html")  # Attach HTML version
                 email_message.send()
-            except(Exception) as e:
-                print('an error occured')
+            except Exception as e:
+                print(f"An error occurred: {e}")
             return redirect('/broker/dashboard/')  # Replace 'dashboard' with the name of your dashboard route
     return render(request, 'swap.html',{'balance':balance})
 
@@ -313,7 +355,6 @@ def dashboard(request):
         # Fetch the Dashboard object for the user
         details = Dashboard.objects.get(user=user)
         assets = myAsset.objects.get(user=user)
-        print("assets",assets.bitcoin,assets.ethereum)
 
 
 
@@ -472,21 +513,30 @@ def process_transfer(request):
 
                 )
 
-            #send mail here
+            # Send transfer request email
             mail_subject = "TRANSFER REQUEST PLACED"
             mail_context = {
                 'email': request.user.email,
                 'name': request.user.username,
             }
-            html_message = render_to_string('transfer-mail.html',mail_context)
-            plain_text = strip_tags(html_message)
-            from_email = settings.Email_HOST_USER
+
+            html_message = render_to_string('transfer-mail.html', mail_context)
+            plain_text = strip_tags(html_message)  # Fallback for plain text email clients
+            from_email = settings.EMAIL_HOST_USER
             recipient_list = [request.user.email]
+
             try:
-                email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+                email_message = EmailMultiAlternatives(
+                    subject=mail_subject,
+                    body=plain_text,  # Use the plain text as fallback
+                    from_email=from_email,
+                    to=recipient_list,
+                )
+                email_message.content_subtype = "plain"  # Ensure the fallback is plain text
+                email_message.attach_alternative(html_message, "text/html")  # Attach HTML version
                 email_message.send()
-            except(Exception) as e:
-                print('an error occured')
+            except Exception as e:
+                print(f"An error occurred: {e}")
 
 
                 return JsonResponse({'success': True, 'message': 'Transfer processed successfully!'})

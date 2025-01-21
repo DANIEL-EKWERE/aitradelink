@@ -72,13 +72,13 @@
 <body>
   <div class="swap-container">
     <h2>Token Swap</h2>
-    <h3>Total Portfolio {{ balance }}</h3>
-    <form id="swap-form" method="POST" action="{% url 'process_swap' %}">
+    <h3>Total Portfolio: ${{ balance }}</h3>
+    <form id="swap-form" method="POST" action="{% url 'broker:process_swap' %}">
       {% csrf_token %}
       <div class="input-group">
         <label for="network">Network</label>
         <select id="network" name="network">
-          <option value="ethereum">Ton</option>
+          <option value="usdt">Ton</option>
           <option value="bsc">Binance Smart Chain</option>
         </select>
       </div>

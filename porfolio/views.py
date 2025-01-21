@@ -8,7 +8,7 @@ from broker.models import Account, Dashboard, Histotry, Withdraw,Deposit, Invest
 from django.contrib import messages
 
 
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
@@ -82,8 +82,9 @@ def signup(request):
         )
         myAsset.objects.create(
             user=user,
-            bitcoin=10,
-            ethereum=10
+            bitcoin=0,
+            solana=0,
+            usdt=0
         )
         Dashboard.objects.create(
             user=user,
@@ -96,21 +97,30 @@ def signup(request):
             trading_platform=trading_platform
         )
 
-        #send mail here
+        # Send withdrawal request email
         mail_subject = "WELCOME TO AITRADEEX"
         mail_context = {
-            'email': request.user.email,
-            'name': request.user.username,
+            'email': email,
+            'name': f'{first_name} {last_name}',
         }
-        html_message = render_to_string('welcome-mail.html',mail_context)
-        plain_text = strip_tags(html_message)
-        from_email = settings.Email_HOST_USER
-        recipient_list = [request.user.email]
+
+        html_message = render_to_string('welcome-mail.html', mail_context)
+        plain_text = strip_tags(html_message)  # Fallback for plain text email clients
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+
         try:
-            email_message = EmailMessage(mail_subject,plain_text,from_email=from_email,to=recipient_list)
+            email_message = EmailMultiAlternatives(
+                subject=mail_subject,
+                body=plain_text,  # Use the plain text as fallback
+                from_email=from_email,
+                to=recipient_list,
+            )
+            email_message.content_subtype = "plain"  # Ensure the fallback is plain text
+            email_message.attach_alternative(html_message, "text/html")  # Attach HTML version
             email_message.send()
-        except(Exception) as e:
-            print('an error occured')
+        except Exception as e:
+            print(f"An error occurred: {e}")
         
         # Automatically log in the user after signup
         login(request, user)
