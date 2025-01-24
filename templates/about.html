@@ -40,7 +40,7 @@ about
 
 												<span class="elementor-icon-list-icon">
 													<i aria-hidden="true" class="fasicon icon-phone-call2"></i> </span>
-												<span class="elementor-icon-list-text">Start trading on aitradelink.
+												<span class="elementor-icon-list-text">Start trading on aitradeex.
 													Learn more</span>
 											</a>
 										</li>
@@ -84,12 +84,7 @@ about
 												<div class="elementor-widget-container">
 
 													<a href="{% url "porfolio:home" %}">
-<<<<<<< HEAD
-														<img width="50" height="36" src="{% static "images/deficrypto-1.png" %}"
-															class="attachment-full size-full wp-image-1164" alt=""
-=======
-														                                                                                                                <span style="font-weight:bold; font-size:100%; color:white" >AITRADELINK</span>
->>>>>>> b41bcae0510ac1e015c5f5aee4e55e04d9d21d4e
+														                                                                                                                <span style="font-weight:bold; font-size:100%; color:white" >AITRADEEX</span>
 														</a>
 												</div>
 											</div>
@@ -149,7 +144,7 @@ about
 																<div class="elementskit-site-title">
 																	<a class="elementskit-nav-logo"
 																		href="{% url "porfolio:home" %}" target="_self" rel="">
-																	                                                                                                                <span style="font-weight:bold; font-size:100%; color:white" >AITRADELINK</span>
+																	                                                                                                                <span style="font-weight:bold; font-size:100%; color:white" >AITRADEEX</span>
 																	</a>
 																</div><button
 																	class="elementskit-menu-close elementskit-menu-toggler"
@@ -237,7 +232,7 @@ about
 										data-widget_type="heading.default">
 										<div class="elementor-widget-container">
 											<h1 class="elementor-heading-title elementor-size-default">Trade &amp;
-												Invest with aitradelink</h1>
+												Invest with aitradeex</h1>
 										</div>
 									</div>
 									<div class="elementor-element elementor-element-2d370342 elementor-widget__width-initial elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit ui-split-animate ui-splitby-chars elementor-widget elementor-widget-text-editor"
@@ -254,7 +249,7 @@ about
 														class="char ui-e-animated fadeInUp" data-char="t"
 														style="---ui-char-index: 1;">t</span></span><span
 													class="whitespace"> </span><span class="word"
-													data-word="aitradelink," style="---ui-word-index: 1;"><span
+													data-word="aitradeex," style="---ui-word-index: 1;"><span
 														class="char ui-e-animated fadeInUp" data-char="D"
 														style="---ui-char-index: 2;">D</span><span
 														class="char ui-e-animated fadeInUp" data-char="e"
@@ -1104,7 +1099,7 @@ about
 										data-id="25f84ab6" data-element_type="widget"
 										data-widget_type="heading.default">
 										<div class="elementor-widget-container">
-											<h5 class="elementor-heading-title elementor-size-default">Why aitradelink?</h5>
+											<h5 class="elementor-heading-title elementor-size-default">Why aitradeex?</h5>
 										</div>
 									</div>
 									<div class="elementor-element elementor-element-56a20397 elementor-widget__width-initial elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-widget elementor-widget-heading"
@@ -1510,7 +1505,7 @@ about
 	<script src="./scripts/wp-polyfill.min2c7c.js" id="wp-polyfill-js"></script>
 	<script src="./scripts/hooks.min2757.js" id="wp-hooks-js"></script>
 	<script src="./scripts/i18n.minc33c.js" id="wp-i18n-js"></script> {% endcomment %}
-
+{% comment %} 
 <!-- WhatsApp and Telegram Floating Buttons -->
 <a href="https://wa.me/+15612071985" target="_blank" class="fab fab-left" aria-label="WhatsApp">
     <i class="fab fa-whatsapp"></i>
@@ -1561,36 +1556,30 @@ about
 	  }
 	  
 
-</style>
+</style> {% endcomment %}
 
 {% block script %}
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const menuToggler = document.querySelector('.elementskit-menu-hamburger'); // Hamburger menu button
-        const menuContainer = document.querySelector('.elementskit-menu-container'); // Menu container
-        const closeButton = document.querySelector('.elementskit-menu-close'); // Close button
-        const overlay = document.querySelector('.elementskit-menu-overlay'); // Optional overlay
+  
 
-        if (menuToggler && menuContainer) {
-            // Toggle menu open/close on hamburger button click
-            menuToggler.addEventListener('click', function () {
-                menuContainer.classList.toggle('active');
-                overlay?.classList.toggle('active');
-            });
+	document.addEventListener('DOMContentLoaded', function () {
+		document.querySelector('.elementskit-menu-hamburger'); // Should not return null
+document.querySelector('.elementskit-menu-container'); // Should not return null
 
-            // Close menu on close button click
-            closeButton?.addEventListener('click', function () {
-                menuContainer.classList.remove('active');
-                overlay?.classList.remove('active');
-            });
-
-            // Close menu on overlay click
-            overlay?.addEventListener('click', function () {
-                menuContainer.classList.remove('active');
-                overlay.classList.remove('active');
-            });
-        }
-    });
+	
+		if (menuToggler && menuContainer) {
+			menuToggler.addEventListener('click', function () {
+				menuContainer.classList.toggle('active');
+			});
+	
+			// Optional: Close menu when clicking the "X" button
+			const closeButton = document.querySelector('.elementskit-menu-close');
+			closeButton?.addEventListener('click', function () {
+				menuContainer.classList.remove('active');
+			});
+		}
+	});
+	
 </script>
 {% endblock %}
 
