@@ -102,9 +102,23 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
+# }
+
+
 DATABASES = {
-    'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mvjqjjzj_aitradeex',         # Database name
+        'USER': 'mvjqjjzj_aitradeexuser',     # Database user
+        'PASSWORD': 'aitradeex1@DT',          # Database password
+        'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
+        'PORT': '5432',                       # Default PostgreSQL port
+    }
 }
+
+
 
 
 
