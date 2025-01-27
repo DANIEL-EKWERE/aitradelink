@@ -94,29 +94,29 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+# /home/mvjqjjzj/public_html/bot.aitradeex.com/EchoBot.py
+# home/mvjqjjzj/SignalSyncBot/SignalSyncBot.py
 # DATABASES = {
 #     'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mvjqjjzj_aitradeex',         # Database name
-        'USER': 'mvjqjjzj_aitradeexuser',     # Database user
-        'PASSWORD': 'aitradeex1@DT',          # Database password
-        'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
-        'PORT': '5432',                       # Default PostgreSQL port
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mvjqjjzj_aitradeex',         # Database name
+#         'USER': 'mvjqjjzj_aitradeexuser',     # Database user
+#         'PASSWORD': 'aitradeex1@DT',          # Database password
+#         'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
+#         'PORT': '5432',                       # Default PostgreSQL port
+#     }
+# }
 
 
 
@@ -161,10 +161,10 @@ STATIC_URL = 'static/'
 
 STATIC_URL = 'static/'
 
-# STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static')
-# ]
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static')
+]
+# STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
