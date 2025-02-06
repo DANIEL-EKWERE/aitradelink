@@ -122,6 +122,13 @@ class myAsset(models.Model):
     bitcoin = models.CharField(max_length=100)
     solana = models.CharField(max_length=100)
     usdt = models.CharField(max_length=100)
+    ethereum = models.CharField(max_length=100,default=0)
+    bnb = models.CharField(max_length=100,default=0)
+    xrp = models.CharField(max_length=100,default=0)
+    cardano = models.CharField(max_length=100,default=0)
+    dogecoin = models.CharField(max_length=100,default=0)
+    litecoin = models.CharField(max_length=100,default=0)
+    usdc = models.CharField(max_length=100,default=0)
 
     def __str__(self):
         return self.user.username
@@ -132,6 +139,7 @@ class Swap(models.Model):
     from_token = models.CharField(max_length=100)
     to_token = models.CharField(max_length=100)
     amount = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):

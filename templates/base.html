@@ -5,6 +5,17 @@
 
 <head>
 
+
+
+     <!--Font Awesome CDN-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!--Owl carousel min.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!--owl.theme.default.min.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     {% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> {% endcomment %}
@@ -94,10 +105,33 @@
 	<link rel="apple-touch-icon" sizes="120x120"
 	
 
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="The world's most popular way to store, invest, and trade crypto.">
+    <meta name="author" content="AITRADEEX">
+    <meta name="keywords" content="trading, account, user profile, finance, investment, cryptocurrency, solana, ethereum, Litecoin, dogecoin, xrp, bnb, usd coin, tether, Cardano, bitcoin, investor, memecoin, degen,">
+    
+    <!-- Open Graph tags for social media sharing -->
+    <meta property="og:title" content="{{ user.username }}'s Account">
+    <meta property="og:description" content="{{ user.first_name }} {{ user.last_name }}'s trading account on our platform.">
+    <meta property="og:image" content="{{ user.profile_image.url }}">  <!-- Example image URL -->
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
+    <!-- Twitter Card for Twitter sharing -->
+    <meta name="twitter:title" content="{{ user.username }}'s Account">
+    <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }}'s trading account page on our platform.">
+    <meta name="twitter:image" content="{{ user.profile_image.url }}">  <!-- Example image URL -->
+    <meta name="twitter:card" content="summary_large_image">
+
+
+
+
+
 </head>
 
-{% block content %}
 
+
+
+{% block content %}
 
 
 

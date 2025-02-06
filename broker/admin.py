@@ -67,6 +67,13 @@ class AdminMyAsset(admin.ModelAdmin):
         'bitcoin',
         'solana',
         'usdt',
+        'ethereum',
+        'bnb',
+        'xrp',
+        'cardano',
+        'dogecoin',
+        'litecoin',
+        'usdc',
     ]
 
 @admin.register(Swap)

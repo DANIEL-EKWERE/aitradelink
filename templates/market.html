@@ -44,7 +44,56 @@
         }
     </style>
 </head>
+<center>
 
+    <style>
+        /* Container for the Google Translate widget */
+        #google_translate_element {
+            display: flex; /* Use flexbox for horizontal layout */
+            justify-content: center; /* Center it horizontally */
+            align-items: center; /* Align items vertically */
+            gap: 10px; /* Add spacing between items */
+            margin: 20px 0; /* Add spacing around the widget */
+            width: 80vw;
+        }
+
+        /* Styling the translate dropdown */
+        #google_translate_element select {
+            width: 100%; /* Make the dropdown responsive */
+            max-width: 300px; /* Set a max width for larger screens */
+            padding: 5px 10px; /* Add padding inside the dropdown */
+            font-size: 16px; /* Improve readability */
+            border: 1px solid #ccc; /* Add a subtle border */
+            border-radius: 5px; /* Round the corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
+        }
+
+        /* Make the widget responsive */
+        @media (max-width: 600px) {
+            #google_translate_element {
+                flex-direction: column; /* Stack items vertically on smaller screens */
+            }
+        }
+    </style>
+
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script type="text/javascript" 
+            src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+    </script>
+</center>
 <body cz-shortcut-listen="true">
 
 
@@ -90,7 +139,7 @@
                             </svg> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -98,7 +147,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            Buy crypto (p2p)</a>
+                            SWAP</a>
                     </li>
 
                     <li>
@@ -115,7 +164,7 @@
                                 </path>
                                 <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
                             </svg>
-                            Buy crypto (gift card)</a>
+                            Buy crypto</a>
                     </li>
 
                     <li>
@@ -301,7 +350,7 @@
 
                     <!--New Menu-->
                     <li>
-                        <a href="{% url "broker:p2p" %}"
+                        <a href="{% url "broker:swap" %}"
                             class="text-capitalize"><!-- https://feathericons.dev/?search=link&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                 class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -309,7 +358,7 @@
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
-                            P2p trading</a>
+                            swap trading</a>
                     </li>
 
                     <li class="has_submenu open">
@@ -593,7 +642,7 @@
 	  }
 	  
 
-</style>
+</style> {% endcomment %}
 
 
 <!-- WhatsApp and Telegram Floating Buttons -->
@@ -601,7 +650,7 @@
     <i class="fab fa-whatsapp"></i>
 </a>
 
-<a href="https://t.me/caesar_alpha" target="_blank" class="fab fab-right" aria-label="Telegram">
+<a href="https://t.me/aitradeex" target="_blank" class="fab fab-right" aria-label="Telegram">
     <i class="fab fa-telegram"></i>
 </a>
 
@@ -646,7 +695,7 @@
 	  }
 	  
 
-</style> {% endcomment %}
+</style>
 
 
 

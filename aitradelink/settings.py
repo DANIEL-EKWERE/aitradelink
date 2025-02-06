@@ -30,11 +30,21 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'ekweredaniel8@gmail.com'
+# EMAIL_HOST_PASSWORD = 'wfrqbqqouzgywnkc'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ekweredaniel8@gmail.com'
-EMAIL_HOST_PASSWORD = 'wfrqbqqouzgywnkc'
+EMAIL_HOST = 'mail.aitradeex.com'
+EMAIL_HOST_USER = 'info@aitradeex.com'
+EMAIL_HOST_PASSWORD = 'aitradeex@dt1'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Application definition
@@ -46,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'broker',
     'porfolio',
 ]
@@ -94,12 +105,12 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 # /home/mvjqjjzj/public_html/bot.aitradeex.com/EchoBot.py
 # home/mvjqjjzj/SignalSyncBot/SignalSyncBot.py
 # DATABASES = {
@@ -107,16 +118,16 @@ DATABASES = {
 # }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mvjqjjzj_aitradeex',         # Database name
-#         'USER': 'mvjqjjzj_aitradeexuser',     # Database user
-#         'PASSWORD': 'aitradeex1@DT',          # Database password
-#         'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
-#         'PORT': '5432',                       # Default PostgreSQL port
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mvjqjjzj_aitradeex',         # Database name
+        'USER': 'mvjqjjzj_aitradeexuser',     # Database user
+        'PASSWORD': 'aitradeex1@DT',          # Database password
+        'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
+        'PORT': '5432',                       # Default PostgreSQL port
+    }
+}
 
 
 

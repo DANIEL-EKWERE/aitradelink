@@ -1,5 +1,22 @@
 from django.urls import path
 from .views import *
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import StaticViewSitemap
+from broker.sitemaps import AccountSitemap, HistorySitemap, WithdrawSitemap, DepositSitemap, InvestmentSitemap, MyAssetSitemap, TransferSitemap, profileSitemap, SwapSitemap  # Import blog sitemap if needed
+
+sitemaps = {
+    'static': StaticViewSitemap(),
+    # 'account': AccountSitemap(),  # Example for blog sitemap
+    # 'history': HistorySitemap(),
+    # 'withdraw': WithdrawSitemap(),
+    # 'deposit': DepositSitemap(),
+    # 'investment': InvestmentSitemap(),
+    # 'myAsset': MyAssetSitemap(),
+    # 'swap': SwapSitemap(),
+    # 'transfer': TransferSitemap(),
+    # 'profile':profileSitemap()
+}
+
 # from . import api
 app_name = 'broker'
 
@@ -32,4 +49,5 @@ urlpatterns = [
     # path('signout/', signout, name='sign-out'),
     # path('investment/', investment, name='investment'),
     # path('', include('broker.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 ]

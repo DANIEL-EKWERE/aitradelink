@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="shortcut icon" type="image/png" href="./asset/theme4/images/icon/icon.png">
     <title>
-        aitradeex
+        AITRADEEX |
         Dashboard
     </title>
 
@@ -45,6 +45,57 @@
     </style>
 
 </head>
+
+<center>
+
+    <style>
+        /* Container for the Google Translate widget */
+        #google_translate_element {
+            display: flex; /* Use flexbox for horizontal layout */
+            justify-content: center; /* Center it horizontally */
+            align-items: center; /* Align items vertically */
+            gap: 10px; /* Add spacing between items */
+            margin: 20px 0; /* Add spacing around the widget */
+            width: 80vw;
+        }
+
+        /* Styling the translate dropdown */
+        #google_translate_element select {
+            width: 100%; /* Make the dropdown responsive */
+            max-width: 300px; /* Set a max width for larger screens */
+            padding: 5px 10px; /* Add padding inside the dropdown */
+            font-size: 16px; /* Improve readability */
+            border: 1px solid #ccc; /* Add a subtle border */
+            border-radius: 5px; /* Round the corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
+        }
+
+        /* Make the widget responsive */
+        @media (max-width: 600px) {
+            #google_translate_element {
+                flex-direction: column; /* Stack items vertically on smaller screens */
+            }
+        }
+    </style>
+
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script type="text/javascript" 
+            src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+    </script>
+</center>
 
 <body cz-shortcut-listen="true">
 
@@ -829,11 +880,144 @@
                                 <div class="card-body row"
                                     style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
                                     <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/ethereum.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Ethereum <br>
+                                        <span class="text-muted text-uppercase">eth</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.ethereum }}<br>
+                                        <span>Total usdt Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/bnb.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        BNB <br>
+                                        <span class="text-muted text-uppercase">bnb</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.bnb }}<br>
+                                        <span>Total bnb Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/usdc.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        USD Coin <br>
+                                        <span class="text-muted text-uppercase">usdc</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.usdc }}<br>
+                                        <span>Total usdc Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/xrp.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        XRP <br>
+                                        <span class="text-muted text-uppercase">xrp</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.xrp }}<br>
+                                        <span>Total xrp Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/cardano.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Cardano <br>
+                                        <span class="text-muted text-uppercase">ADA</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.solana }}<br>
+                                        <span>Total ada Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/dogecoin.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Dogecoin <br>
+                                        <span class="text-muted text-uppercase">doge</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.dogecoin }}<br>
+                                        <span>Total doge Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/litecoin.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Litecoin <br>
+                                        <span class="text-muted text-uppercase">LTC</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.litecoin }}<br>
+                                        <span>Total LTC Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
                                         <img width="60%" src="{% static "images/Tether.png" %}" class="t-icon">
                                         <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
                                     </div>
                                     <div class="col-4 text-capitalize text-dark">
-                                        USDT <br>
+                                        Tether <br>
                                         <span class="text-muted text-uppercase">usdt</span>
                                     </div>
                                     <div class="col-6 text-dark">
@@ -1098,45 +1282,195 @@
                     <div class="row d-sm-none d-block" style=" padding-left:5px; ">
                         <h6 class="my-3">My Assets</h6>
                         <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
-                            style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
-                            <div class="card-body row"
-                                style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
-                                <div class="col-2 text-capitalize text-dark">
-                                    <img width="60%" height="auto" src="{% static "images/64cd7b9fe98ce1691188127.png" %}"
-                                        class="t-icon">
-                                    <img width="40%" height="auto" src="{% static "images/lock.jpeg" %}" class="t-icon">
-                                </div>
-                                <div class="col-4 text-capitalize text-dark">
-                                    Bitcoin <br>
-                                    <span class="text-muted text-uppercase">btc</span>
-                                </div>
-                                <div class="col-6 text-dark">
-                                    ${{ myAsset.bitcoin }}<br>
-                                    <!--$0.00 <br>-->
-                                    <span>Total btc Balance</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
-                            style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
-                            <div class="card-body row"
-                                style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
-                                <div class="col-2 text-capitalize text-dark">
-                                    <img width="60%" src="{% static "images/64cd3c3d3896a1691171901.png" %}" class="t-icon">
-                                    <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
-                                </div>
-                                <div class="col-4 text-capitalize text-dark">
-                                    Ethereum <br>
-                                    <span class="text-muted text-uppercase">eth</span>
-                                </div>
-                                <div class="col-6 text-dark">
-                                    ${{ myAsset.ethereum }}<br>
-                                    <span>Total eth Balance</span>
+                                style="margin-left: 6px; box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/64cd7b9fe98ce1691188127.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Bitcoin <br>
+                                        <span class="text-muted text-uppercase">btc</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.bitcoin }}<br>
+                                        <!--$0.00 <br>-->
+                                        <span>Total btc Balance</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/solana.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Solana <br>
+                                        <span class="text-muted text-uppercase">sol</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.solana }}<br>
+                                        <span>Total sol Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/ethereum.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Ethereum <br>
+                                        <span class="text-muted text-uppercase">eth</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.ethereum }}<br>
+                                        <span>Total usdt Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/bnb.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        BNB <br>
+                                        <span class="text-muted text-uppercase">bnb</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.bnb }}<br>
+                                        <span>Total bnb Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/usdc.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        USD Coin <br>
+                                        <span class="text-muted text-uppercase">usdc</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.usdc }}<br>
+                                        <span>Total usdc Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/xrp.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        XRP <br>
+                                        <span class="text-muted text-uppercase">xrp</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.xrp }}<br>
+                                        <span>Total xrp Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/cardano.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Cardano <br>
+                                        <span class="text-muted text-uppercase">ADA</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.cardano }}<br>
+                                        <span>Total ada Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/dogecoin.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Dogecoin <br>
+                                        <span class="text-muted text-uppercase">doge</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.dogecoin }}<br>
+                                        <span>Total doge Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/litecoin.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Litecoin <br>
+                                        <span class="text-muted text-uppercase">LTC</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.litecoin }}<br>
+                                        <span>Total LTC Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 card ml-2 text-white my-2"
+                                style="margin-left: 6px;box-shadow: 1px 1px 2px 1px #e1d7e1;border-radius: 20px;">
+                                <div class="card-body row"
+                                    style="padding:10px !important; display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-2 text-capitalize text-dark">
+                                        <img width="60%" src="{% static "images/Tether.png" %}" class="t-icon">
+                                        <img width="40%" src="{% static "images/lock.jpeg" %}" class="t-icon">
+                                    </div>
+                                    <div class="col-4 text-capitalize text-dark">
+                                        Tether <br>
+                                        <span class="text-muted text-uppercase">usdt</span>
+                                    </div>
+                                    <div class="col-6 text-dark">
+                                        ${{ myAsset.usdt }}<br>
+                                        <span>Total usdt Balance</span>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         <!--<div class="col-xl-4 col-lg-6 card ml-2 bg-dark text-white my-3" style="margin-left: 6px; box;box-shadow: 1px 1px 2px 1px #f4f0f4;">-->
@@ -1218,7 +1552,7 @@
         }
     </style>
 
-{% comment %} 
+
 <!-- WhatsApp and Telegram Floating Buttons -->
 <a href="https://wa.me/+15612071985" target="_blank" class="fab fab-left" aria-label="WhatsApp">
     <i class="fab fa-whatsapp"></i>
@@ -1270,7 +1604,7 @@
 	  
 
 </style>
- {% endcomment %}
+ 
 
 
 
