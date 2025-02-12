@@ -1562,9 +1562,9 @@ about
 	<script src="./scripts/i18n.minc33c.js" id="wp-i18n-js"></script> {% endcomment %}
 
 <!-- WhatsApp and Telegram Floating Buttons -->
-<a href="https://wa.me/+15612071985" target="_blank" class="fab fab-left" aria-label="WhatsApp">
+{% comment %} <a href="https://wa.me/+15612071985" target="_blank" class="fab fab-left" aria-label="WhatsApp">
     <i class="fab fa-whatsapp"></i>
-</a>
+</a> {% endcomment %}
 
 <a href="https://t.me/caesar_alpha" target="_blank" class="fab fab-right" aria-label="Telegram">
     <i class="fab fa-telegram"></i>
@@ -1614,6 +1614,65 @@ about
 </style> 
 
 {% block script %}
+<script>
+	// List of messages
+	const messages = [
+	"Client A withdrew $100",
+	"Client B withdrew $200",
+	"Client C withdrew $300",
+	"Client D withdrew $400",
+	"Client E withdrew $500"
+];
+
+let index = 0;
+  function showToast(){
+	  iziToast.success({
+		  message: messages[index],
+		  position: "topRight"
+	  });
+  
+  // Move to the next message, loop back to the start if at the end
+  index = (index + 1) % messages.length;
+  
+  }
+  
+  // Show the first toast immediately
+  showToast();
+
+  // Display messages periodically every 5 seconds
+  setInterval(showToast, 7000);
+</script> 
+
+
+<script>
+  // List of messages
+  const messages1 = [
+  "Client A invested $100",
+  "Client B invested $200",
+  "Client C invested $300",
+  "Client D invested $400",
+  "Client E invested $500"
+];
+
+let index1 = 0;
+function showToast1(){
+	iziToast.success({
+		message: messages1[index],
+		position: "topLeft"
+	});
+
+// Move to the next message, loop back to the start if at the end
+index1 = (index1 + 1) % messages1.length;
+
+}
+
+// Show the first toast immediately
+showToast1();
+
+// Display messages periodically every 5 seconds
+setInterval(showToast1, 7000);
+</script>
+<div class="iziToast-wrapper iziToast-wrapper-topRight"></div>
 <script>
   
 

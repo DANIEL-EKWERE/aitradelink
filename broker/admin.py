@@ -1,5 +1,5 @@
 from django.contrib import admin
-from broker.models import Account, Dashboard,Histotry,Withdraw,Deposit,Investment, myAsset, Transfer,Profile, Swap
+from broker.models import Account, Dashboard,Histotry,Withdraw,Deposit,Investment, Asset, Transfer,Profile, Swap
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
@@ -60,8 +60,25 @@ class AdminProfile(admin.ModelAdmin):
 
 
 
-@admin.register(myAsset)
-class AdminMyAsset(admin.ModelAdmin):
+# @admin.register(MyAsset)
+# class AdminMyAsset(admin.ModelAdmin):
+#     list_display = [
+#         'user',
+#         'bitcoin',
+#         'solana',
+#         'usdt',
+#         'ethereum',
+#         'bnb',
+#         'xrp',
+#         'cardano',
+#         'dogecoin',
+#         'litecoin',
+#         'usdc',
+#     ]
+
+
+@admin.register(Asset)
+class AdminAsset(admin.ModelAdmin):
     list_display = [
         'user',
         'bitcoin',

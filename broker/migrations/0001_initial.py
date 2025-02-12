@@ -75,7 +75,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='myAsset',
+            name='MyAsset',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('bitcoin', models.CharField(max_length=100)),

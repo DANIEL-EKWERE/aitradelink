@@ -31,7 +31,7 @@
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 	
 	{% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> {% endcomment %}
-	
+	<link rel="stylesheet" href="{% static "styles/iziToast.min.css" %}">
 	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -517,6 +517,46 @@
             $('#firstchart .tradingview-widget-container a').attr('href', '#')
         });
     </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+
+<script>
+    // List of messages
+    const messages = [
+      "lea withdrew $10,00",
+      "Hiroshi invested $500",
+	  "Mateo withdrew $2,500",
+      "Anya invested $1000",
+	  "Elias withdrew $10,000",
+      "Fatima invested $10,000",
+	  "Rafael withdrew $30,000",
+      "Sofia invested $3,000",
+	  "Johan withdrew $30,000",
+	  "Zhihao invested $5,000"
+    ];
+
+    let index = 0;
+
+    function showToast() {
+        iziToast.success({
+            message: messages[index],
+            position: "topRight"
+        });
+
+        // Move to the next message, loop back to the start if at the end
+        index = (index + 1) % messages.length;
+    }
+
+    // Show the first toast immediately
+    showToast();
+
+    // Display messages periodically every 5 seconds
+    setInterval(showToast, 7000);
+</script>
+
+<div class="iziToast-wrapper iziToast-wrapper-topRight"></div>
 
 {% endblock %}
 

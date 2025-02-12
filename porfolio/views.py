@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout,login, authenticate
-from broker.models import Account, Dashboard, Histotry, Withdraw,Deposit, Investment, myAsset,Profile
+from broker.models import Account, Dashboard, Histotry, Withdraw,Deposit, Investment, Asset,Profile
 from django.contrib import messages
 
 
@@ -80,11 +80,18 @@ def signup(request):
             last_name=last_name,
             phone=phone,
         )
-        myAsset.objects.create(
+        Asset.objects.create(
             user=user,
             bitcoin=0,
             solana=0,
-            usdt=0
+            usdt=0,
+            ethereum=0.0,
+        bnb=0.0,
+        xrp=0.0,
+        cardano=0.0,
+        dogecoin=0.0,
+        litecoin=0.0,
+        usdc=0.0,
         )
         Dashboard.objects.create(
             user=user,

@@ -105,12 +105,12 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 # /home/mvjqjjzj/public_html/bot.aitradeex.com/EchoBot.py
 # home/mvjqjjzj/SignalSyncBot/SignalSyncBot.py
 # DATABASES = {
@@ -118,16 +118,16 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mvjqjjzj_aitradeex',         # Database name
-        'USER': 'mvjqjjzj_aitradeexuser',     # Database user
-        'PASSWORD': 'aitradeex1@DT',          # Database password
-        'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
-        'PORT': '5432',                       # Default PostgreSQL port
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mvjqjjzj_aitradeex',         # Database name
+#         'USER': 'mvjqjjzj_aitradeexuser',     # Database user
+#         'PASSWORD': 'aitradeex1@DT',          # Database password
+#         'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
+#         'PORT': '5432',                       # Default PostgreSQL port
+#     }
+# }
 
 
 

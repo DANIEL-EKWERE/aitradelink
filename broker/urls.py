@@ -11,7 +11,7 @@ sitemaps = {
     # 'withdraw': WithdrawSitemap(),
     # 'deposit': DepositSitemap(),
     # 'investment': InvestmentSitemap(),
-    # 'myAsset': MyAssetSitemap(),
+    # 'MyAsset': MyAssetSitemap(),
     # 'swap': SwapSitemap(),
     # 'transfer': TransferSitemap(),
     # 'profile':profileSitemap()

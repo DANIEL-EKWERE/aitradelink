@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from broker.models import Account, Histotry, Withdraw,Deposit, Investment, myAsset,Transfer,Profile,Swap
+from broker.models import Account, Histotry, Withdraw,Deposit, Investment, Asset,Transfer,Profile,Swap
 from broker.models import Dashboard
 from django.shortcuts import render
 from django.contrib.auth import logout,login, authenticate
@@ -108,7 +108,7 @@ def deposit(request):
         payment_method = request.POST.get('method')
              # Fetch the Dashboard object for the user
         
-        assets = myAsset.objects.get(user=request.user)
+        assets = Asset.objects.get(user=request.user)
         print("details",details)
         if not amount or not payment_method:
             # messages.error(request, "Amount and payment method are required.")
@@ -354,7 +354,7 @@ def dashboard(request):
     try:
         # Fetch the Dashboard object for the user
         details = Dashboard.objects.get(user=user)
-        assets = myAsset.objects.get(user=user)
+        assets = Asset.objects.get(user=user)
 
 
 
@@ -404,7 +404,7 @@ def dashboard(request):
             # 'deposits': deposits,
             # 'withdraws':withdraws,
             'profile':profile,
-            'myAsset':assets,
+            'MyAsset':assets,
         }
     )
 

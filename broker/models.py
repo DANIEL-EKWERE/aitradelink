@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -117,18 +118,35 @@ class Investment(models.Model):
     def __str__(self):
         return self.user.username
     
-class myAsset(models.Model):
+# class MyAsset(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     bitcoin = models.CharField(max_length=100)
+#     solana = models.CharField(max_length=100)
+#     usdt = models.CharField(max_length=100)
+#     ethereum = models.CharField(max_length=100,default=0)
+#     bnb = models.CharField(max_length=100,default=0)
+#     xrp = models.CharField(max_length=100,default=0)
+#     cardano = models.CharField(max_length=100,default=0)
+#     dogecoin = models.CharField(max_length=100,default=0)
+#     litecoin = models.CharField(max_length=100,default=0)
+#     usdc = models.CharField(max_length=100,default=0)
+
+#     def __str__(self):
+#         return self.user.username
+    
+
+class Asset(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bitcoin = models.CharField(max_length=100)
     solana = models.CharField(max_length=100)
     usdt = models.CharField(max_length=100)
-    ethereum = models.CharField(max_length=100,default=0)
-    bnb = models.CharField(max_length=100,default=0)
-    xrp = models.CharField(max_length=100,default=0)
-    cardano = models.CharField(max_length=100,default=0)
-    dogecoin = models.CharField(max_length=100,default=0)
-    litecoin = models.CharField(max_length=100,default=0)
-    usdc = models.CharField(max_length=100,default=0)
+    ethereum = models.CharField(max_length=100)
+    bnb = models.CharField(max_length=100)
+    xrp = models.CharField(max_length=100)
+    cardano = models.CharField(max_length=100)
+    dogecoin = models.CharField(max_length=100)
+    litecoin = models.CharField(max_length=100)
+    usdc = models.CharField(max_length=100)
 
     def __str__(self):
         return self.user.username
@@ -139,7 +157,7 @@ class Swap(models.Model):
     from_token = models.CharField(max_length=100)
     to_token = models.CharField(max_length=100)
     amount = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(default=timezone.now)
     
 
     def __str__(self):

@@ -1247,13 +1247,160 @@ home
 							</div>
 						</div>
 					</section>
-
+					<section style="background-color: white; padding: 20px;">
+						<h1 class="investment-title">INVESTMENT PLAN</h1>
+						<div class="plans-container">
+							
 					
+							<div class="plan">
+								<h3>BASIC PLAN</h3>
+								<p>Return 20%</p>
+								<hr class="hr">
+								<p>After 24 hours</p>
+								<hr class="hr">
+								<p>Total 20% <span class="highlight1"> + CAPITAL </span></p>
+								<hr class="hr">
+								<p><b>$500 - $25,000</b></p>
+								<hr class="hr">
+								<a href="{% url 'porfolio:register' %}">
+									<button>Invest Now</button>
+								</a>
+							</div>
 					
-					  
+							<div class="plan">
+								<h3>SILVER PLAN</h3>
+								<p>Return 50%</p>
+								<hr class="hr">
+								<p>After 48 hours</p>
+								<hr class="hr">
+								<p>Total 50% <span class="highlight1"> + CAPITAL </span></p>
+								<hr class="hr">
+								<p><b>$1000 - $10,000</b></p>
+								<hr class="hr">
+								<a href="{% url 'porfolio:register' %}">
+									<button>Invest Now</button>
+								</a>
+							</div>
+					
+							<div class="plan">
+								<h3>GOLD PLAN</h3>
+								<p>Return 80%</p>
+								<hr class="hr">
+								<p>After 72 hours</p>
+								<hr class="hr">
+								<p>Total 80% <span class="highlight1"> + CAPITAL </span></p>
+								<hr class="hr">
+								<p><b>$3,000 - $30,000</b></p>
+								<hr class="hr">
+								<a href="{% url 'porfolio:register' %}">
+									<button>Invest Now</button>
+								</a>
+							</div>
+					
+							<div class="plan">
+								<h3>VIP PLAN</h3>
+								<p>Return 100%</p>
+								<hr class="hr">
+								<p>After 96 hours</p>
+								<hr class="hr">
+								<p>Total 100% <span class="highlight1"> + CAPITAL </span></p>
+								<hr class="hr">
+								<p><b>$5,000 - $50,000</b></p>
+								<hr class="hr">
+								<a href="{% url 'porfolio:register' %}">
+									<button>Invest Now</button>
+								</a>
+							</div>
+						</div>
+					
+						<style>
+							.investment-title {
+								font-family: Arial, sans-serif;
+								font-size: 2rem;
+								color: #0088cc;
+								text-align: center;
+								margin-bottom: 20px;
+							}
+					
+							.plans-container {
+								display: grid;
+								grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+								gap: 20px;
+								justify-content: center;
+								padding: 20px;
+							}
+					
+							.plan {
+								background-color: rgb(244, 243, 252);
+								border: 1px solid #0088cc;
+								border-radius: 8px;
+								padding: 20px;
+								text-align: center;
+								box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+								transition: transform 0.3s ease-in-out;
+							}
+					
+							.plan:hover {
+								transform: scale(1.05);
+							}
+					
+							.plan h3 {
+								font-size: 1.5rem;
+								color: black;
+							}
+					
+							.plan p {
+								font-size: 1rem;
+								margin: 10px 0;
+								color: black;
+							}
+					
+							.highlight1 {
+								background-color:rgb(255, 229, 229);
+								padding: 2px 5px;
+								color:rgb(240, 1, 1);
+								border-radius: 3px;
+							}
+					
+							.plan button {
+								margin-top: 15px;
+								background-color: #007bff;
+								color: white;
+								border: none;
+								border-radius: 5px;
+								padding: 10px 20px;
+								cursor: pointer;
+								font-size: 1rem;
+								transition: background-color 0.3s;
+							}
+					
+							.plan button:hover {
+								background-color: #0056b3;
+							}
+					
+							.hr {
+								margin: 8% 0;
+								color: black;
+								border: 0.5px solid black;
+							}
+					
+							@media (max-width: 768px) {
+								.plans-container {
+									grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+								}
+							}
+					
+							@media (max-width: 480px) {
+								.plans-container {
+									grid-template-columns: 1fr;
+								}
+							}
+						</style>
+					</section>
+					
 
 
-<center>
+{% comment %} <center>
 
 	<section style="background-color:white; padding-top: 10%; text-align: center;">
 		<h1 style="color:#0088cc; font-size:250%; font-family: Arial, sans-serif;">What our clients say</h1>
@@ -1440,7 +1587,7 @@ home
 		  </style>
 	  </section>
 
-				</center>
+				</center> {% endcomment %}
 					
 					<section
 						class="elementor-section elementor-top-section elementor-element elementor-element-4c5368a8 elementor-section-boxed elementor-section-height-default"
@@ -1531,9 +1678,9 @@ home
 
  
 <!-- WhatsApp and Telegram Floating Buttons -->
-<a href="https://wa.me/+15612071985" target="_blank" class="fab fab-left" aria-label="WhatsApp">
+{% comment %} <a href="https://wa.me/+15612071985" target="_blank" class="fab fab-left" aria-label="WhatsApp">
     <i class="fab fa-whatsapp"></i>
-</a>
+</a> {% endcomment %}
 
 <a href="https://t.me/aitradeex" target="_blank" class="fab fab-right" aria-label="Telegram">
     <i class="fab fa-telegram"></i>
@@ -1606,10 +1753,68 @@ dFsDKyswwxLbuLnVqosFteesh5WYr9Ep3RxYxqZx62H6xKbg48 {% endcomment %}
 
 access token secret ygpeaY8rDNFVawkCvZaln8ORVNbIczn5LXfab5AGNryuL {% endcomment %}
 
-
+<script src="{% static "scripts/iziToast.min.js" %}"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% block script %}
+ <script>
+	  // List of messages
+	  const messages = [
+	  "Zara withdrew $10,000",
+	  "Rafal withdrew $2,500",
+	  "Leandro withdrew $30,000",
+	  "Yasmin withdrew $50,000",
+	  "Mathieu withdrew $10,000"
+  ];
+
+  let index = 0;
+	function showToast(){
+		iziToast.success({
+			message: messages[index],
+			position: "topRight"
+		});
 	
+	// Move to the next message, loop back to the start if at the end
+	index = (index + 1) % messages.length;
+	
+	}
+	
+	// Show the first toast immediately
+    showToast();
+
+	// Display messages periodically every 5 seconds
+    setInterval(showToast, 7000);
+</script> 
+
+
+<script>
+	// List of messages
+	const messages1 = [
+	"Luca invested $500",
+	"Elara invested $1,000",
+	"Hiroshi invested $3,000",
+	"Amara invested $5,000",
+	"Sven invested $1,000"
+];
+
+let index1 = 0;
+  function showToast1(){
+	  iziToast.success({
+		  message: messages1[index],
+		  position: "topLeft"
+	  });
+  
+  // Move to the next message, loop back to the start if at the end
+  index1 = (index1 + 1) % messages1.length;
+  
+  }
+  
+  // Show the first toast immediately
+  showToast1();
+
+  // Display messages periodically every 5 seconds
+  setInterval(showToast1, 7000);
+</script>
+<div class="iziToast-wrapper iziToast-wrapper-topRight"></div>
 	 <script>
 
 

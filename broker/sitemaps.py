@@ -1,7 +1,7 @@
 import datetime
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-from .models import Account, Histotry, Withdraw,Deposit, Investment, myAsset,Transfer,Profile,Swap  # Import your model (change this to match your app)
+from .models import Account, Histotry, Withdraw,Deposit, Investment, Asset,Transfer,Profile,Swap  # Import your model (change this to match your app)
 
 class AccountSitemap(Sitemap):
     changefreq = "monthly"  # How often the content changes
@@ -60,7 +60,7 @@ class MyAssetSitemap(Sitemap):
     priority = 0.8  # Importance (0.0 - 1.0)
     
     def items(self):
-        return myAsset.objects.all()  # Change to your model
+        return Asset.objects.all()  # Change to your model
 
     def lastmod(self, obj):
         return datetime(2025, 1, 1)  # Use the field that tracks last update
