@@ -69,58 +69,67 @@
   </style>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 -->
 </head>
-<center>
 
-  <style>
-      /* Container for the Google Translate widget */
-      #google_translate_element {
-          display: flex; /* Use flexbox for horizontal layout */
-          justify-content: center; /* Center it horizontally */
-          align-items: center; /* Align items vertically */
-          gap: 10px; /* Add spacing between items */
-          margin: 20px 0; /* Add spacing around the widget */
-          width: 80vw;
-      }
-
-      /* Styling the translate dropdown */
-      #google_translate_element select {
-          width: 100%; /* Make the dropdown responsive */
-          max-width: 300px; /* Set a max width for larger screens */
-          padding: 5px 10px; /* Add padding inside the dropdown */
-          font-size: 16px; /* Improve readability */
-          border: 1px solid #ccc; /* Add a subtle border */
-          border-radius: 5px; /* Round the corners */
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
-      }
-
-      /* Make the widget responsive */
-      @media (max-width: 600px) {
-          #google_translate_element {
-              flex-direction: column; /* Stack items vertically on smaller screens */
-          }
-      }
-  </style>
-
-
-  <div id="google_translate_element"></div>
-
-  <script type="text/javascript">
-      function googleTranslateElementInit() {
-          new google.translate.TranslateElement(
-              {pageLanguage: 'en'},
-              'google_translate_element'
-          );
-      }
-  </script>
-
-  <script type="text/javascript" 
-          src=
-"https://translate.google.com/translate_a/element.js?
-cb=googleTranslateElementInit">
-  </script>
-</center>
 <body>
+  
   <div class="swap-container">
+
+
+
+    <center>
+
+      <style>
+          /* Container for the Google Translate widget */
+          #google_translate_element {
+              display: flex; /* Use flexbox for horizontal layout */
+              justify-content: center; /* Center it horizontally */
+              align-items: center; /* Align items vertically */
+              gap: 10px; /* Add spacing between items */
+              margin: 20px 0; /* Add spacing around the widget */
+              width: 80vw;
+          }
+    
+          /* Styling the translate dropdown */
+          #google_translate_element select {
+              width: 100%; /* Make the dropdown responsive */
+              max-width: 300px; /* Set a max width for larger screens */
+              padding: 5px 10px; /* Add padding inside the dropdown */
+              font-size: 16px; /* Improve readability */
+              border: 1px solid #ccc; /* Add a subtle border */
+              border-radius: 5px; /* Round the corners */
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
+          }
+    
+          /* Make the widget responsive */
+          @media (max-width: 600px) {
+              #google_translate_element {
+                  flex-direction: column; /* Stack items vertically on smaller screens */
+              }
+          }
+      </style>
+    
+    
+      <div id="google_translate_element"></div>
+    
+      <script type="text/javascript">
+          function googleTranslateElementInit() {
+              new google.translate.TranslateElement(
+                  {pageLanguage: 'en'},
+                  'google_translate_element'
+              );
+          }
+      </script>
+    
+      <script type="text/javascript" 
+              src=
+    "https://translate.google.com/translate_a/element.js?
+    cb=googleTranslateElementInit">
+      </script>
+    </center>
+
+
+
+
     <h2>Token Swap</h2>
     <h3>Total Portfolio: ${{ balance }}</h3>
     <form id="swap-form" method="POST" action="{% url 'broker:process_swap' %}">
@@ -136,16 +145,23 @@ cb=googleTranslateElementInit">
         <label for="from-token">From</label>
         <select id="from-token" name="from_token">
           <option value="USDT">Tether (USDT)</option>
-          <option value="ETH">Solana (SOL)</option>
-          <option value="BTC">Binance Coin (BNB)</option>
+          {% comment %} <option value="ETH">Solana (SOL)</option>
+          <option value="BTC">Binance Coin (BNB)</option> {% endcomment %}
         </select>
       </div>
       <div class="input-group">
         <label for="to-token">To</label>
         <select id="to-token" name="to_token">
-          <option value="ETH">Solana (SOL)</option>
-          <option value="BTC">Binance Coin (BNB)</option>
+          <option value="SOL">Solana (SOL)</option>
+          <option value="BNB">Binance Coin (BNB)</option>
+          <option value="ETH">Ethereum (ETH)</option>
           <option value="USDT">Tether (USDT)</option>
+          <option value="XRP">XRP (XRP)</option>
+          <option value="BTC">Bitcoin (BTC)</option>
+          <option value="ADA">cardano (ADA)</option>
+          <option value="DOGE">Doge Coin (DOGE)</option>
+          <option value="LTC">LitcoinCoin (LTC)</option>
+          <option value="USDC">USD Coin (USDC)</option>
         </select>
       </div>
       <div class="input-group">
@@ -154,8 +170,8 @@ cb=googleTranslateElementInit">
       </div>
       <button type="button" class="swap-button" onclick="handleSwap()">Swap Tokens</button>
     </form>
-    <p class="info" id="exchange-rate">Exchange Rate: 1 ETH = 1000 USDT</p>
-    <p class="info" id="fees">Network Fees: 0.001 ETH</p>
+    {% comment %} <p class="info" id="exchange-rate">Exchange Rate: 1 ETH = 1000 USDT</p>
+    <p class="info" id="fees">Network Fees: 0.001 ETH</p> {% endcomment %}
     <p class="warning">
       Warning: If you send tokens to the wrong network or address, they will be lost permanently. Double-check all details before confirming the swap.
     </p>

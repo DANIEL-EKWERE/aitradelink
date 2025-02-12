@@ -82,16 +82,16 @@ def signup(request):
         )
         Asset.objects.create(
             user=user,
-            bitcoin=0,
-            solana=0,
-            usdt=0,
+            bitcoin=0.0,
+            solana=0.0,
+            usdt=0.0,
             ethereum=0.0,
-        bnb=0.0,
-        xrp=0.0,
-        cardano=0.0,
-        dogecoin=0.0,
-        litecoin=0.0,
-        usdc=0.0,
+            bnb=0.0,
+            xrp=0.0,
+            cardano=0.0,
+            dogecoin=0.0,
+            litecoin=0.0,
+            usdc=0.0,
         )
         Dashboard.objects.create(
             user=user,
