@@ -10,5 +10,5 @@ sqlparse==0.5.2
 urllib3==2.2.3
 pillow<10.0
 psycopg2-binary==2.9.10
-wheel==0.44.0
+wheel
 whitenoise==6.8.2
