@@ -105,17 +105,17 @@ WSGI_APPLICATION = 'aitradelink.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 # /home/mvjqjjzj/public_html/bot.aitradeex.com/EchoBot.py
 # home/mvjqjjzj/SignalSyncBot/SignalSyncBot.py
-# DATABASES = {
-#     'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
-# }
+DATABASES = {
+    'default': dj_database_url.parse("postgresql://aitradelink_db_ejkx_user:h8L6CEdKzGNHGxiCB51MOqAhAFhGVeAy@dpg-d1n5633uibrs73e53osg-a.oregon-postgres.render.com/aitradelink_db_ejkx")
+}
 
 
 # DATABASES = {
