@@ -27,5 +27,8 @@ pip install gunicorn
 # Collect static files
 python manage.py collectstatic --no-input
 
+# Run makemigrations
+python manage.py makemigrations
+
 # Run migrations
 python manage.py migrate
