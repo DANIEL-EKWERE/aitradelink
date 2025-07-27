@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-# import dj_database_url
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +46,17 @@ EMAIL_HOST_USER = 'info@aitradeex.com'
 EMAIL_HOST_PASSWORD = 'aitradeex@dt1'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+'''
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+EMAIL_PORT = 465
+EMAIL_HOST = 'mail.pcrtradingplatform.com'
+EMAIL_HOST_USER = 'pcrtradingplatform@pcrtradingplatform.com'
+EMAIL_HOST_PASSWORD = 'ajebo1@DT*'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+'''
 
 # Application definition
 
@@ -114,7 +125,7 @@ DATABASES = {
 # /home/mvjqjjzj/public_html/bot.aitradeex.com/EchoBot.py
 # home/mvjqjjzj/SignalSyncBot/SignalSyncBot.py
 # DATABASES = {
-#     'default': dj_database_url.parse("postgresql://aitradelink_db_user:R1WIj3PGPrYj9tAgbXrDeRcJfhVf82WN@dpg-cu5d02dsvqrc7386ltog-a.oregon-postgres.render.com/aitradelink_db")
+#     'default': dj_database_url.parse("postgresql://aitradelink_db_ejkx_user:h8L6CEdKzGNHGxiCB51MOqAhAFhGVeAy@dpg-d1n5633uibrs73e53osg-a.oregon-postgres.render.com/aitradelink_db_ejkx")
 # }
 
 
@@ -129,7 +140,21 @@ DATABASES = {
 #     }
 # }
 
+'''
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'zwhtltwm_pcrtradingplatform-db',         # Database name
+         'USER': 'zwhtltwm_pcr-user',     # Database user
+         'PASSWORD': 'ajebo1@DT*',          # Database password
+         'HOST': 'localhost',                  # Host (usually 'localhost' for cPanel)
+         'PORT': '5432',                       # Default PostgreSQL port
+     }
+}
 
+
+
+'''
 
 
 
@@ -185,3 +210,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/broker/dashboard/' 
 
 LOGIN_URL = '/signin/'
+
+
+# Add any additional configurations for trading
+TRADING_CONFIG = {
+    'DEFAULT_DEMO_BALANCE': 10000.00,
+    'PRICE_UPDATE_INTERVAL': 5,  # seconds
+    'MAX_TRADES_PER_USER': 100,
+}

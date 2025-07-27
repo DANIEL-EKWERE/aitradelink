@@ -17,6 +17,15 @@ from django.conf import settings
 
 
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from decimal import Decimal
+import json
+import requests
+from .models import Trade, TradingPair, UserProfile, TradingSession
+from .forms import TradeForm
+
+
 # Create your views here.
 
 @login_required(login_url='/signin/')
@@ -237,8 +246,60 @@ def process_swap(request):
             from_token = request.POST.get('from_token')
             to_token = request.POST.get('to_token')
             amount = request.POST.get('amount')
-
-
+            '''
+            Experimenting now!!!!!!!!!!!!!!!!!!!!!!!!!!
+            '''
+        #      <option value="SOL">Solana (SOL)</option>
+        #   <option value="BNB">Binance Coin (BNB)</option>
+        #   <option value="ETH">Ethereum (ETH)</option>
+        #   <option value="USDT">Tether (USDT)</option>
+        #   <option value="XRP">XRP (XRP)</option>
+        #   <option value="BTC">Bitcoin (BTC)</option>
+        #   <option value="ADA">cardano (ADA)</option>
+        #   <option value="DOGE">Doge Coin (DOGE)</option>
+        #   <option value="LTC">LitcoinCoin (LTC)</option>
+        #   <option value="USDC">USD Coin (USDC)</option>
+            asset = Asset.objects.get(user= request.user)
+            if to_token =='SOL':
+               asset.solana += int(amount)
+               asset.usdt -= int(amount)
+               asset.save()
+            elif to_token == 'BNB':
+                asset.bnb = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            elif to_token == 'ETH':
+                asset.ethereum = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            elif to_token == 'XRP':
+                asset.xrp = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            elif to_token == "BTC":
+                asset.bitcoin = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            elif to_token == 'ADA':
+                asset.cardano = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            elif to_token == "DOGE":
+                asset.dogecoin = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            elif to_token == "LTC":
+                asset.litecoin = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            elif to_token == "USDC":
+                asset.usdc = int(amount)
+                asset.usdt -= int(amount)
+                asset.save()
+            else:
+                pass
+            
+            
 
             # try:
             #     swap, created = Swap.objects.get_or_create(user=user)
@@ -342,7 +403,9 @@ def dashboard(request):
     user = request.user
 
     # Initialize variables with default values
-    details = None
+    details1 = None
+    totalDept = None
+    totalWith = None
     # pending = None
     # approved = None
     # cancelled = None
@@ -350,24 +413,48 @@ def dashboard(request):
     # withdraws = None
     profile = None
     assets = None
-
+    print('this is the dashboard function')
+    # dasboard = Dashboard.objects.get(user=request.user).deposit_wallet_balance
+    # print(dasboard)
     try:
+        print('try block')
         # Fetch the Dashboard object for the user
-        details = Dashboard.objects.get(user=user)
+        # details = Dashboard.objects.get(user=request.user).deposit_wallet_balance
+        details1 = Dashboard.objects.get(user=request.user)
+        totalDept = Dashboard.objects.get(user=request.user).total_deposit
+        totalWith = Dashboard.objects.get(user=request.user).total_withdraw
         assets = Asset.objects.get(user=user)
-
-
+        # print(details.deposit_wallet_balance)
 
         deposits = Deposit.objects.filter(user=user).order_by("-date")
         withdraws = Withdraw.objects.filter(user=user)
         # profile = Account.objects.get(user=user)
         for x in deposits:
+            print(x.status)
             if x.status == "APPROVED":
-                details.deposit_wallet_balance += int(x.amount)
+                # details += int(float(x.amount))
+                totalDept += int(float(x.amount))
+                assets.usdt += int(float(x.amount))
+                assets.save()
+                details1.deposit_wallet_balance += int(float(x.amount))
+                details1.total_deposit += int(float(x.amount))
+                x.status = "PAID"
+                x.save()
+                details1.save()
+                # Dashboard.objects.filter(user=request.user).update(deposit_wallet_balance= int(float(x.amount)))
+                
+                print(x.status)
+
 
         for x in withdraws:
             if x.status == "APPROVED":
-                details.deposit_wallet_balance -= int(x.amount)
+                details1.deposit_wallet_balance -= int(float(x.amount))
+                details1.total_withdraw -= int(float(x.amount))
+                totalWith += int(float(x.amount))
+                assets.usdt -= int(float(x.amount))
+                x.status = "PAID"
+                x.save()
+                details1.save()
         # Fetch History objects based on transaction type
         # pending = Histotry.objects.filter(user=user, tType="PENDING")
         # approved = Histotry.objects.filter(user=user, tType="APPROVED")
@@ -375,7 +462,7 @@ def dashboard(request):
 
         # deposits = Deposit.objects.filter(user=user).order_by("-date")
         # withdraws = Withdraw.objects.filter(user=user)
-        profile = Account.objects.get(user=user)
+        # profile = Account.objects.get(user=user)
         # for x in deposits:
         #     if x.status == "APPROVED":
         #         details.deposit_wallet_balance += int(x.amount)
@@ -397,13 +484,15 @@ def dashboard(request):
         request, 
         'dashboard-index.html', 
         {
-            'details': details,
+            'details': details1,
             # 'pending': pending,
             # 'approved': approved,
             # 'cancelled': cancelled,
             # 'deposits': deposits,
             # 'withdraws':withdraws,
-            'profile':profile,
+            # 'profile':profile,
+            'total_deposit':totalDept,
+            'total_withdraw': totalWith,
             'MyAsset':assets,
         }
     )
@@ -902,3 +991,252 @@ if __name__ == "__main__":
     main()
 
 '''
+
+
+
+'''
+trading codes here - views
+'''
+
+# views.py
+
+
+@login_required
+def trading_dashboard(request):
+    """Main trading dashboard view"""
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+    active_trades = Trade.objects.filter(user=request.user, status='EXECUTED')
+    recent_trades = Trade.objects.filter(user=request.user)[:10]
+    
+    # Update current prices for active trades
+    for trade in active_trades:
+        current_price = get_current_price(trade.trading_pair.symbol)
+        if current_price:
+            trade.current_price = current_price
+            trade.calculate_profit_loss()
+    
+    context = {
+        'user_profile': user_profile,
+        'active_trades': active_trades,
+        'recent_trades': recent_trades,
+        'trading_pairs': TradingPair.objects.filter(is_active=True),
+    }
+    return render(request, 'trading_dashboard.html', context)
+
+@login_required
+@csrf_exempt
+def execute_trade(request):
+    """Execute a buy or sell trade"""
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            trading_pair_symbol = data.get('symbol')
+            trade_type = data.get('type').upper()  # 'BUY' or 'SELL'
+            amount = Decimal(str(data.get('amount')))
+            
+            # Get trading pair
+            trading_pair = get_object_or_404(TradingPair, symbol=trading_pair_symbol)
+            
+            # Get current price
+            current_price = get_current_price(trading_pair_symbol)
+            if not current_price:
+                return JsonResponse({'success': False, 'message': 'Could not fetch current price'})
+            
+            current_price = Decimal(str(current_price))
+            total_value = amount * current_price
+            
+            # Get user profile
+            user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+            
+            # Check if user has sufficient balance
+            if user_profile.deposit_wallet_balance < total_value:
+                return JsonResponse({
+                    'success': False, 
+                    'message': f'Insufficient balance. Required: ${total_value}, Available: ${user_profile.deposit_wallet_balance}'
+                })
+            
+            # Deduct from user balance
+            user_profile.deposit_wallet_balance -= total_value
+            user_profile.save()
+            
+            # Create trade
+            trade = Trade.objects.create(
+                user=request.user,
+                trading_pair=trading_pair,
+                trade_type=trade_type,
+                amount=amount,
+                entry_price=current_price,
+                current_price=current_price,
+                total_value=total_value,
+                status='EXECUTED',
+                executed_at=timezone.now()
+            )
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'{trade_type} order executed successfully',
+                'trade': {
+                    'id': str(trade.id),
+                    'type': trade.trade_type,
+                    'amount': float(trade.amount),
+                    'entry_price': float(trade.entry_price),
+                    'total_value': float(trade.total_value),
+                    'timestamp': trade.executed_at.isoformat()
+                }
+            })
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)})
+    
+    return JsonResponse({'success': False, 'message': 'Invalid request method'})
+
+@login_required
+@csrf_exempt
+def close_trade(request, trade_id):
+    """Close an active trade"""
+    if request.method == 'POST':
+        try:
+            trade = get_object_or_404(Trade, id=trade_id, user=request.user, status='EXECUTED')
+            
+            # Get current price
+            current_price = get_current_price(trade.trading_pair.symbol)
+            if not current_price:
+                return JsonResponse({'success': False, 'message': 'Could not fetch current price'})
+            
+            # Close the trade
+            trade.close_trade(Decimal(str(current_price)))
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Trade closed successfully',
+                'profit_loss': float(trade.profit_loss)
+            })
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)})
+    
+    return JsonResponse({'success': False, 'message': 'Invalid request method'})
+
+@login_required
+def get_trade_history(request):
+    """Get user's trade history"""
+    trades = Trade.objects.filter(user=request.user).order_by('-created_at')
+    
+    trade_data = []
+    for trade in trades:
+        trade_data.append({
+            'id': str(trade.id),
+            'symbol': trade.trading_pair.symbol,
+            'type': trade.trade_type,
+            'amount': float(trade.amount),
+            'entry_price': float(trade.entry_price),
+            'current_price': float(trade.current_price) if trade.current_price else None,
+            'exit_price': float(trade.exit_price) if trade.exit_price else None,
+            'profit_loss': float(trade.profit_loss),
+            'status': trade.status,
+            'created_at': trade.created_at.isoformat(),
+            'executed_at': trade.executed_at.isoformat() if trade.executed_at else None,
+            'closed_at': trade.closed_at.isoformat() if trade.closed_at else None,
+        })
+    
+    return JsonResponse({'trades': trade_data})
+
+@login_required
+def get_active_trades(request):
+    """Get user's active trades with current P&L"""
+    active_trades = Trade.objects.filter(user=request.user, status='EXECUTED')
+    
+    trade_data = []
+    for trade in active_trades:
+        # Update current price and P&L
+        current_price = get_current_price(trade.trading_pair.symbol)
+        if current_price:
+            trade.current_price = Decimal(str(current_price))
+            trade.calculate_profit_loss()
+        
+        trade_data.append({
+            'id': str(trade.id),
+            'symbol': trade.trading_pair.symbol,
+            'type': trade.trade_type,
+            'amount': float(trade.amount),
+            'entry_price': float(trade.entry_price),
+            'current_price': float(trade.current_price) if trade.current_price else None,
+            'profit_loss': float(trade.profit_loss),
+            'executed_at': trade.executed_at.isoformat() if trade.executed_at else None,
+        })
+    
+    return JsonResponse({'trades': trade_data})
+
+def get_current_price(symbol):
+    """Fetch current price from Binance API (you can replace with your preferred API)"""
+    try:
+        # Using Binance API as example
+        url = f"https://api.binance.com/api/v3/ticker/price?symbol={symbol}"
+        response = requests.get(url, timeout=5)
+        
+        if response.status_code == 200:
+            data = response.json()
+            return float(data['price'])
+        else:
+            # Fallback to mock price for demo
+            return get_mock_price(symbol)
+    except:
+        # Fallback to mock price for demo
+        return get_mock_price(symbol)
+
+def get_mock_price(symbol):
+    """Mock price generator for demo purposes"""
+    import random
+    base_prices = {
+        'BTCUSDT': 45000,
+        'ETHUSDT': 3000,
+        'ADAUSDT': 0.5,
+        'BNBUSDT': 300,
+        'SOLUSDT': 100,
+    }
+    
+    base_price = base_prices.get(symbol, 100)
+    # Add some random variation (±2%)
+    variation = random.uniform(-0.02, 0.02)
+    return base_price * (1 + variation)
+
+@login_required
+@csrf_exempt
+def save_trade_marker(request):
+    """Save trade marker for chart display"""
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            trade_id = data.get('trade_id')
+            
+            trade = get_object_or_404(Trade, id=trade_id, user=request.user)
+            
+            # Store marker data in session or database
+            if 'trade_markers' not in request.session:
+                request.session['trade_markers'] = []
+            
+            marker = {
+                'id': str(trade.id),
+                'time': trade.executed_at.timestamp(),
+                'position': 'belowBar' if trade.trade_type == 'BUY' else 'aboveBar',
+                'color': '#2196F3' if trade.trade_type == 'BUY' else '#e91e63',
+                'shape': 'arrowUp' if trade.trade_type == 'BUY' else 'arrowDown',
+                'text': f'{trade.trade_type} {trade.amount} @ {trade.entry_price}'
+            }
+            
+            request.session['trade_markers'].append(marker)
+            request.session.modified = True
+            
+            return JsonResponse({'success': True, 'marker': marker})
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)})
+    
+    return JsonResponse({'success': False, 'message': 'Invalid request method'})
+
+@login_required
+def get_trade_markers(request):
+    """Get trade markers for chart display"""
+    markers = request.session.get('trade_markers', [])
+    return JsonResponse({'markers': markers})

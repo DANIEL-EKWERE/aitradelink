@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="shortcut icon" type="image/png" href="./asset/theme4/images/icon/icon.png">
     <title>
-        AITRADEEX |
+        PCRTRADINGPLATFORM |
         Dashboard
     </title>
 
@@ -228,7 +228,7 @@ cb=googleTranslateElementInit">
                     <!--  <a href="./2fa"><i data-feather="shield"></i> 2fa</a>-->
                     <!--</li>-->
                     <li>
-                        <a href="./html/mailto:support@aitradeex.com.html"><svg xmlns="http://www.w3.org/2000/svg"
+                        <a href="./html/mailto:support@pcrtradingplatform.com.html"><svg xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-life-buoy">
@@ -765,7 +765,7 @@ cb=googleTranslateElementInit">
                                         </div>
                                         <div class="col-10 text-left">
                                             <div class="text-left">Total Portfolio</div>
-                                            <div>${{ details.deposit_wallet_balance }}</div>
+                                            <div>${{ details.deposit_wallet_balance }} here</div>
 
                                         </div>
                                     </div>
@@ -813,7 +813,7 @@ cb=googleTranslateElementInit">
                                             </div>
                                             <div class="col-10">
                                                 <div>Total Withdraw</div>
-                                                <div>${{ details.total_withdraw }}</div>
+                                                <div>${{ total_withdraw }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -825,7 +825,7 @@ cb=googleTranslateElementInit">
                                         </div>
                                         <div class="col-10">
                                             <div>Total Deposit</div>
-                                            <div>${{ details.total_deposit }}</div>
+                                            <div>${{ total_deposit }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -888,7 +888,7 @@ cb=googleTranslateElementInit">
                                         <span class="text-muted text-uppercase">eth</span>
                                     </div>
                                     <div class="col-6 text-dark">
-                                        ${{ MyAsset.ethereum }}<br>
+                                        ${{ MyAsset.usdt }}<br>
                                         <span>Total usdt Balance</span>
                                     </div>
                                 </div>
@@ -964,7 +964,7 @@ cb=googleTranslateElementInit">
                                         <span class="text-muted text-uppercase">ADA</span>
                                     </div>
                                     <div class="col-6 text-dark">
-                                        ${{ MyAsset.solana }}<br>
+                                        ${{ MyAsset.cardano }}<br>
                                         <span>Total ada Balance</span>
                                     </div>
                                 </div>
@@ -1040,8 +1040,8 @@ cb=googleTranslateElementInit">
                                     style="background-color:#0093e4;; padding: 30px; border-radius: 8px; text-align: center;">
 
                                     <p class="caption mb-2 text-center" style="color: white;">
-                                        Hello, <b>{{ request.user.first_name }} {{ profile.last_name }}</b><br>
-                                        Welcome to aitradeex Investment, <br> Trade Crypto with ease
+                                        Hello, <b>{{ request.user.first_name }} {{ request.user.last_name }}</b><br>
+                                        Welcome to pcrtradingplatform Investment, <br> Trade Crypto with ease
                                     </p>
                                     <br>
                                     <a href="{% url "broker:logs" %}"
@@ -1129,7 +1129,7 @@ cb=googleTranslateElementInit">
                                     style="background-color: #0093e4; padding: 30px; border-radius: 8px; text-align: center;z-index:99">
                                     <p class="caption mb-2 text-center" style="color: white;">
                                         Hello, <b>{{ profile.first_name }} {{ profile.last_name }}</b><br>
-                                        Welcome to aitradeex Investment <br> Trade Crypto with ease
+                                        Welcome to pcrtradingplatform Investment <br> Trade Crypto with ease
                                     </p>
                                     <br>
                                     <a href="{% url "broker:logs" %}" class="caption mb-2"
@@ -1203,7 +1203,7 @@ cb=googleTranslateElementInit">
                                         </div>
                                         <div class="content">
                                             <p class="text-small mb-0 text-dark">Total Withdraw</p>
-                                            <h5 class="title text-dark">${{ details.total_withdraw }}</h5>
+                                            <h5 class="title text-dark">${{ total_withdraw }}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -1214,7 +1214,7 @@ cb=googleTranslateElementInit">
                                         </div>
                                         <div class="content">
                                             <p class="text-small mb-0 text-dark">Total Deposit</p>
-                                            <h5 class="title text-dark">${{ details.total_deposit }}</h5>
+                                            <h5 class="title text-dark">${{ total_deposit }}</h5>
                                         </div>
                                     </div>
                                 </div>

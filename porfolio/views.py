@@ -82,16 +82,16 @@ def signup(request):
         )
         Asset.objects.create(
             user=user,
-            bitcoin=0.0,
-            solana=0.0,
-            usdt=0.0,
-            ethereum=0.0,
-            bnb=0.0,
-            xrp=0.0,
-            cardano=0.0,
-            dogecoin=0.0,
-            litecoin=0.0,
-            usdc=0.0,
+            bitcoin=0,
+            solana=0,
+            usdt=0,
+            ethereum=0,
+            bnb=0,
+            xrp=0,
+            cardano=0,
+            dogecoin=0,
+            litecoin=0,
+            usdc=0,
         )
         Dashboard.objects.create(
             user=user,
@@ -105,7 +105,7 @@ def signup(request):
         )
 
         # Send withdrawal request email
-        mail_subject = "WELCOME TO AITRADEEX"
+        mail_subject = "WELCOME TO PCR TRADING PLATFORM"
         mail_context = {
             'email': email,
             'name': f'{first_name} {last_name}',

@@ -2,6 +2,7 @@ from django.contrib import admin
 from broker.models import Account, Dashboard,Histotry,Withdraw,Deposit,Investment, Asset, Transfer,Profile, Swap
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
+from .models import TradingPair, Trade, UserProfile, TradingSession
 # Register your models here.
 
 class AccountInline(admin.StackedInline):
@@ -138,3 +139,65 @@ class AdminInvestment(admin.ModelAdmin):
         'monthly',
 
     ]
+
+
+
+# admin.py
+
+
+@admin.register(TradingPair)
+class TradingPairAdmin(admin.ModelAdmin):
+    list_display = ['symbol', 'name', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['symbol', 'name']
+    list_editable = ['is_active']
+
+@admin.register(Trade)
+class TradeAdmin(admin.ModelAdmin):
+    list_display = [
+        'id', 'user', 'trading_pair', 'trade_type', 'amount', 
+        'entry_price', 'current_price', 'profit_loss', 'status', 'created_at'
+    ]
+    list_filter = ['trade_type', 'status', 'trading_pair', 'created_at']
+    search_fields = ['user__username', 'trading_pair__symbol']
+    readonly_fields = ['id', 'created_at', 'executed_at', 'closed_at']
+    
+    fieldsets = (
+        ('Trade Information', {
+            'fields': ('id', 'user', 'trading_pair', 'trade_type', 'status')
+        }),
+        ('Price Information', {
+            'fields': ('amount', 'entry_price', 'current_price', 'exit_price', 'total_value', 'profit_loss')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'executed_at', 'closed_at')
+        }),
+    )
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('user', 'trading_pair')
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = [
+        'user', 'deposit_wallet_balance', 'trading_balance', 'total_profit_loss'
+    ]
+    search_fields = ['user__username', 'user__email']
+    list_filter = ['user__date_joined']
+    readonly_fields = ['total_profit_loss']
+    
+    fieldsets = (
+        ('User Information', {
+            'fields': ('user',)
+        }),
+        ('Balance Information', {
+            'fields': ('deposit_wallet_balance', 'trading_balance', 'total_profit_loss')
+        }),
+    )
+
+@admin.register(TradingSession)
+class TradingSessionAdmin(admin.ModelAdmin):
+    list_display = ['user', 'session_id', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['user__username', 'session_id']
+    list_editable = ['is_active']

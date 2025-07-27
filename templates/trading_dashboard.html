@@ -1,0 +1,787 @@
+<html lang="en">
+{% load static %}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/png" href="./asset/theme4/images/icon/icon.png">
+    <title>PCRTRADINGPLATFORM - Investment log</title>
+    <link href="./asset/theme4/frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{% static "styles/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "styles/bootstrap-icons.css" %}" rel="stylesheet">
+    <link href="{% static "styles/boxicons.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href=".{% static "styles/slick.css" %}">
+    <link href="{% static "styles/glightbox.min.css" %}" rel="stylesheet">
+    <link href="{% static "styles/remixicon.css" %}" rel="stylesheet">
+    <link href="{% static "styles/swiper-bundle.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "styles/selectric.css" %}">
+    <link rel="stylesheet" href="{% static "styles/animate.min.css" %}">
+    <link rel="stylesheet" href="{% static "styles/font-awsome.min.css" %}">
+    <link rel="stylesheet" href="{% static "styles/iziToast.min.css" %}">
+    <link href="{% static "styles/style.css" %}" rel="stylesheet">
+
+    <style>
+        .menu li{
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        li a{
+            color: white;
+            text-decoration: none;
+        }
+        li a:hover{
+            color: white;
+        }
+        
+        /* Trading Panel Styles */
+        .trading-panel {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .trade-button {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-button {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .buy-button:hover {
+            background: #45a049;
+        }
+        
+        .sell-button {
+            background: #f44336;
+            color: white;
+        }
+        
+        .sell-button:hover {
+            background: #d32f2f;
+        }
+        
+        .close-button {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .close-button:hover {
+            background: #f57c00;
+        }
+        
+        .trade-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .active-trades {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .trade-item {
+            background: #f8f9fa;
+            border-left: 4px solid;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .trade-item.buy {
+            border-left-color: #4CAF50;
+        }
+        
+        .trade-item.sell {
+            border-left-color: #f44336;
+        }
+        
+        .profit {
+            color: #4CAF50;
+        }
+        
+        .loss {
+            color: #f44336;
+        }
+        
+        .balance-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #google_translate_element {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            width: 80vw;
+        }
+
+        #google_translate_element select {
+            width: 100%;
+            max-width: 300px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            #google_translate_element {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<center>
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" 
+            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+</center>
+
+<body cz-shortcut-listen="true">
+    <!-- Header remains the same as your original -->
+    <header id="header" class="fixed-top header-inner-pages header-scrolled">
+        <!-- ... (keep your existing header content) |default:details.deposit_wallet_balance... -->
+        <h1 class="header-mark">
+            <i class="bi bi-currency-exchange"></i>
+        </h1>
+        <h2 class="header-mark">
+            <i class="bi bi-currency-exchange"></i>
+        </h2>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <div class="d-flex flex-wrap align-items-center">
+                <div class="logo me-auto me-lg-0 my-3">
+                    <div class="d-block d-sm-none">
+                        <p class="text-small mb-0 text-dark">Total portfolio</p>
+                        <h5>${{ user_profile.deposit_wallet_balance }}</h5>
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <a href="{% url "broker:dashboard-index" %}">
+                            <img class="img-fluid rounded sm-device-img text-align" src="{% static "images/definew.png" %}" alt="pp">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- ... (keep your existing navigation) ... -->
+        </div>
+    </header>
+
+    <main id="main" class="dashboard-main">
+        <section class="dashboard-section">
+            <!-- Sidebar remains the same -->
+            <div class="d-sidebar">
+                <!-- ... (keep your existing sidebar content) ... -->
+            </div>
+
+            <div class="dashboard-body-part">
+                <div class="mobile-page-header">
+                    <h5 class="title">Trading Dashboard</h5>
+                    <a href="{% url "broker:dashboard-index" %}" class="back-btn" style="text-decoration: none;">
+                        <i class="bi bi-arrow-left"></i> Back
+                    </a>
+                </div>
+
+                <!-- Balance Info -->
+                <div class="balance-info">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Available Balance</h6>
+                            <h4 id="userBalance">${{ user_profile.deposit_wallet_balance|default:0 }}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Total P&L</h6>
+                            <h4 id="totalPL" class="{% if user_profile.total_profit_loss >= 0 %}profit{% else %}loss{% endif %}">
+                                ${{ user_profile.total_profit_loss|default:0 }}
+                            </h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Active Trades</h6>
+                            <h4 id="activeTrades">{{ active_trades.count|default:0 }}</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Trading Chart -->
+                    <div class="col-lg-8">
+                        <div class="site-card">
+                            <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+                                <h5 class="mb-sm-0 mb-2">Trading Chart</h5>
+                                <select id="symbolSelector" class="form-control" style="width: 200px;">
+                                    <option value="BTCUSDT">BTC/USDT</option>
+                                    <option value="ETHUSDT">ETH/USDT</option>
+                                    <option value="ADAUSDT">ADA/USDT</option>
+                                    <option value="BNBUSDT">BNB/USDT</option>
+                                </select>
+                            </div>
+                            <div class="card-body" style="padding: 6px 0px !important;width:100%;height:610px">
+                                <div class="tradingview-widget-container" style="width:100%;">
+                                    <div id="tradingview_chart" style="height:610px">
+                                        <div id="tradingview_6aaad-wrapper" style="position: relative; box-sizing: content-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Trebuchet MS&quot; Roboto, Ubuntu, sans-serif; margin: 0px auto !important; padding: 0px !important; width: 100%; height: 100%;">
+                                            <iframe title="advanced chart TradingView widget" lang="en" id="tradingview_6aaad" frameborder="0" allowtransparency="true" scrolling="no" allowfullscreen="true" src="https://s.tradingview.com/widgetembed/?hideideas=1&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en#%7B%22symbol%22%3A%22BINANCE%3ABTCUSDT%22%2C%22frameElementId%22%3A%22tradingview_6aaad%22%2C%22interval%22%3A%22D%22%2C%22hide_side_toolbar%22%3A%220%22%2C%22allow_symbol_change%22%3A%221%22%2C%22save_image%22%3A%221%22%2C%22studies%22%3A%22%5B%5D%22%2C%22theme%22%3A%22light%22%2C%22style%22%3A%221%22%2C%22timezone%22%3A%22Africa%2FLagos%22%2C%22studies_overrides%22%3A%22%7B%7D%22%2C%22utm_source%22%3A%22localhost%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22chart%22%2C%22utm_term%22%3A%22BINANCE%3ABTCUSDT%22%7D" style="width: 100%; height: 100%; margin: 0px !important; padding: 0px !important;"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trading Panel -->
+                    <div class="col-lg-4">
+                        <div class="trading-panel">
+                            <h5>Quick Trade</h5>
+                            <div class="form-group">
+                                <label>Symbol</label>
+                                <input type="text" id="tradeSymbol" class="trade-input" value="BTCUSDT" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Current Price</label>
+                                <input type="text" id="currentPrice" class="trade-input" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="number" id="tradeAmount" class="trade-input" placeholder="Enter amount" step="0.00000001" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Value</label>
+                                <input type="text" id="totalValue" class="trade-input" readonly>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="trade-button buy-button" onclick="executeTrade('BUY')">
+                                        <i class="bi bi-arrow-up"></i> BUY
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="trade-button sell-button" onclick="executeTrade('SELL')">
+                                        <i class="bi bi-arrow-down"></i> SELL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Trades -->
+                        <div class="trading-panel">
+                            <h5>Active Trades</h5>
+                            <div class="active-trades" id="activeTradesList">
+                                <!-- Active trades will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trade History -->
+                <div class="site-card mt-4">
+                    <div class="card-header">
+                        <h5>Trade History</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="tradeHistoryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Symbol</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Entry Price</th>
+                                        <th>Exit Price</th>
+                                        <th>P&L</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Trade history will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Trading Scripts -->
+    <script type="text/javascript" src="https://s.tradingview.com/tv.js"></script>
+    <script src="{% static 'scripts/jquery.min.js' %}"></script>
+    <script src="{% static 'scripts/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'scripts/iziToast.min.js' %}"></script>
+
+    <!-- Replace the entire script section with this clean version -->
+<script type="text/javascript">
+(function() {
+    'use strict';
+    
+    // Global variables
+    let currentSymbol = 'BTCUSDT';
+    let currentPrice = 0;
+    let tradingViewWidget = null;
+    let tradeMarkers = [];
+    
+    // Initialize TradingView Widget with fallback
+    function initTradingView(symbol) {
+        symbol = symbol || 'BTCUSDT';
+        const container = document.getElementById('tradingview_chart');
+        
+        if (!container) {
+            console.error('Chart container not found');
+            return;
+        }
+        
+        // Clear existing content
+        container.innerHTML = '';
+        
+        try {
+            // Method 1: Try advanced widget
+            if (typeof TradingView !== 'undefined' && TradingView.widget) {
+                tradingViewWidget = new TradingView.widget({
+                    autosize: true,
+                    symbol: 'BINANCE:' + symbol,
+                    interval: '15',
+                    timezone: 'Africa/Lagos',
+                    theme: 'light',
+                    style: '1',
+                    locale: 'en',
+                    enable_publishing: false,
+                    hide_side_toolbar: false,
+                    allow_symbol_change: true,
+                    container_id: 'tradingview_chart',
+                    studies: [],
+                    show_popup_button: true,
+                    popup_width: '1000',
+                    popup_height: '650',
+                    onChartReady: function() {
+                        console.log('Chart ready');
+                        loadTradeMarkers();
+                    }
+                });
+            } else {
+                // Method 2: Fallback to iframe embed
+                createFallbackChart(symbol);
+            }
+        } catch (error) {
+            console.error('TradingView widget error:', error);
+            createFallbackChart(symbol);
+        }
+    }
+    
+    // Fallback chart using iframe
+    function createFallbackChart(symbol) {
+        symbol = symbol || 'BTCUSDT';
+        const container = document.getElementById('tradingview_chart');
+        const iframe = document.createElement('iframe');
+        
+       // iframe.src = 'https://s.tradingview.com/widgetembed/?hideideas=1&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en#%7B%22symbol%22%3A%22BINANCE%3A' + symbol + '%22%2C%22frameElementId%22%3A%22tradingview_fallback%22%2C%22interval%22%3A%22D%22%2C%22hide_side_toolbar%22%3A%220%22%2C%22allow_symbol_change%22%3A%221%22%2C%22save_image%22%3A%221%22%2C%22studies%22%3A%22%5B%5D%22%2C%22theme%22%3A%22light%22%2C%22style%22%3A%221%22%2C%22timezone%22%3A%22Africa%2FLagos%22%2C%22studies_overrides%22%3A%22%7B%7D%22%2C%22utm_source%22%3A%22localhost%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22chart%22%2C%22utm_term%22%3A%22BINANCE%3A' + symbol + '%22%7D';
+       iframe.src = 'https://s.tradingview.com/widgetembed/?hideideas=1&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en#%7B%22symbol%22%3A%22BINANCE%3ABTCUSDT%22%2C%22frameElementId%22%3A%22tradingview_5348c%22%2C%22interval%22%3A%22D%22%2C%22hide_side_toolbar%22%3A%220%22%2C%22allow_symbol_change%22%3A%221%22%2C%22save_image%22%3A%221%22%2C%22studies%22%3A%22%5B%5D%22%2C%22theme%22%3A%22light%22%2C%22style%22%3A%221%22%2C%22timezone%22%3A%22Africa%2FLagos%22%2C%22studies_overrides%22%3A%22%7B%7D%22%2C%22utm_source%22%3A%22app.def-trademarket.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22chart%22%2C%22utm_term%22%3A%22BINANCE%3ABTCUSDT%22%2C%22page-uri%22%3A%22app.def-trademarket.com%2Fdashboard%2Flog%22%7D';
+        
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = 'none';
+        iframe.frameBorder = '0';
+        iframe.allowTransparency = 'true';
+        iframe.scrolling = 'no';
+        iframe.allowFullscreen = true;
+        iframe.title = 'TradingView Chart';
+        
+        container.appendChild(iframe);
+        console.log('Fallback chart loaded for:', symbol);
+    }
+    
+    // Load trade markers on chart
+    function loadTradeMarkers() {
+        if (typeof $ === 'undefined') {
+            console.log('jQuery not loaded');
+            return;
+        }
+        
+        $.get('/get-trade-markers/')
+            .done(function(response) {
+                if (response.markers && tradingViewWidget) {
+                    tradingViewWidget.onChartReady(function() {
+                        tradingViewWidget.chart().createStudy('Overlay', false, false, [response.markers]);
+                    });
+                }
+            })
+            .fail(function() {
+                console.log('Could not load trade markers');
+            });
+    }
+    
+    // Execute Trade
+    function executeTrade(type) {
+        const amountInput = document.getElementById('tradeAmount');
+        const symbolInput = document.getElementById('tradeSymbol');
+        const userBalanceElement = document.getElementById('userBalance');
+        
+        if (!amountInput || !symbolInput || !userBalanceElement) {
+            console.error('Required elements not found');
+            return;
+        }
+        
+        const amount = parseFloat(amountInput.value);
+        const symbol = symbolInput.value;
+        
+        if (!amount || amount <= 0) {
+            showToast('error', 'Error', 'Please enter a valid amount');
+            return;
+        }
+        
+        const totalValue = amount * currentPrice;
+        const userBalance = parseFloat(userBalanceElement.textContent.replace('$', ''));
+        
+        if (totalValue > userBalance) {
+            showToast('error', 'Insufficient Balance', 'Required: $' + totalValue.toFixed(2) + ', Available: $' + userBalance.toFixed(2));
+            return;
+        }
+        
+        // Show loading
+        showToast('info', 'Processing', 'Executing trade...');
+        
+        if (typeof $ === 'undefined') {
+            console.error('jQuery not loaded');
+            return;
+        }
+        
+        $.ajax({
+            url: '/broker/execute-trade/',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                symbol: symbol,
+                type: type,
+                amount: amount
+            }),
+            success: function(response) {
+                if (response.success) {
+                    showToast('success', 'Success', response.message);
+                    
+                    // Update UI
+                    updateBalance();
+                    loadActiveTrades();
+                    loadTradeHistory();
+                    amountInput.value = '';
+                    document.getElementById('totalValue').value = '';
+                    
+                    // Add marker to chart
+                    addTradeMarkerToChart(response.trade);
+                    
+                } else {
+                    showToast('error', 'Error', response.message);
+                }
+            },
+            error: function() {
+                showToast('error', 'Error', 'Failed to execute trade');
+            }
+        });
+    }
+    
+    // Close Trade
+    function closeTrade(tradeId) {
+        if (!confirm('Are you sure you want to close this trade?')) {
+            return;
+        }
+        
+        if (typeof $ === 'undefined') {
+            console.error('jQuery not loaded');
+            return;
+        }
+        
+        $.ajax({
+            url: '/close-trade/' + tradeId + '/',
+            method: 'POST',
+            success: function(response) {
+                if (response.success) {
+                    showToast('success', 'Success', 'Trade closed. P&L: $' + response.profit_loss.toFixed(2));
+                    updateBalance();
+                    loadActiveTrades();
+                    loadTradeHistory();
+                } else {
+                    showToast('error', 'Error', response.message);
+                }
+            },
+            error: function() {
+                showToast('error', 'Error', 'Failed to close trade');
+            }
+        });
+    }
+    
+    // Add trade marker to chart
+    function addTradeMarkerToChart(trade) {
+        const marker = {
+            id: trade.id,
+            time: new Date(trade.timestamp).getTime() / 1000,
+            position: trade.type === 'BUY' ? 'belowBar' : 'aboveBar',
+            color: trade.type === 'BUY' ? '#4CAF50' : '#f44336',
+            shape: trade.type === 'BUY' ? 'arrowUp' : 'arrowDown',
+            text: trade.type + ' ' + trade.amount + ' @ $' + trade.entry_price
+        };
+        
+        if (typeof $ === 'undefined') {
+            console.error('jQuery not loaded');
+            return;
+        }
+        
+        $.ajax({
+            url: '/save-trade-marker/',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({trade_id: trade.id}),
+            success: function(response) {
+                if (response.success) {
+                    loadTradeMarkers();
+                }
+            },
+            error: function() {
+                console.log('Could not save trade marker');
+            }
+        });
+    }
+    
+    // Update current price and total value
+    function updatePriceAndTotal() {
+        const amountInput = document.getElementById('tradeAmount');
+        const totalValueInput = document.getElementById('totalValue');
+        
+        if (!amountInput || !totalValueInput) return;
+        
+        const amount = parseFloat(amountInput.value) || 0;
+        const total = amount * currentPrice;
+        totalValueInput.value = '$' + total.toFixed(2);
+    }
+    
+    // Mock price update
+    function updateCurrentPrice() {
+        const variation = (Math.random() - 0.5) * 0.02;
+        const basePrice = currentSymbol === 'BTCUSDT' ? 45000 : 
+                        currentSymbol === 'ETHUSDT' ? 3000 :
+                        currentSymbol === 'ADAUSDT' ? 0.5 : 300;
+        
+        currentPrice = basePrice * (1 + variation);
+        
+        const priceInput = document.getElementById('currentPrice');
+        if (priceInput) {
+            priceInput.value = '$' + currentPrice.toFixed(2);
+        }
+        
+        updatePriceAndTotal();
+    }
+    
+    // Load active trades
+    function loadActiveTrades() {
+        if (typeof $ === 'undefined') return;
+        
+        $.get('/active-trades/')
+            .done(function(response) {
+                const container = document.getElementById('activeTradesList');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                if (response.trades && response.trades.length > 0) {
+                    response.trades.forEach(function(trade) {
+                        const profitClass = trade.profit_loss >= 0 ? 'profit' : 'loss';
+                        const tradeHtml = '<div class="trade-item ' + trade.type.toLowerCase() + '">' +
+                            '<div class="d-flex justify-content-between align-items-center">' +
+                                '<div>' +
+                                    '<strong>' + trade.symbol + '</strong> - ' + trade.type + '<br>' +
+                                    '<small>Amount: ' + trade.amount + '</small><br>' +
+                                    '<small>Entry: $' + trade.entry_price + '</small><br>' +
+                                    '<small>Current: $' + (trade.current_price || 'N/A') + '</small>' +
+                                '</div>' +
+                                '<div class="text-end">' +
+                                    '<div class="' + profitClass + '">' +
+                                        '$' + trade.profit_loss.toFixed(2) +
+                                    '</div>' +
+                                    '<button class="btn btn-sm close-button mt-1" onclick="closeTrade(\'' + trade.id + '\')">' +
+                                        'Close' +
+                                    '</button>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+                        container.innerHTML += tradeHtml;
+                    });
+                } else {
+                    container.innerHTML = '<p class="text-center text-muted">No active trades</p>';
+                }
+            })
+            .fail(function() {
+                console.log('Could not load active trades');
+            });
+    }
+    
+    // Load trade history
+    function loadTradeHistory() {
+        if (typeof $ === 'undefined') return;
+        
+        $.get('/trade-history/')
+            .done(function(response) {
+                const tbody = document.querySelector('#tradeHistoryTable tbody');
+                if (!tbody) return;
+                
+                tbody.innerHTML = '';
+                
+                if (response.trades && response.trades.length > 0) {
+                    response.trades.forEach(function(trade) {
+                        const profitClass = trade.profit_loss >= 0 ? 'profit' : 'loss';
+                        const statusBadge = trade.status === 'EXECUTED' ? 'bg-success' : 
+                                          trade.status === 'CLOSED' ? 'bg-info' : 'bg-warning';
+                        
+                        const row = '<tr>' +
+                            '<td>' + new Date(trade.created_at).toLocaleString() + '</td>' +
+                            '<td>' + trade.symbol + '</td>' +
+                            '<td><span class="badge ' + (trade.type === 'BUY' ? 'bg-success' : 'bg-danger') + '">' + trade.type + '</span></td>' +
+                            '<td>' + trade.amount + '</td>' +
+                            '<td>$' + trade.entry_price + '</td>' +
+                            '<td>' + (trade.exit_price ? '$' + trade.exit_price : '-') + '</td>' +
+                            '<td class="' + profitClass + '">$' + trade.profit_loss.toFixed(2) + '</td>' +
+                            '<td><span class="badge ' + statusBadge + '">' + trade.status + '</span></td>' +
+                        '</tr>';
+                        tbody.innerHTML += row;
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No trades found</td></tr>';
+                }
+            })
+            .fail(function() {
+                console.log('Could not load trade history');
+            });
+    }
+    
+    // Update balance display
+    function updateBalance() {
+        // Simple reload for now
+        location.reload();
+    }
+    
+    // Show toast notification
+    function showToast(type, title, message) {
+        if (typeof iziToast !== 'undefined') {
+            iziToast[type]({
+                title: title,
+                message: message
+            });
+        } else {
+            alert(title + ': ' + message);
+        }
+    }
+    
+    // Make functions global for onclick handlers
+    window.executeTrade = executeTrade;
+    window.closeTrade = closeTrade;
+    
+    // Event handlers
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize chart with delay
+        setTimeout(function() {
+            initTradingView(currentSymbol);
+        }, 1000);
+        
+        updateCurrentPrice();
+        loadActiveTrades();
+        loadTradeHistory();
+        
+        // Symbol selector change
+        const symbolSelector = document.getElementById('symbolSelector');
+        if (symbolSelector) {
+            symbolSelector.addEventListener('change', function() {
+                currentSymbol = this.value;
+                const tradeSymbol = document.getElementById('tradeSymbol');
+                if (tradeSymbol) {
+                    tradeSymbol.value = currentSymbol;
+                }
+                
+                // Reinitialize chart with new symbol
+                setTimeout(function() {
+                    initTradingView(currentSymbol);
+                }, 500);
+                
+                updateCurrentPrice();
+            });
+        }
+        
+        // Amount input change
+        const tradeAmount = document.getElementById('tradeAmount');
+        if (tradeAmount) {
+            tradeAmount.addEventListener('input', updatePriceAndTotal);
+        }
+        
+        // Update prices every 5 seconds
+        setInterval(function() {
+            updateCurrentPrice();
+            loadActiveTrades();
+        }, 5000);
+    });
+    
+})();
+</script>
+
+    <!-- WhatsApp and Telegram Floating Buttons -->
+    <a href="https://t.me/caesar_alpha" target="_blank" class="fab fab-right" aria-label="Telegram">
+        <i class="fab fa-telegram"></i>
+    </a>
+    
+    <style>
+        .fab {
+            position: fixed;
+            bottom: 40px;
+            width: 60px;
+            height: 60px;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            z-index: 1000;
+            font-size: 28px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .fab-right {
+            right: 20px;
+            background-color: #0088cc;
+        }
+        
+        .fab:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+        
+        .fab i {
+            line-height: 1;
+        }
+    </style>
+</body>
+</html>

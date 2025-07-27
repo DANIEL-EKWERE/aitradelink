@@ -51,3 +51,16 @@ urlpatterns = [
     # path('', include('broker.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 ]
+
+# Add these patterns to your existing urlpatterns
+trading_patterns = [
+    path('trading-dashboard/', trading_dashboard, name='trading-dashboard'),
+    path('execute-trade/', execute_trade, name='execute-trade'),
+    path('close-trade/<uuid:trade_id>/', close_trade, name='close-trade'),
+    path('trade-history/', get_trade_history, name='trade-history'),
+    path('active-trades/', get_active_trades, name='active-trades'),
+    path('save-trade-marker/', save_trade_marker, name='save-trade-marker'),
+    path('get-trade-markers/', get_trade_markers, name='get-trade-markers'),
+]
+
+urlpatterns += trading_patterns
