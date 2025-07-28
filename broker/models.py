@@ -224,7 +224,7 @@ class Trade(models.Model):
         """Calculate profit/loss based on current price"""
         if self.current_price and self.status == 'EXECUTED':
             if self.trade_type == 'BUY':
-                self.profit_loss = (self.current_price - self.entry_price) * self.amount
+                self.profit_loss = (Decimal(str(self.current_price)) - self.entry_price) * self.amount
             else:  # SELL
                 self.profit_loss = (self.entry_price - self.current_price) * self.amount
             self.save()

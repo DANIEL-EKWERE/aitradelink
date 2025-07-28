@@ -425,7 +425,7 @@
             return;
         }
         
-        $.get('/get-trade-markers/')
+        $.get('/broker/get-trade-markers/')
             .done(function(response) {
                 if (response.markers && tradingViewWidget) {
                     tradingViewWidget.onChartReady(function() {
@@ -518,7 +518,7 @@
         }
         
         $.ajax({
-            url: '/close-trade/' + tradeId + '/',
+            url: '/broker/close-trade/' + tradeId + '/',
             method: 'POST',
             success: function(response) {
                 if (response.success) {
@@ -553,7 +553,7 @@
         }
         
         $.ajax({
-            url: '/save-trade-marker/',
+            url: '/broker/save-trade-marker/',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({trade_id: trade.id}),
@@ -601,7 +601,7 @@
     function loadActiveTrades() {
         if (typeof $ === 'undefined') return;
         
-        $.get('/active-trades/')
+        $.get('/broker/active-trades/')
             .done(function(response) {
                 const container = document.getElementById('activeTradesList');
                 if (!container) return;
@@ -644,7 +644,7 @@
     function loadTradeHistory() {
         if (typeof $ === 'undefined') return;
         
-        $.get('/trade-history/')
+        $.get('/broker/trade-history/')
             .done(function(response) {
                 const tbody = document.querySelector('#tradeHistoryTable tbody');
                 if (!tbody) return;
